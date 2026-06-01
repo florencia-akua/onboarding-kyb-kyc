@@ -1,6 +1,7 @@
 'use client';
 
 import {
+  Box,
   Checkbox,
   Group,
   NumberInput,
@@ -8,6 +9,7 @@ import {
   SimpleGrid,
   Stack,
   Text,
+  TextInput,
 } from '@mantine/core';
 import { StepTitle } from '../fields/SectionTitle';
 import { copy } from '../copy';
@@ -15,6 +17,10 @@ import { ECONOMIC_ACTIVITY_OPTIONS } from '../options';
 import type { StepProps } from '../stepProps';
 
 export function DatosNegocioStep({ data, update }: StepProps) {
+  const showWebsite =
+    data.salesChannels.includes('ecommerce') ||
+    data.salesChannels.includes('both');
+
   return (
     <Stack gap="md">
       <StepTitle>{copy.business.title}</StepTitle>
@@ -70,6 +76,18 @@ export function DatosNegocioStep({ data, update }: StepProps) {
               color="akuaPurple.6"
               radius="xs"
             />
+            {showWebsite && (
+              <Box ml={32}>
+                <TextInput
+                  label={copy.business.website}
+                  placeholder={copy.business.websitePlaceholder}
+                  value={data.businessWebsite}
+                  onChange={(e) =>
+                    update({ businessWebsite: e.currentTarget.value })
+                  }
+                />
+              </Box>
+            )}
             <Checkbox
               value="inPerson"
               label={copy.business.channels.inPerson}

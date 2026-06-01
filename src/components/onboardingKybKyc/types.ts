@@ -89,6 +89,7 @@ export interface OnboardingFormData {
   monthlyVolume: string;
   averageTicket: string;
   salesChannels: string[];
+  businessWebsite: string;
 
   // --- Información comercial (solo física) ---
   commercialName: string;
@@ -164,6 +165,7 @@ export const initialOnboardingFormData: OnboardingFormData = {
   monthlyVolume: '',
   averageTicket: '',
   salesChannels: [],
+  businessWebsite: '',
 
   commercialName: '',
   commercialAddress: '',

@@ -106,6 +106,8 @@ export const copy = {
       inPerson: 'Venta presencial (punto físico)',
       both: 'Ambos',
     },
+    website: 'Sitio web',
+    websitePlaceholder: 'http://...',
   },
 
   commercial: {
