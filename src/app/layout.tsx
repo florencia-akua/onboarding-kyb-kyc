@@ -6,6 +6,7 @@ import {
   mantineHtmlProps,
 } from '@mantine/core';
 import '@mantine/core/styles.css';
+import '@mantine/dates/styles.css';
 import './globals.css';
 import { theme } from '@/theme';
 

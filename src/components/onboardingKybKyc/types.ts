@@ -61,6 +61,37 @@ export interface Shareholder {
   nationality: string;
 }
 
+export const emptyShareholder: Shareholder = {
+  fullName: '',
+  documentNumber: '',
+  participation: '',
+  birthCountry: '',
+  birthCity: '',
+  nationality: '',
+};
+
+export interface Beneficiary {
+  fullName: string;
+  documentNumber: string;
+  controlPercentage: string;
+  birthCountry: string;
+  birthCity: string;
+  address: string;
+  phone: string;
+  email: string;
+}
+
+export const emptyBeneficiary: Beneficiary = {
+  fullName: '',
+  documentNumber: '',
+  controlPercentage: '',
+  birthCountry: '',
+  birthCity: '',
+  address: '',
+  phone: '',
+  email: '',
+};
+
 export interface OnboardingFormData {
   personaType: PersonaType | null;
 
@@ -105,18 +136,23 @@ export interface OnboardingFormData {
   legalRepEmail: string;
   hasAlternateLegalRep: YesNo | null;
 
+  // --- Representante legal suplente (solo si aplica) ---
+  alternateRepFullName: string;
+  alternateRepDocumentNumber: string;
+  alternateRepBirthDate: string;
+  alternateRepIssueDate: string;
+  alternateRepBirthCountry: string;
+  alternateRepBirthCity: string;
+  alternateRepNationality: string;
+  alternateRepAddress: string;
+  alternateRepPhone: string;
+  alternateRepEmail: string;
+
   // --- Estructura societaria ---
   shareholders: Shareholder[];
 
   // --- Beneficiario final ---
-  beneficiaryFullName: string;
-  beneficiaryDocumentNumber: string;
-  beneficiaryControlPercentage: string;
-  beneficiaryBirthCountry: string;
-  beneficiaryBirthCity: string;
-  beneficiaryAddress: string;
-  beneficiaryPhone: string;
-  beneficiaryEmail: string;
+  beneficiaries: Beneficiary[];
 
   // --- Perfil de riesgo ---
   companyHasPep: YesNo | null;
@@ -187,16 +223,20 @@ export const initialOnboardingFormData: OnboardingFormData = {
   legalRepEmail: '',
   hasAlternateLegalRep: null,
 
+  alternateRepFullName: '',
+  alternateRepDocumentNumber: '',
+  alternateRepBirthDate: '',
+  alternateRepIssueDate: '',
+  alternateRepBirthCountry: '',
+  alternateRepBirthCity: '',
+  alternateRepNationality: '',
+  alternateRepAddress: '',
+  alternateRepPhone: '',
+  alternateRepEmail: '',
+
   shareholders: [],
 
-  beneficiaryFullName: '',
-  beneficiaryDocumentNumber: '',
-  beneficiaryControlPercentage: '',
-  beneficiaryBirthCountry: '',
-  beneficiaryBirthCity: '',
-  beneficiaryAddress: '',
-  beneficiaryPhone: '',
-  beneficiaryEmail: '',
+  beneficiaries: [],
 
   companyHasPep: null,
   companyPep: { ...emptyPepDeclaration },

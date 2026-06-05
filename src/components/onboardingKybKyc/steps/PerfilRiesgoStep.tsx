@@ -2,16 +2,24 @@
 
 import { Group, Paper, Radio, Stack, Text } from '@mantine/core';
 import { IconShieldHalf } from '@tabler/icons-react';
-import { StepTitle } from '../fields/SectionTitle';
+import { StepTitle, SectionTitle } from '../fields/SectionTitle';
 import { PepDeclarationFields } from '../fields/PepDeclarationFields';
 import { copy } from '../copy';
 import type { StepProps } from '../stepProps';
 import type { YesNo } from '../types';
 
-export function PerfilRiesgoStep({ data, update }: StepProps) {
+export function PerfilRiesgoStep({
+  data,
+  update,
+  asSection,
+}: StepProps & { asSection?: boolean }) {
   return (
     <Stack gap="md">
-      <StepTitle>{copy.riskProfile.title}</StepTitle>
+      {asSection ? (
+        <SectionTitle>{copy.riskProfile.title}</SectionTitle>
+      ) : (
+        <StepTitle>{copy.riskProfile.title}</StepTitle>
+      )}
 
       <Text size="sm" c="mantineDefault.8">
         {copy.riskProfile.question}

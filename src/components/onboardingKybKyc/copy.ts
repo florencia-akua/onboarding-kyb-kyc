@@ -55,6 +55,7 @@ export const copy = {
     // Persona jurídica
     identification: 'Identificación y contacto',
     legalRep: 'Representante legal',
+    sociosBeneficiarios: 'Socios y Beneficiarios',
     ownership: 'Estructura societaria',
     beneficiary: 'Beneficiario final',
     riskProfile: 'Perfil de riesgo',
@@ -106,7 +107,7 @@ export const copy = {
     startDate: 'Fecha de inicio',
     endDate: 'Fecha de finalización',
     startPlaceholder: 'DD / MM / AAAA',
-    endPlaceholder: 'DD / MM / AAAA  ó  "Actual"',
+    endPlaceholder: 'Dejar vacío si continúa (Actual)',
     levelQuestion: '¿El cargo es o fue a nivel nacional, regional o municipal?',
     levelNacional: 'Nacional',
     levelRegional: 'Regional (Departamento)',
@@ -189,13 +190,14 @@ export const copy = {
     title: 'Representante legal',
     principalTitle: 'Representante legal principal',
     alternateQuestion: '¿Existe representante legal suplente?',
+    alternateTitle: 'Representante legal suplente',
   },
 
   ownership: {
     title: 'Estructura societaria',
     subtitle: 'Accionistas con participación mayor al 5%',
     participation: 'Porcentaje de participación (%)',
-    addShareholder: 'Agregar accionista',
+    addShareholder: 'Agregar Accionista',
     shareholderLabel: 'Accionista',
   },
 
@@ -204,6 +206,8 @@ export const copy = {
     calloutTitle: 'Beneficiario final',
     calloutText: 'Persona natural que controla o beneficia de la empresa',
     controlPercentage: 'Porcentaje de control (%)',
+    addBeneficiary: 'Agregar Beneficiario',
+    beneficiaryLabel: 'Beneficiario',
   },
 
   riskProfile: {

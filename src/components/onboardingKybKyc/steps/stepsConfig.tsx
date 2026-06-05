@@ -5,9 +5,7 @@ import {
   IconBuildingStore,
   IconBriefcase,
   IconFileText,
-  IconShieldHalf,
   IconUser,
-  IconUserCheck,
   IconUsersGroup,
 } from '@tabler/icons-react';
 import { copy, FISICA_DOCUMENTS, JURIDICA_DOCUMENTS } from '../copy';
@@ -20,9 +18,7 @@ import { DatosBancariosStep } from './DatosBancariosStep';
 import { DocumentosStep } from './DocumentosStep';
 import { IdentificacionContactoStep } from './IdentificacionContactoStep';
 import { RepresentanteLegalStep } from './RepresentanteLegalStep';
-import { EstructuraSocietariaStep } from './EstructuraSocietariaStep';
-import { BeneficiarioFinalStep } from './BeneficiarioFinalStep';
-import { PerfilRiesgoStep } from './PerfilRiesgoStep';
+import { SociosBeneficiariosStep } from './SociosBeneficiariosStep';
 
 const ICON_SIZE = 18;
 
@@ -80,22 +76,10 @@ const JURIDICA_STEPS: StepConfig[] = [
     render: (p) => <RepresentanteLegalStep {...p} />,
   },
   {
-    id: 'ownership',
-    label: copy.steps.ownership,
+    id: 'sociosBeneficiarios',
+    label: copy.steps.sociosBeneficiarios,
     icon: <IconUsersGroup size={ICON_SIZE} />,
-    render: (p) => <EstructuraSocietariaStep {...p} />,
-  },
-  {
-    id: 'beneficiary',
-    label: copy.steps.beneficiary,
-    icon: <IconUserCheck size={ICON_SIZE} />,
-    render: (p) => <BeneficiarioFinalStep {...p} />,
-  },
-  {
-    id: 'riskProfile',
-    label: copy.steps.riskProfile,
-    icon: <IconShieldHalf size={ICON_SIZE} />,
-    render: (p) => <PerfilRiesgoStep {...p} />,
+    render: (p) => <SociosBeneficiariosStep {...p} />,
   },
   {
     id: 'business',

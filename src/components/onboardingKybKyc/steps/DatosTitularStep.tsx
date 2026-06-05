@@ -1,9 +1,9 @@
 'use client';
 
 import { SimpleGrid, Stack, Select, Switch, TextInput, Group, Text } from '@mantine/core';
-import { IconCalendar } from '@tabler/icons-react';
 import { StepTitle, SectionTitle } from '../fields/SectionTitle';
 import { PhoneField } from '../fields/PhoneField';
+import { DateField } from '../fields/DateField';
 import { PepDeclarationFields } from '../fields/PepDeclarationFields';
 import { copy } from '../copy';
 import {
@@ -13,10 +13,6 @@ import {
   NATIONALITY_OPTIONS,
 } from '../options';
 import type { StepProps } from '../stepProps';
-
-const calendarIcon = (
-  <IconCalendar size={16} color="var(--mantine-color-mantineDefault-5)" />
-);
 
 export function DatosTitularStep({ data, update }: StepProps) {
   return (
@@ -46,21 +42,17 @@ export function DatosTitularStep({ data, update }: StepProps) {
             update({ holderDocumentNumber: e.currentTarget.value })
           }
         />
-        <TextInput
+        <DateField
           label={copy.fields.issueDate}
-          placeholder="01/02/0000"
-          rightSection={calendarIcon}
           value={data.holderDocumentIssueDate}
-          onChange={(e) =>
-            update({ holderDocumentIssueDate: e.currentTarget.value })
-          }
+          onChange={(v) => update({ holderDocumentIssueDate: v })}
+          maxDate={new Date()}
         />
-        <TextInput
+        <DateField
           label={copy.fields.birthDate}
-          placeholder="01/02/0000"
-          rightSection={calendarIcon}
           value={data.holderBirthDate}
-          onChange={(e) => update({ holderBirthDate: e.currentTarget.value })}
+          onChange={(v) => update({ holderBirthDate: v })}
+          maxDate={new Date()}
         />
         <Select
           label={copy.fields.nationality}

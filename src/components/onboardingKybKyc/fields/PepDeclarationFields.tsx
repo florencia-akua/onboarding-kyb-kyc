@@ -9,6 +9,7 @@ import {
   TextInput,
 } from '@mantine/core';
 import { copy } from '../copy';
+import { DateField } from './DateField';
 import { DocumentUploadField } from './DocumentUploadField';
 import type {
   PepApproval,
@@ -79,17 +80,17 @@ export function PepDeclarationFields({
       <Stack gap="xs">
         <Question>{c.periodQuestion}</Question>
         <SimpleGrid cols={2} spacing="md">
-          <TextInput
+          <DateField
             label={c.startDate}
-            placeholder={c.startPlaceholder}
             value={value.startDate}
-            onChange={(e) => onChange({ startDate: e.currentTarget.value })}
+            onChange={(v) => onChange({ startDate: v })}
+            maxDate={new Date()}
           />
-          <TextInput
+          <DateField
             label={c.endDate}
             placeholder={c.endPlaceholder}
             value={value.endDate}
-            onChange={(e) => onChange({ endDate: e.currentTarget.value })}
+            onChange={(v) => onChange({ endDate: v })}
           />
         </SimpleGrid>
       </Stack>

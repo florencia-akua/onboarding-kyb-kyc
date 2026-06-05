@@ -1,8 +1,10 @@
 'use client';
 
-import { Radio, SimpleGrid, Stack, Select, TextInput, Text } from '@mantine/core';
+import { useEffect, useRef } from 'react';
+import { Box, Radio, SimpleGrid, Stack, Select, TextInput, Text } from '@mantine/core';
 import { StepTitle, SectionTitle } from '../fields/SectionTitle';
 import { PhoneField } from '../fields/PhoneField';
+import { DateField } from '../fields/DateField';
 import { DocumentNumberLabel } from '../fields/DocumentNumberLabel';
 import { copy } from '../copy';
 import { CITY_OPTIONS, COUNTRY_OPTIONS, NATIONALITY_OPTIONS } from '../options';
@@ -10,6 +12,21 @@ import type { StepProps } from '../stepProps';
 import type { YesNo } from '../types';
 
 export function RepresentanteLegalStep({ data, update }: StepProps) {
+  const alternateRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (data.hasAlternateLegalRep === 'si') {
+      // Pequeño delay para que la sección ya esté montada antes de scrollear.
+      const id = window.setTimeout(() => {
+        alternateRef.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+      }, 50);
+      return () => window.clearTimeout(id);
+    }
+  }, [data.hasAlternateLegalRep]);
+
   return (
     <Stack gap="md">
       <StepTitle>{copy.legalRep.title}</StepTitle>
@@ -30,17 +47,17 @@ export function RepresentanteLegalStep({ data, update }: StepProps) {
             update({ legalRepDocumentNumber: e.currentTarget.value })
           }
         />
-        <TextInput
+        <DateField
           label={copy.fields.birthDate}
-          placeholder="Ingrese fecha de nacimiento"
           value={data.legalRepBirthDate}
-          onChange={(e) => update({ legalRepBirthDate: e.currentTarget.value })}
+          onChange={(v) => update({ legalRepBirthDate: v })}
+          maxDate={new Date()}
         />
-        <TextInput
+        <DateField
           label={copy.fields.issueDate}
-          placeholder="Ingrese fecha de expedición"
           value={data.legalRepIssueDate}
-          onChange={(e) => update({ legalRepIssueDate: e.currentTarget.value })}
+          onChange={(v) => update({ legalRepIssueDate: v })}
+          maxDate={new Date()}
         />
         <Select
           label={copy.fields.birthCountry}
@@ -101,6 +118,90 @@ export function RepresentanteLegalStep({ data, update }: StepProps) {
           </Stack>
         </Radio.Group>
       </div>
+
+      {data.hasAlternateLegalRep === 'si' && (
+        <Box ref={alternateRef} style={{ scrollMarginTop: 24 }}>
+          <SectionTitle>{copy.legalRep.alternateTitle}</SectionTitle>
+
+          <SimpleGrid cols={2} spacing="md">
+            <TextInput
+              label={copy.fields.fullName}
+              placeholder="Ingrese nombre completo"
+              value={data.alternateRepFullName}
+              onChange={(e) =>
+                update({ alternateRepFullName: e.currentTarget.value })
+              }
+            />
+            <TextInput
+              label={<DocumentNumberLabel />}
+              placeholder="Ingrese número de documento"
+              value={data.alternateRepDocumentNumber}
+              onChange={(e) =>
+                update({ alternateRepDocumentNumber: e.currentTarget.value })
+              }
+            />
+            <DateField
+              label={copy.fields.birthDate}
+              value={data.alternateRepBirthDate}
+              onChange={(v) => update({ alternateRepBirthDate: v })}
+              maxDate={new Date()}
+            />
+            <DateField
+              label={copy.fields.issueDate}
+              value={data.alternateRepIssueDate}
+              onChange={(v) => update({ alternateRepIssueDate: v })}
+              maxDate={new Date()}
+            />
+            <Select
+              label={copy.fields.birthCountry}
+              placeholder={copy.fields.selectCountry}
+              data={COUNTRY_OPTIONS}
+              value={data.alternateRepBirthCountry || null}
+              onChange={(v) => update({ alternateRepBirthCountry: v ?? '' })}
+              comboboxProps={{ withinPortal: true }}
+              searchable
+            />
+            <Select
+              label={copy.fields.birthCity}
+              placeholder={copy.fields.selectCity}
+              data={CITY_OPTIONS}
+              value={data.alternateRepBirthCity || null}
+              onChange={(v) => update({ alternateRepBirthCity: v ?? '' })}
+              comboboxProps={{ withinPortal: true }}
+              searchable
+            />
+            <Select
+              label={copy.fields.nationality}
+              placeholder={copy.fields.selectNationality}
+              data={NATIONALITY_OPTIONS}
+              value={data.alternateRepNationality || null}
+              onChange={(v) => update({ alternateRepNationality: v ?? '' })}
+              comboboxProps={{ withinPortal: true }}
+              searchable
+            />
+            <TextInput
+              label={copy.fields.residentialAddress}
+              placeholder="Ingrese dirección residencial"
+              value={data.alternateRepAddress}
+              onChange={(e) =>
+                update({ alternateRepAddress: e.currentTarget.value })
+              }
+            />
+            <PhoneField
+              value={data.alternateRepPhone}
+              onChange={(v) => update({ alternateRepPhone: v })}
+            />
+            <TextInput
+              label={copy.fields.email}
+              placeholder="Ingrese correo electrónico"
+              value={data.alternateRepEmail}
+              onChange={(e) =>
+                update({ alternateRepEmail: e.currentTarget.value })
+              }
+            />
+          </SimpleGrid>
+        </Box>
+      )}
     </Stack>
   );
 }

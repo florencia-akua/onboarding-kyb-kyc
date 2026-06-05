@@ -82,12 +82,9 @@ export const ECONOMIC_ACTIVITY_OPTIONS = [
 ];
 
 export const COMPANY_TYPE_OPTIONS = [
-  'S.A.S. (Sociedad por Acciones Simplificada)',
-  'S.A. (Sociedad Anónima)',
-  'Ltda. (Sociedad de Responsabilidad Limitada)',
-  'S. en C. (Sociedad en Comandita)',
-  'Empresa Unipersonal',
-  'Entidad sin Ánimo de Lucro',
+  'SAS (Sociedad por Acciones Simplificada)',
+  'Representante legal suplente',
+  'Accionista con >5%',
 ];
 
 export const PHONE_PREFIX = '+57';
