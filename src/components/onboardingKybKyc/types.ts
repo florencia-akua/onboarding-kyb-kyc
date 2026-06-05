@@ -9,6 +9,42 @@ export type OnboardingPhase =
 
 export type AccountType = 'ahorros' | 'corriente';
 export type YesNo = 'si' | 'no';
+export type PepLevel = 'nacional' | 'regional' | 'municipal';
+export type PepApproval = 'requiere' | 'tiene';
+
+export interface PepDeclaration {
+  position: string;
+  institution: string;
+  startDate: string;
+  endDate: string;
+  level: PepLevel | null;
+  isRelative: YesNo | null;
+  relativeDetail: string;
+  isAssociate: YesNo | null;
+  associateDetail: string;
+  receivedPublicFunds: YesNo | null;
+  decisionPower: YesNo | null;
+  fundsOrigin: string;
+  approval: PepApproval | null;
+  approvalDoc: UploadedDoc | null;
+}
+
+export const emptyPepDeclaration: PepDeclaration = {
+  position: '',
+  institution: '',
+  startDate: '',
+  endDate: '',
+  level: null,
+  isRelative: null,
+  relativeDetail: '',
+  isAssociate: null,
+  associateDetail: '',
+  receivedPublicFunds: null,
+  decisionPower: null,
+  fundsOrigin: '',
+  approval: null,
+  approvalDoc: null,
+};
 
 export interface UploadedDoc {
   name: string;
@@ -42,6 +78,7 @@ export interface OnboardingFormData {
   holderPhone: string;
   holderEmail: string;
   holderIsPep: boolean;
+  holderPep: PepDeclaration;
 
   // --- Persona jurídica: identificación y contacto ---
   companyLegalName: string;
@@ -83,6 +120,7 @@ export interface OnboardingFormData {
 
   // --- Perfil de riesgo ---
   companyHasPep: YesNo | null;
+  companyPep: PepDeclaration;
 
   // --- Datos del negocio (compartido) ---
   economicActivity: string;
@@ -124,6 +162,7 @@ export const initialOnboardingFormData: OnboardingFormData = {
   holderPhone: '',
   holderEmail: '',
   holderIsPep: false,
+  holderPep: { ...emptyPepDeclaration },
 
   companyLegalName: '',
   companyNit: '',
@@ -160,6 +199,7 @@ export const initialOnboardingFormData: OnboardingFormData = {
   beneficiaryEmail: '',
 
   companyHasPep: null,
+  companyPep: { ...emptyPepDeclaration },
 
   economicActivity: '',
   monthlyVolume: '',

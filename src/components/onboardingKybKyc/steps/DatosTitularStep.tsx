@@ -4,6 +4,7 @@ import { SimpleGrid, Stack, Select, Switch, TextInput, Group, Text } from '@mant
 import { IconCalendar } from '@tabler/icons-react';
 import { StepTitle, SectionTitle } from '../fields/SectionTitle';
 import { PhoneField } from '../fields/PhoneField';
+import { PepDeclarationFields } from '../fields/PepDeclarationFields';
 import { copy } from '../copy';
 import {
   CITY_OPTIONS,
@@ -132,6 +133,15 @@ export function DatosTitularStep({ data, update }: StepProps) {
           color="akuaPurple.6"
         />
       </Group>
+
+      {data.holderIsPep && (
+        <PepDeclarationFields
+          value={data.holderPep}
+          onChange={(patch) =>
+            update({ holderPep: { ...data.holderPep, ...patch } })
+          }
+        />
+      )}
     </Stack>
   );
 }

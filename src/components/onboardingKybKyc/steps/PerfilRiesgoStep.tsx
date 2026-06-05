@@ -3,6 +3,7 @@
 import { Group, Paper, Radio, Stack, Text } from '@mantine/core';
 import { IconShieldHalf } from '@tabler/icons-react';
 import { StepTitle } from '../fields/SectionTitle';
+import { PepDeclarationFields } from '../fields/PepDeclarationFields';
 import { copy } from '../copy';
 import type { StepProps } from '../stepProps';
 import type { YesNo } from '../types';
@@ -41,6 +42,15 @@ export function PerfilRiesgoStep({ data, update }: StepProps) {
           </div>
         </Group>
       </Paper>
+
+      {data.companyHasPep === 'si' && (
+        <PepDeclarationFields
+          value={data.companyPep}
+          onChange={(patch) =>
+            update({ companyPep: { ...data.companyPep, ...patch } })
+          }
+        />
+      )}
     </Stack>
   );
 }

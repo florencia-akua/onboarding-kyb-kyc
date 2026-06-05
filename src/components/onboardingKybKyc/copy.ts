@@ -89,10 +89,51 @@ export const copy = {
     title: 'Identificación del titular',
     contactTitle: 'Datos de contacto',
     pepTitle: 'Declaración PEP',
-    pepLabel: 'Declaro que el titular es una Persona Políticamente Expuesta',
+    pepLabel: '¿Eres una Persona Expuesta Políticamente (PEP)?',
     fullNamePlaceholder: 'Juan Pérez',
     documentNumberPlaceholder: 'Ej: 12.345.678',
     emailPlaceholder: 'Escribe aquí el correo electrónico',
+  },
+
+  pepDeclaration: {
+    positionLabel: '¿Cuál es o fue el cargo público que ocupaste?',
+    positionPlaceholder: 'Ej: Ministro, Congresista, Juez…',
+    positionHint:
+      '(Ej: Concejal, Alcalde, Ministro, Congresista, Juez, Gobernador, etc.)',
+    institutionLabel: '¿En qué institución o entidad pública ejerciste el cargo?',
+    institutionPlaceholder: 'Institución o entidad pública',
+    periodQuestion: '¿En qué período ejerciste el cargo?',
+    startDate: 'Fecha de inicio',
+    endDate: 'Fecha de finalización',
+    startPlaceholder: 'DD / MM / AAAA',
+    endPlaceholder: 'DD / MM / AAAA  ó  "Actual"',
+    levelQuestion: '¿El cargo es o fue a nivel nacional, regional o municipal?',
+    levelNacional: 'Nacional',
+    levelRegional: 'Regional (Departamento)',
+    levelMunicipal: 'Municipal (Municipio)',
+    relativeQuestion:
+      '¿Eres familiar cercano de una persona que ocupa o ocupó un cargo público importante?',
+    relativeDetailLabel: 'Especificar relación y nombre del cargo',
+    relativeDetailPlaceholder: 'Relación y cargo',
+    associateQuestion:
+      '¿Eres conocido/asociado cercano de una persona políticamente expuesta?',
+    associateDetailLabel: 'Explicar la relación',
+    associateDetailPlaceholder: 'Explicación de la relación',
+    publicFundsQuestion:
+      '¿Has recibido o recibes fondos públicos relacionados con tu cargo?',
+    decisionPowerQuestion:
+      '¿Tienes o tuviste poder de decisión sobre contratación pública, presupuesto o recursos del Estado?',
+    fundsOriginTitle: 'Declaración de origen de fondos',
+    fundsOriginLabel:
+      'Describe brevemente el origen de los fondos que procesarás a través de la plataforma:',
+    fundsOriginPlaceholder: 'Describe el origen de los fondos…',
+    approvalQuestion:
+      '¿Necesitas aprobación especial de cumplimiento para operar como PEP?',
+    approvalHint:
+      '(Esta pregunta es para activar revisión manual del equipo de compliance)',
+    approvalRequires: 'Sí, requiero aprobación',
+    approvalHas: 'No, ya tengo aprobación previa (adjuntar documento)',
+    approvalDocLabel: 'Documento de aprobación previa',
   },
 
   business: {
