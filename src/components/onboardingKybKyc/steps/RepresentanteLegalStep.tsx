@@ -29,7 +29,7 @@ export function RepresentanteLegalStep({ data, update }: StepProps) {
   }, [data.hasAlternateLegalRep]);
 
   return (
-    <Stack gap={24}>
+    <Stack gap={32}>
       <Stack gap={6}>
         <Title order={3} c="mantineDefault.9" fz={22}>
           {copy.legalRep.title}
@@ -39,7 +39,7 @@ export function RepresentanteLegalStep({ data, update }: StepProps) {
         </GroupLabel>
       </Stack>
 
-      <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={24}>
+      <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={32}>
         <TextInput
           label={copy.fields.fullName}
           placeholder="Ingrese nombre completo"
@@ -134,7 +134,7 @@ export function RepresentanteLegalStep({ data, update }: StepProps) {
               {copy.legalRep.alternateTitle}
             </GroupLabel>
 
-            <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={24}>
+            <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={32}>
             <TextInput
               label={copy.fields.fullName}
               placeholder="Ingrese nombre completo"

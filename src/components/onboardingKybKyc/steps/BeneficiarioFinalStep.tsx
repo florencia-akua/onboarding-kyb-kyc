@@ -44,7 +44,7 @@ export function BeneficiarioFinalStep({
   };
 
   return (
-    <Stack gap={24}>
+    <Stack gap={32}>
       {asSection ? (
         <SectionTitle>{copy.beneficiary.title}</SectionTitle>
       ) : (
@@ -53,7 +53,7 @@ export function BeneficiarioFinalStep({
 
       {beneficiaries.length === 0 ? (
         <Paper withBorder radius="md" p="md" bg="gray.0">
-          <Group justify="space-between" wrap="nowrap" gap={24}>
+          <Group justify="space-between" wrap="nowrap" gap={32}>
             <Text size="sm" c="mantineDefault.6">
               {copy.beneficiary.calloutText}
             </Text>
@@ -70,7 +70,7 @@ export function BeneficiarioFinalStep({
       ) : (
         <>
           {beneficiaries.map((beneficiary, index) => (
-            <Stack key={index} gap={24}>
+            <Stack key={index} gap={32}>
               <Group justify="space-between" mt={index > 0 ? 'md' : undefined}>
                 <Text fw={600} size="sm" c="mantineDefault.7">
                   {copy.beneficiary.beneficiaryLabel} {index + 1}
@@ -85,7 +85,7 @@ export function BeneficiarioFinalStep({
                 </ActionIcon>
               </Group>
 
-              <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={24}>
+              <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={32}>
                 <TextInput
                   label={copy.fields.fullName}
                   placeholder="Ingrese nombre completo"

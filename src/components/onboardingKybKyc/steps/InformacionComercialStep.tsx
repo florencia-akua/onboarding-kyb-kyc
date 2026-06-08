@@ -9,7 +9,7 @@ import type { StepProps } from '../stepProps';
 
 export function InformacionComercialStep({ data, update }: StepProps) {
   return (
-    <Stack gap={24}>
+    <Stack gap={32}>
       <StepTitle>{copy.commercial.title}</StepTitle>
 
       <TextInput
@@ -19,7 +19,7 @@ export function InformacionComercialStep({ data, update }: StepProps) {
         onChange={(e) => update({ commercialName: e.currentTarget.value })}
       />
 
-      <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={24}>
+      <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={32}>
         <TextInput
           label={copy.fields.address}
           placeholder={copy.commercial.commercialAddressPlaceholder}

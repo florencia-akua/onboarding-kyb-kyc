@@ -28,10 +28,10 @@ export function DatosTitularStep({ data, update }: StepProps) {
   }, [data.holderIsPep]);
 
   return (
-    <Stack gap={24}>
+    <Stack gap={32}>
       <StepTitle>{copy.holder.title}</StepTitle>
 
-      <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={24}>
+      <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={32}>
         <TextInput
           label={copy.fields.fullName}
           placeholder={copy.holder.fullNamePlaceholder}
@@ -88,7 +88,7 @@ export function DatosTitularStep({ data, update }: StepProps) {
 
       <SectionTitle>{copy.holder.contactTitle}</SectionTitle>
 
-      <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={24}>
+      <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={32}>
         <TextInput
           label={copy.fields.residentialAddress}
           placeholder="Carrera 15 # 80 - 45"

@@ -22,7 +22,7 @@ export function DatosNegocioStep({ data, update }: StepProps) {
     data.salesChannels.includes('both');
 
   return (
-    <Stack gap={24}>
+    <Stack gap={32}>
       <StepTitle>{copy.business.title}</StepTitle>
 
       <Select
@@ -35,7 +35,7 @@ export function DatosNegocioStep({ data, update }: StepProps) {
         searchable
       />
 
-      <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={24}>
+      <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={32}>
         <NumberInput
           label={copy.business.monthlyVolume}
           placeholder="0"

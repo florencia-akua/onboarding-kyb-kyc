@@ -9,10 +9,10 @@ import type { StepProps } from '../stepProps';
 
 export function IdentificacionContactoStep({ data, update }: StepProps) {
   return (
-    <Stack gap={24}>
+    <Stack gap={32}>
       <StepTitle>{copy.identification.companyTitle}</StepTitle>
 
-      <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={24}>
+      <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={32}>
         <TextInput
           label={copy.identification.legalName}
           placeholder={copy.identification.legalNamePlaceholder}
@@ -45,7 +45,7 @@ export function IdentificacionContactoStep({ data, update }: StepProps) {
 
       <SectionTitle>{copy.identification.contactTitle}</SectionTitle>
 
-      <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={24}>
+      <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={32}>
         <TextInput
           label="Dirección comercial"
           placeholder="Ingrese dirección comercial"

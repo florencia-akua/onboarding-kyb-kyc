@@ -8,7 +8,7 @@ import { PerfilRiesgoStep } from './PerfilRiesgoStep';
 
 export function SociosBeneficiariosStep(props: StepProps) {
   return (
-    <Stack gap={24}>
+    <Stack gap={32}>
       <EstructuraSocietariaStep {...props} asSection />
       <BeneficiarioFinalStep {...props} asSection />
       <PerfilRiesgoStep {...props} asSection />

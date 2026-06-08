@@ -26,7 +26,7 @@ export function PerfilRiesgoStep({
   }, [isPep]);
 
   return (
-    <Stack gap={24}>
+    <Stack gap={32}>
       {asSection ? (
         <SectionTitle>{copy.riskProfile.declarationTitle}</SectionTitle>
       ) : (
