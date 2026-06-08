@@ -1,6 +1,6 @@
 'use client';
 
-import { Badge, Button, Group, Text } from '@mantine/core';
+import { Badge, Button, Group } from '@mantine/core';
 import { copy } from '../copy';
 import type { PersonaType } from '../types';
 
@@ -14,7 +14,7 @@ export function TopNav({ personaType }: TopNavProps) {
       justify="space-between"
       align="center"
       h={64}
-      px="xl"
+      px={{ base: 16, md: 32 }}
       style={{
         borderBottom: '1px solid var(--mantine-color-gray-2)',
         flexShrink: 0,
@@ -22,16 +22,31 @@ export function TopNav({ personaType }: TopNavProps) {
       }}
     >
       <Group gap="sm">
-        <Text fw={700} fz={20} c="akuaPurple.6">
-          akua
-        </Text>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/logo-akua.svg"
+          alt="Akua"
+          style={{ height: 18, width: 'auto', display: 'block' }}
+        />
         {personaType && (
           <Badge
-            variant="outline"
-            color="mantineDefault.8"
             radius="xl"
-            size="lg"
-            styles={{ label: { textTransform: 'none', fontWeight: 500 } }}
+            styles={{
+              root: {
+                height: 'auto',
+                padding: '4px 12px',
+                // DS: bg/muted, border/strong, fg/default.
+                backgroundColor: 'var(--mantine-color-mantineDefault-1)',
+                border: '1px solid var(--mantine-color-mantineDefault-3)',
+              },
+              label: {
+                textTransform: 'none',
+                fontWeight: 500,
+                fontSize: 11,
+                lineHeight: 1.4,
+                color: 'var(--mantine-color-mantineDefault-9)',
+              },
+            }}
           >
             {copy.personaBadge[personaType]}
           </Badge>

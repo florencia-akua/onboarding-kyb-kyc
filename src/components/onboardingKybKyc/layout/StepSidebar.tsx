@@ -15,6 +15,8 @@ interface StepSidebarProps {
   activeIndex: number;
   maxReachedIndex: number;
   onStepClick: (index: number) => void;
+  /** Breakpoint from which the sidebar is visible (hidden below it). */
+  visibleFrom?: string;
 }
 
 export function StepSidebar({
@@ -22,19 +24,20 @@ export function StepSidebar({
   activeIndex,
   maxReachedIndex,
   onStepClick,
+  visibleFrom,
 }: StepSidebarProps) {
   return (
     <Box
       component="nav"
       w={300}
       p="md"
+      visibleFrom={visibleFrom}
       style={{
         flexShrink: 0,
-        borderRight: '1px solid var(--mantine-color-gray-2)',
         overflowY: 'auto',
       }}
     >
-      <Stack gap={4}>
+      <Stack gap={2}>
         {steps.map((step, index) => {
           const isActive = index === activeIndex;
           const isCompleted = index < maxReachedIndex;
@@ -45,7 +48,8 @@ export function StepSidebar({
               key={step.id}
               onClick={() => isReachable && onStepClick(index)}
               disabled={!isReachable}
-              p="sm"
+              py={9}
+              px={12}
               style={{
                 borderRadius: 'var(--mantine-radius-md)',
                 backgroundColor: isActive
@@ -61,9 +65,9 @@ export function StepSidebar({
                     c={
                       isActive
                         ? 'white'
-                        : isCompleted
-                          ? 'akuaGreen.8'
-                          : 'mantineDefault.5'
+                        : isReachable
+                          ? 'mantineDefault.8'
+                          : 'mantineDefault.4'
                     }
                     style={{ display: 'flex' }}
                   >

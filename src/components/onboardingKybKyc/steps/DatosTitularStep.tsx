@@ -1,6 +1,7 @@
 'use client';
 
-import { SimpleGrid, Stack, Select, Switch, TextInput, Group, Text } from '@mantine/core';
+import { useEffect, useRef } from 'react';
+import { Box, SimpleGrid, Stack, Select, Switch, TextInput, Group, Text } from '@mantine/core';
 import { StepTitle, SectionTitle } from '../fields/SectionTitle';
 import { PhoneField } from '../fields/PhoneField';
 import { DateField } from '../fields/DateField';
@@ -15,11 +16,22 @@ import {
 import type { StepProps } from '../stepProps';
 
 export function DatosTitularStep({ data, update }: StepProps) {
+  const pepRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (data.holderIsPep) {
+      const id = window.setTimeout(() => {
+        pepRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 50);
+      return () => window.clearTimeout(id);
+    }
+  }, [data.holderIsPep]);
+
   return (
-    <Stack gap="md">
+    <Stack gap={24}>
       <StepTitle>{copy.holder.title}</StepTitle>
 
-      <SimpleGrid cols={2} spacing="md">
+      <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={24}>
         <TextInput
           label={copy.fields.fullName}
           placeholder={copy.holder.fullNamePlaceholder}
@@ -76,7 +88,7 @@ export function DatosTitularStep({ data, update }: StepProps) {
 
       <SectionTitle>{copy.holder.contactTitle}</SectionTitle>
 
-      <SimpleGrid cols={2} spacing="md">
+      <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={24}>
         <TextInput
           label={copy.fields.residentialAddress}
           placeholder="Carrera 15 # 80 - 45"
@@ -127,12 +139,14 @@ export function DatosTitularStep({ data, update }: StepProps) {
       </Group>
 
       {data.holderIsPep && (
-        <PepDeclarationFields
-          value={data.holderPep}
-          onChange={(patch) =>
-            update({ holderPep: { ...data.holderPep, ...patch } })
-          }
-        />
+        <Box ref={pepRef} style={{ scrollMarginTop: 24 }}>
+          <PepDeclarationFields
+            value={data.holderPep}
+            onChange={(patch) =>
+              update({ holderPep: { ...data.holderPep, ...patch } })
+            }
+          />
+        </Box>
       )}
     </Stack>
   );

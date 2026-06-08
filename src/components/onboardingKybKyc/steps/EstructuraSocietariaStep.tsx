@@ -43,7 +43,7 @@ export function EstructuraSocietariaStep({
   };
 
   return (
-    <Stack gap="md">
+    <Stack gap={24}>
       {asSection ? (
         <SectionTitle>{copy.ownership.title}</SectionTitle>
       ) : (
@@ -52,13 +52,13 @@ export function EstructuraSocietariaStep({
 
       {shareholders.length === 0 ? (
         <Paper withBorder radius="md" p="md" bg="gray.0">
-          <Group justify="space-between" wrap="nowrap" gap="md">
+          <Group justify="space-between" wrap="nowrap" gap={24}>
             <Text fw={600} size="sm" c="mantineDefault.9">
               {copy.ownership.subtitle}
             </Text>
             <Button
               variant="default"
-              leftSection={<IconPlus size={16} />}
+              rightSection={<IconPlus size={16} />}
               onClick={addShareholder}
               style={{ flexShrink: 0 }}
             >
@@ -73,7 +73,7 @@ export function EstructuraSocietariaStep({
           </Text>
 
           {shareholders.map((shareholder, index) => (
-            <Stack key={index} gap="md">
+            <Stack key={index} gap={24}>
               <Group justify="space-between" mt={index > 0 ? 'md' : undefined}>
                 <Text fw={600} size="sm" c="mantineDefault.7">
                   {copy.ownership.shareholderLabel} {index + 1}
@@ -88,7 +88,7 @@ export function EstructuraSocietariaStep({
                 </ActionIcon>
               </Group>
 
-              <SimpleGrid cols={2} spacing="md">
+              <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={24}>
                 <TextInput
                   label={copy.fields.fullName}
                   placeholder="Ingrese nombre completo"
@@ -148,7 +148,7 @@ export function EstructuraSocietariaStep({
 
           <Button
             variant="default"
-            leftSection={<IconPlus size={16} />}
+            rightSection={<IconPlus size={16} />}
             w="fit-content"
             onClick={addShareholder}
           >

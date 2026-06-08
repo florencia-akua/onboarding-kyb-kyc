@@ -12,7 +12,7 @@ import {
   TextInput,
   Text,
 } from '@mantine/core';
-import { IconPlus, IconTrash, IconUserCheck } from '@tabler/icons-react';
+import { IconPlus, IconTrash } from '@tabler/icons-react';
 import { StepTitle, SectionTitle } from '../fields/SectionTitle';
 import { PhoneField } from '../fields/PhoneField';
 import { DocumentNumberLabel } from '../fields/DocumentNumberLabel';
@@ -44,7 +44,7 @@ export function BeneficiarioFinalStep({
   };
 
   return (
-    <Stack gap="md">
+    <Stack gap={24}>
       {asSection ? (
         <SectionTitle>{copy.beneficiary.title}</SectionTitle>
       ) : (
@@ -53,20 +53,13 @@ export function BeneficiarioFinalStep({
 
       {beneficiaries.length === 0 ? (
         <Paper withBorder radius="md" p="md" bg="gray.0">
-          <Group justify="space-between" wrap="nowrap" gap="md">
-            <Group gap="sm" wrap="nowrap">
-              <IconUserCheck
-                size={20}
-                color="var(--mantine-color-mantineDefault-7)"
-                style={{ flexShrink: 0 }}
-              />
-              <Text size="sm" c="mantineDefault.6">
-                {copy.beneficiary.calloutText}
-              </Text>
-            </Group>
+          <Group justify="space-between" wrap="nowrap" gap={24}>
+            <Text size="sm" c="mantineDefault.6">
+              {copy.beneficiary.calloutText}
+            </Text>
             <Button
               variant="default"
-              leftSection={<IconPlus size={16} />}
+              rightSection={<IconPlus size={16} />}
               onClick={addBeneficiary}
               style={{ flexShrink: 0 }}
             >
@@ -77,7 +70,7 @@ export function BeneficiarioFinalStep({
       ) : (
         <>
           {beneficiaries.map((beneficiary, index) => (
-            <Stack key={index} gap="md">
+            <Stack key={index} gap={24}>
               <Group justify="space-between" mt={index > 0 ? 'md' : undefined}>
                 <Text fw={600} size="sm" c="mantineDefault.7">
                   {copy.beneficiary.beneficiaryLabel} {index + 1}
@@ -92,7 +85,7 @@ export function BeneficiarioFinalStep({
                 </ActionIcon>
               </Group>
 
-              <SimpleGrid cols={2} spacing="md">
+              <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={24}>
                 <TextInput
                   label={copy.fields.fullName}
                   placeholder="Ingrese nombre completo"
@@ -165,7 +158,7 @@ export function BeneficiarioFinalStep({
 
           <Button
             variant="default"
-            leftSection={<IconPlus size={16} />}
+            rightSection={<IconPlus size={16} />}
             w="fit-content"
             onClick={addBeneficiary}
           >

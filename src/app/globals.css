@@ -7,3 +7,11 @@ body {
   margin: 0;
   padding: 0;
 }
+
+/* Tokens del Akua Design System (Core) */
+:root {
+  /* border/default */
+  --mantine-color-default-border: #dee2e6;
+  /* fg/default */
+  --mantine-color-text: #0a0b0d;
+}

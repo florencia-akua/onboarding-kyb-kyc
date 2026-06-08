@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Group, Paper, Stack, Text } from '@mantine/core';
+import { Box, Paper, SimpleGrid, Stack, Text } from '@mantine/core';
 import { IconBuilding, IconUsers } from '@tabler/icons-react';
 import { PlainShell } from '../layout/PlainShell';
 import { copy } from '../copy';
@@ -33,7 +33,8 @@ function OptionCard({
       withBorder
       radius="lg"
       p="xl"
-      w={280}
+      w="100%"
+      h="100%"
       onClick={onClick}
       style={{
         cursor: 'pointer',
@@ -85,11 +86,11 @@ export function PersonaTypeScreen({
         onNext: selected ? onNext : undefined,
       }}
     >
-      <Stack align="center" gap="xl">
+      <Stack align="center" gap="xl" w="100%" maw={600}>
         <Text fz="md" c="mantineDefault.7">
           {copy.select.title}
         </Text>
-        <Group gap="lg" align="stretch">
+        <SimpleGrid cols={{ base: 1, xs: 2 }} spacing="lg" w="100%">
           <OptionCard
             icon={<IconUsers size={22} />}
             title={copy.select.fisica.title}
@@ -104,7 +105,7 @@ export function PersonaTypeScreen({
             selected={selected === 'juridica'}
             onClick={() => onSelect('juridica')}
           />
-        </Group>
+        </SimpleGrid>
       </Stack>
     </PlainShell>
   );

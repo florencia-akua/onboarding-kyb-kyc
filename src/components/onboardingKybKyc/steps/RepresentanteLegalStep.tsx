@@ -1,8 +1,9 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { Box, Radio, SimpleGrid, Stack, Select, TextInput, Text } from '@mantine/core';
-import { StepTitle, SectionTitle } from '../fields/SectionTitle';
+import { Box, Divider, Radio, SimpleGrid, Stack, Select, TextInput, Text, Title } from '@mantine/core';
+import { IconUser } from '@tabler/icons-react';
+import { GroupLabel } from '../fields/GroupLabel';
 import { PhoneField } from '../fields/PhoneField';
 import { DateField } from '../fields/DateField';
 import { DocumentNumberLabel } from '../fields/DocumentNumberLabel';
@@ -28,11 +29,17 @@ export function RepresentanteLegalStep({ data, update }: StepProps) {
   }, [data.hasAlternateLegalRep]);
 
   return (
-    <Stack gap="md">
-      <StepTitle>{copy.legalRep.title}</StepTitle>
-      <SectionTitle>{copy.legalRep.principalTitle}</SectionTitle>
+    <Stack gap={24}>
+      <Stack gap={6}>
+        <Title order={3} c="mantineDefault.9" fz={22}>
+          {copy.legalRep.title}
+        </Title>
+        <GroupLabel icon={<IconUser size={15} />}>
+          {copy.legalRep.principalTitle}
+        </GroupLabel>
+      </Stack>
 
-      <SimpleGrid cols={2} spacing="md">
+      <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={24}>
         <TextInput
           label={copy.fields.fullName}
           placeholder="Ingrese nombre completo"
@@ -121,9 +128,13 @@ export function RepresentanteLegalStep({ data, update }: StepProps) {
 
       {data.hasAlternateLegalRep === 'si' && (
         <Box ref={alternateRef} style={{ scrollMarginTop: 24 }}>
-          <SectionTitle>{copy.legalRep.alternateTitle}</SectionTitle>
+          <Divider mb={24} />
+          <Stack gap="sm">
+            <GroupLabel icon={<IconUser size={15} />}>
+              {copy.legalRep.alternateTitle}
+            </GroupLabel>
 
-          <SimpleGrid cols={2} spacing="md">
+            <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={24}>
             <TextInput
               label={copy.fields.fullName}
               placeholder="Ingrese nombre completo"
@@ -199,7 +210,8 @@ export function RepresentanteLegalStep({ data, update }: StepProps) {
                 update({ alternateRepEmail: e.currentTarget.value })
               }
             />
-          </SimpleGrid>
+            </SimpleGrid>
+          </Stack>
         </Box>
       )}
     </Stack>

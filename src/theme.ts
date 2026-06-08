@@ -79,7 +79,17 @@ export const theme = createTheme({
     Paper: { defaultProps: { withBorder: true } },
     Card: { defaultProps: { withBorder: true, radius: 'lg' } },
     Badge: { defaultProps: { variant: 'light', size: 'sm', radius: 'sm' } },
-    Button: { defaultProps: { radius: 'md' } },
+    // DS: botones con radio sm (8px).
+    Button: { defaultProps: { radius: 'sm' } },
     Modal: { defaultProps: { centered: true, radius: 'md' } },
+    // DS: inputs con bordes levemente redondeados (sm = 8px). Se setea en
+    // cada componente para garantizar que aplique (no siempre cascadea Input).
+    Input: { defaultProps: { radius: 'sm' } },
+    InputBase: { defaultProps: { radius: 'sm' } },
+    TextInput: { defaultProps: { radius: 'sm' } },
+    Select: { defaultProps: { radius: 'sm' } },
+    Textarea: { defaultProps: { radius: 'sm' } },
+    NumberInput: { defaultProps: { radius: 'sm' } },
+    DatePickerInput: { defaultProps: { radius: 'sm' } },
   },
 });

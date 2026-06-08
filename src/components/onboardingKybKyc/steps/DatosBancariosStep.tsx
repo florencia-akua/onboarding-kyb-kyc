@@ -9,10 +9,10 @@ import type { AccountType, YesNo } from '../types';
 
 export function DatosBancariosStep({ data, update }: StepProps) {
   return (
-    <Stack gap="md">
+    <Stack gap={24}>
       <StepTitle>{copy.banking.title}</StepTitle>
 
-      <SimpleGrid cols={2} spacing="md">
+      <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={24}>
         <Select
           label={copy.banking.payoutBank}
           placeholder={BANK_OPTIONS[0]}

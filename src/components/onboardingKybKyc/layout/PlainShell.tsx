@@ -20,9 +20,6 @@ interface PlainShellProps {
   centered?: boolean;
 }
 
-const DOTTED_BG =
-  'radial-gradient(var(--mantine-color-gray-3) 1px, transparent 1px)';
-
 export function PlainShell({
   personaType,
   children,
@@ -47,10 +44,8 @@ export function PlainShell({
           display: 'flex',
           alignItems: centered ? 'center' : 'flex-start',
           justifyContent: 'center',
-          backgroundImage: DOTTED_BG,
-          backgroundSize: '22px 22px',
         }}
-        p={48}
+        p={{ base: 16, md: 48 }}
       >
         {children}
       </Box>

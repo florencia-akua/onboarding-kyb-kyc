@@ -22,12 +22,13 @@ export function FooterBar({
     <Group
       justify="space-between"
       align="center"
-      h={72}
-      px="xl"
+      mih={72}
+      px={{ base: 16, md: 32 }}
       style={{
         borderTop: '1px solid var(--mantine-color-gray-2)',
         flexShrink: 0,
         backgroundColor: 'var(--mantine-color-white)',
+        paddingBottom: 'env(safe-area-inset-bottom)',
       }}
     >
       {showBack ? (
@@ -36,6 +37,7 @@ export function FooterBar({
           color="akuaPurple.6"
           onClick={onBack}
           disabled={backDisabled}
+          styles={{ root: { minHeight: 44 } }}
         >
           {copy.common.back}
         </Button>
@@ -44,7 +46,11 @@ export function FooterBar({
       )}
 
       {onNext && (
-        <Button color="akuaPurple.6" onClick={onNext}>
+        <Button
+          color="akuaPurple.6"
+          onClick={onNext}
+          styles={{ root: { minHeight: 44 } }}
+        >
           {nextLabel}
         </Button>
       )}

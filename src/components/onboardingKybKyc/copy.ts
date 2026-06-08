@@ -24,13 +24,12 @@ export const copy = {
   },
 
   intro: {
-    eyebrow: 'PROCESO DE ONBOARDING', // "ONBOARDING PROCESS"
-    title: 'Conozca a su proveedor', // "Know Your Supplier"
-    description:
-      'Un proceso de cumplimiento único requerido para registrarte como proveedor de servicios de Akua.', // "A one-time compliance process required to register as an Akua service provider."
+    eyebrow: 'Onboarding',
+    title: 'Nuevo comercio',
+    description: 'Le damos la bienvenida al registro de Merchants.',
     documentsNote:
-      'Ten a mano los documentos de tu empresa, toma alrededor de 20 minutos.', // "Have your company documents ready, it takes around 20 minutes."
-    cta: 'Comenzar', // "Get Started"
+      'Complete la información requerida en los siguientes pasos para activar su cuenta y comenzar a operar.',
+    cta: 'Comenzar',
   },
 
   select: {
@@ -197,21 +196,22 @@ export const copy = {
     title: 'Estructura societaria',
     subtitle: 'Accionistas con participación mayor al 5%',
     participation: 'Porcentaje de participación (%)',
-    addShareholder: 'Agregar Accionista',
+    addShareholder: 'Agregar',
     shareholderLabel: 'Accionista',
   },
 
   beneficiary: {
     title: 'Beneficiario final (Controlador)',
     calloutTitle: 'Beneficiario final',
-    calloutText: 'Persona natural que controla o beneficia de la empresa',
+    calloutText: 'Persona natural que controla/beneficia de la empresa',
     controlPercentage: 'Porcentaje de control (%)',
-    addBeneficiary: 'Agregar Beneficiario',
+    addBeneficiary: 'Agregar',
     beneficiaryLabel: 'Beneficiario',
   },
 
   riskProfile: {
     title: 'Perfil de riesgo',
+    declarationTitle: 'Declaración PEP',
     question:
       '¿El representante legal, suplente o algún accionista >5% es Persona Políticamente Expuesta (PEP)?',
     calloutTitle: 'Persona Políticamente Expuesta (PEP)',

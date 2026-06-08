@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Button, Stack, Text, Title } from '@mantine/core';
+import { Badge, Box, Button, Stack, Text, Title } from '@mantine/core';
 import { TopNav } from '../layout/TopNav';
 import { copy } from '../copy';
 
@@ -21,39 +21,60 @@ export function IntroScreen({ onStart }: IntroScreenProps) {
       <TopNav />
 
       <Box style={{ display: 'flex', flex: 1, minHeight: 0 }}>
-        {/* Panel de texto */}
+        {/* Columna izquierda: contenido sobre fondo punteado */}
         <Box
+          px={{ base: 24, md: 64 }}
           style={{
             flex: 1,
             display: 'flex',
             alignItems: 'center',
+            backgroundColor: 'var(--mantine-color-white)',
+            backgroundImage:
+              'radial-gradient(var(--mantine-color-gray-2) 1.3px, transparent 1.3px)',
+            backgroundSize: '21px 21px',
+            backgroundPosition: '-3px -3px',
           }}
-          px={64}
         >
-          <Stack gap="md" maw={460}>
-            <Text
-              fw={700}
-              fz={12}
-              c="akuaPurple.5"
-              style={{ letterSpacing: 1.5 }}
+          <Stack gap="lg" maw={380}>
+            <Badge
+              variant="default"
+              radius="xl"
+              styles={{
+                root: {
+                  height: 'auto',
+                  padding: '4px 12px',
+                  backgroundColor: 'var(--mantine-color-mantineDefault-1)',
+                  border: '1px solid var(--mantine-color-mantineDefault-3)',
+                },
+                label: {
+                  textTransform: 'none',
+                  fontWeight: 500,
+                  fontSize: 11,
+                  color: 'var(--mantine-color-mantineDefault-9)',
+                },
+              }}
             >
               {copy.intro.eyebrow}
-            </Text>
-            <Title order={1} c="mantineDefault.9" fz={40} lh={1.1}>
-              {copy.intro.title}
-            </Title>
-            <Text c="mantineDefault.7" fz="md">
-              {copy.intro.description}
-            </Text>
-            <Text c="mantineDefault.7" fz="md">
+            </Badge>
+
+            <Stack gap="xs">
+              <Title order={1} c="mantineDefault.9" fz={32} fw={700} lh={1.2}>
+                {copy.intro.title}
+              </Title>
+              <Text c="mantineDefault.7" fz="md" lh={1.5}>
+                {copy.intro.description}
+              </Text>
+            </Stack>
+
+            <Text c="mantineDefault.7" fz="md" lh={1.5}>
               {copy.intro.documentsNote}
             </Text>
+
             <Button
               color="akuaPurple.6"
               size="md"
-              radius="md"
+              fullWidth
               mt="md"
-              w="fit-content"
               onClick={onStart}
             >
               {copy.intro.cta}
@@ -61,53 +82,29 @@ export function IntroScreen({ onStart }: IntroScreenProps) {
           </Stack>
         </Box>
 
-        {/* Panel decorativo con degradado y orbes */}
+        {/* Columna derecha: preview del dashboard sobre fondo lavanda */}
         <Box
+          visibleFrom="md"
           style={{
             flex: 1,
             position: 'relative',
             overflow: 'hidden',
-            background:
-              'linear-gradient(135deg, #2d0e80 0%, #180047 55%, #100033 100%)',
+            backgroundColor: '#f5f6fc',
           }}
         >
-          <Box
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/intro-dashboard.svg"
+            alt=""
+            aria-hidden
             style={{
               position: 'absolute',
-              width: 360,
-              height: 360,
-              borderRadius: '50%',
-              top: -60,
-              left: -40,
-              background:
-                'radial-gradient(circle at 30% 30%, #b9a3e0, #6440b8 60%, transparent 75%)',
-              opacity: 0.85,
-            }}
-          />
-          <Box
-            style={{
-              position: 'absolute',
-              width: 420,
-              height: 420,
-              borderRadius: '50%',
-              bottom: -80,
-              right: -60,
-              background:
-                'radial-gradient(circle at 35% 35%, #51e9b0, #6440b8 55%, transparent 78%)',
-              opacity: 0.8,
-            }}
-          />
-          <Box
-            style={{
-              position: 'absolute',
-              width: 220,
-              height: 220,
-              borderRadius: '50%',
-              bottom: 80,
-              left: 60,
-              background:
-                'radial-gradient(circle at 40% 40%, #d1c2eb, #8361c7 60%, transparent 80%)',
-              opacity: 0.55,
+              top: '50%',
+              right: -40,
+              transform: 'translateY(-50%)',
+              height: '104%',
+              width: 'auto',
+              maxWidth: 'none',
             }}
           />
         </Box>

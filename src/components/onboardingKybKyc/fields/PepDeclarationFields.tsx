@@ -60,7 +60,7 @@ export function PepDeclarationFields({
   onChange,
 }: PepDeclarationFieldsProps) {
   return (
-    <Stack gap="lg" mt="md">
+    <Stack gap={24} mt="md">
       <TextInput
         label={c.positionLabel}
         placeholder={c.positionPlaceholder}
@@ -79,7 +79,7 @@ export function PepDeclarationFields({
 
       <Stack gap="xs">
         <Question>{c.periodQuestion}</Question>
-        <SimpleGrid cols={2} spacing="md">
+        <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={24}>
           <DateField
             label={c.startDate}
             value={value.startDate}

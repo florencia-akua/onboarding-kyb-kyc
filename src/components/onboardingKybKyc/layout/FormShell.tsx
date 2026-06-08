@@ -1,6 +1,6 @@
 'use client';
 
-import { Box } from '@mantine/core';
+import { Box, Text } from '@mantine/core';
 import type { ReactNode } from 'react';
 import { TopNav } from './TopNav';
 import { FooterBar } from './FooterBar';
@@ -47,10 +47,22 @@ export function FormShell({
           activeIndex={activeIndex}
           maxReachedIndex={maxReachedIndex}
           onStepClick={onStepClick}
+          visibleFrom="md"
         />
 
-        <Box style={{ flex: 1, overflowY: 'auto' }} px={48} py={40}>
-          <Box maw={620}>{children}</Box>
+        <Box
+          style={{ flex: 1, overflowY: 'auto', minWidth: 0 }}
+          px={{ base: 16, md: 48 }}
+          py={{ base: 24, md: 40 }}
+        >
+          <Box maw={620} mx="auto">
+            {/* Indicador de paso solo en mobile (el sidebar se oculta). */}
+            <Text hiddenFrom="md" size="xs" c="mantineDefault.5" fw={600} mb="md">
+              Paso {activeIndex + 1} de {steps.length} ·{' '}
+              {steps[activeIndex]?.label}
+            </Text>
+            {children}
+          </Box>
         </Box>
       </Box>
 
