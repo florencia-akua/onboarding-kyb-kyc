@@ -125,12 +125,15 @@ export function IntroScreen({ onStart }: IntroScreenProps) {
         style={{ display: 'flex', flexDirection: 'column', flex: 1, minHeight: 0 }}
       >
         <Box style={{ flex: 1, overflowY: 'auto' }}>
-          {/* Preview del dashboard (versión mobile, recortada/zoom). */}
+          {/* Preview del dashboard (versión mobile). Imagen SVG pegada al margen derecho. */}
           <Box
             style={{
               backgroundColor: '#f5f6fc',
-              display: 'flex',
-              justifyContent: 'center',
+              overflow: 'hidden',
+              position: 'relative',
+              height: '46vw',
+              minHeight: 160,
+              maxHeight: 240,
             }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -139,11 +142,13 @@ export function IntroScreen({ onStart }: IntroScreenProps) {
               alt=""
               aria-hidden
               style={{
-                display: 'block',
+                position: 'absolute',
+                top: 0,
+                right: 0,
+                height: '100%',
                 width: 'auto',
-                height: 'auto',
-                maxWidth: '100%',
-                maxHeight: '40vh',
+                maxWidth: 'none',
+                display: 'block',
               }}
             />
           </Box>
