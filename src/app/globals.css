@@ -6,6 +6,9 @@ html,
 body {
   margin: 0;
   padding: 0;
+  /* Evitar scroll horizontal en mobile */
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 /* Tokens del Akua Design System (Core) */

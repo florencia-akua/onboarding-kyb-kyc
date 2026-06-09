@@ -1,6 +1,7 @@
 'use client';
 
-import { Badge, Button, Group } from '@mantine/core';
+import { ActionIcon, Badge, Button, Group } from '@mantine/core';
+import { IconQuestionMark } from '@tabler/icons-react';
 import { copy } from '../copy';
 import type { PersonaType } from '../types';
 
@@ -76,11 +77,18 @@ export function TopNav({ personaType }: TopNavProps) {
         )}
       </Group>
 
-      {/* Mobile: botón xs compacto */}
-      <Button variant="default" size="xs" radius="sm" hiddenFrom="md">
-        {copy.common.needHelp}
-      </Button>
-      {/* Desktop: botón sm */}
+      {/* Mobile: ícono circular "?" */}
+      <ActionIcon
+        variant="default"
+        radius="xl"
+        size={32}
+        hiddenFrom="md"
+        aria-label={copy.common.needHelp}
+        style={{ border: '1px solid var(--mantine-color-mantineDefault-3)' }}
+      >
+        <IconQuestionMark size={16} />
+      </ActionIcon>
+      {/* Desktop: botón de texto */}
       <Button variant="default" size="sm" radius="sm" visibleFrom="md">
         {copy.common.needHelp}
       </Button>

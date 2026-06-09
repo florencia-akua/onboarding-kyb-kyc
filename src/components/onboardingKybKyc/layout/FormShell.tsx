@@ -38,6 +38,9 @@ export function FormShell({
         display: 'flex',
         flexDirection: 'column',
         height: '100dvh',
+        width: '100%',
+        maxWidth: '100vw',
+        overflowX: 'hidden',
         backgroundColor: 'var(--mantine-color-white)',
       }}
     >
