@@ -37,9 +37,10 @@ export function FooterBar({
         <Button
           variant="subtle"
           color="akuaPurple.6"
+          size="md"
+          radius="sm"
           onClick={onBack}
           disabled={backDisabled}
-          styles={{ root: { minHeight: 44 } }}
         >
           {copy.common.back}
         </Button>
@@ -50,9 +51,10 @@ export function FooterBar({
       {onNext && (
         <Button
           color="akuaPurple.6"
+          size="md"
+          radius="sm"
           onClick={onNext}
           disabled={nextDisabled}
-          styles={{ root: { minHeight: 44 } }}
         >
           {nextLabel}
         </Button>

@@ -53,7 +53,7 @@ export function TopNav({ personaType }: TopNavProps) {
         )}
       </Group>
 
-      <Button variant="default" size="sm" radius="md">
+      <Button variant="default" size="sm" radius="sm">
         {copy.common.needHelp}
       </Button>
     </Group>

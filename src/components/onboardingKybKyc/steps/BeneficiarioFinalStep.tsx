@@ -1,6 +1,7 @@
 'use client';
 
 import { Stack } from '@mantine/core';
+import { IconUserCheck } from '@tabler/icons-react';
 import { StepTitle } from '../fields/SectionTitle';
 import { PersonSection } from '../fields/PersonSection';
 import { copy } from '../copy';
@@ -16,8 +17,9 @@ export function BeneficiarioFinalStep({
       {!asSection && <StepTitle>{copy.beneficiary.title}</StepTitle>}
       <PersonSection
         idPrefix="bf"
+        icon={<IconUserCheck size={20} />}
         cardLabel={copy.beneficiary.cardLabel}
-        tooltip={copy.beneficiary.calloutText}
+        subtitle={copy.beneficiary.calloutText}
         newPersonLabel={copy.beneficiary.newPersonLabel}
         people={data.beneficiaries}
         onChange={(people) => update({ beneficiaries: people })}

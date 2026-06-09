@@ -1,6 +1,7 @@
 'use client';
 
 import { Stack } from '@mantine/core';
+import { IconUsersGroup } from '@tabler/icons-react';
 import { StepTitle } from '../fields/SectionTitle';
 import { PersonSection } from '../fields/PersonSection';
 import { copy } from '../copy';
@@ -16,8 +17,9 @@ export function EstructuraSocietariaStep({
       {!asSection && <StepTitle>{copy.ownership.title}</StepTitle>}
       <PersonSection
         idPrefix="sh"
+        icon={<IconUsersGroup size={20} />}
         cardLabel={copy.ownership.cardLabel}
-        tooltip={copy.ownership.subtitle}
+        subtitle={copy.ownership.subtitle}
         newPersonLabel={copy.ownership.newPersonLabel}
         people={data.shareholders}
         onChange={(people) => update({ shareholders: people })}

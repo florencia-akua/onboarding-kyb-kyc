@@ -16,6 +16,7 @@ interface FormShellProps {
   onBack: () => void;
   onNext: () => void;
   nextLabel?: string;
+  nextDisabled?: boolean;
   children: ReactNode;
 }
 
@@ -28,6 +29,7 @@ export function FormShell({
   onBack,
   onNext,
   nextLabel,
+  nextDisabled,
   children,
 }: FormShellProps) {
   return (
@@ -66,7 +68,12 @@ export function FormShell({
         </Box>
       </Box>
 
-      <FooterBar onBack={onBack} onNext={onNext} nextLabel={nextLabel} />
+      <FooterBar
+        onBack={onBack}
+        onNext={onNext}
+        nextLabel={nextLabel}
+        nextDisabled={nextDisabled}
+      />
     </Box>
   );
 }

@@ -1,7 +1,8 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { Box, SimpleGrid, Stack, Select, Switch, TextInput, Group, Text } from '@mantine/core';
+import { Box, Paper, SimpleGrid, Stack, Select, Switch, TextInput, Group, Text } from '@mantine/core';
+import { IconShieldHalf } from '@tabler/icons-react';
 import { StepTitle, SectionTitle } from '../fields/SectionTitle';
 import { PhoneField } from '../fields/PhoneField';
 import { DateField } from '../fields/DateField';
@@ -137,6 +138,24 @@ export function DatosTitularStep({ data, update }: StepProps) {
           color="akuaPurple.6"
         />
       </Group>
+
+      <Paper withBorder radius="md" p="md" bg="gray.0">
+        <Group gap="sm" wrap="nowrap" align="flex-start">
+          <IconShieldHalf
+            size={20}
+            color="var(--mantine-color-mantineDefault-7)"
+            style={{ flexShrink: 0 }}
+          />
+          <div>
+            <Text fw={600} size="sm" c="mantineDefault.9">
+              {copy.riskProfile.calloutTitle}
+            </Text>
+            <Text size="sm" c="mantineDefault.6">
+              {copy.riskProfile.calloutText}
+            </Text>
+          </div>
+        </Group>
+      </Paper>
 
       {data.holderIsPep && (
         <Box ref={pepRef} style={{ scrollMarginTop: 24 }}>

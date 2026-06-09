@@ -4,6 +4,7 @@ import {
   IconBuildingBank,
   IconBuildingStore,
   IconBriefcase,
+  IconCircleCheck,
   IconFileText,
   IconUser,
   IconUsersGroup,
@@ -101,6 +102,15 @@ const JURIDICA_STEPS: StepConfig[] = [
   },
 ];
 
+// Paso final de revisión y envío (su contenido se renderiza aparte).
+const REVIEW_STEP: StepConfig = {
+  id: 'review',
+  label: copy.steps.reviewStep,
+  icon: <IconCircleCheck size={ICON_SIZE} />,
+  render: () => null,
+};
+
 export function getSteps(personaType: PersonaType): StepConfig[] {
-  return personaType === 'fisica' ? FISICA_STEPS : JURIDICA_STEPS;
+  const base = personaType === 'fisica' ? FISICA_STEPS : JURIDICA_STEPS;
+  return [...base, REVIEW_STEP];
 }

@@ -17,10 +17,12 @@ export const copy = {
     yes: 'Sí',
     no: 'No',
     addPerson: 'Agregar persona',
+    add: 'Agregar',
     cancel: 'Cancelar',
     continue: 'Continuar',
     inProgress: 'En progreso',
     copyLink: 'Copiar enlace',
+    linkCopied: 'Enlace copiado',
   },
 
   addPersonForm: {
@@ -94,6 +96,7 @@ export const copy = {
     riskProfile: 'Perfil de riesgo',
     bankingPayouts: 'Datos bancarios para payouts',
     review: 'Revisión',
+    reviewStep: 'Revisión y envío',
   },
 
   fields: {
@@ -230,6 +233,9 @@ export const copy = {
     alternateQuestion: '¿Existe representante legal suplente?',
     alternateTitle: 'Representante legal suplente',
     alternateHint: '(si aplica)',
+    mandatory: 'Obligatorio',
+    optional: 'Opcional',
+    unassigned: 'sin asignar',
     newPersonLabel: 'Nuevo representante legal',
   },
 

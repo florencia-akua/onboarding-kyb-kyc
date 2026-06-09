@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import {
   ActionIcon,
   Badge,
@@ -7,6 +8,7 @@ import {
   Stack,
   Text,
   TextInput,
+  Tooltip,
 } from '@mantine/core';
 import { IconCopy } from '@tabler/icons-react';
 import { copy } from '../copy';
@@ -17,8 +19,12 @@ interface InvitedPersonRowProps {
 }
 
 export function InvitedPersonRow({ person }: InvitedPersonRowProps) {
+  const [copied, setCopied] = useState(false);
+
   const handleCopy = () => {
     if (person.link) navigator.clipboard?.writeText(person.link);
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 2000);
   };
 
   return (
@@ -62,19 +68,24 @@ export function InvitedPersonRow({ person }: InvitedPersonRowProps) {
           style={{ flex: 1 }}
           variant="default"
         />
-        <ActionIcon
-          variant="default"
-          size={36}
-          radius="sm"
-          onClick={handleCopy}
-          aria-label={copy.common.copyLink}
-          style={{ flexShrink: 0 }}
-          styles={{
-            root: { borderColor: 'var(--mantine-color-mantineDefault-3)' },
-          }}
+        <Tooltip
+          label={copied ? copy.common.linkCopied : copy.common.copyLink}
+          withArrow
         >
-          <IconCopy size={18} color="var(--mantine-color-mantineDefault-6)" />
-        </ActionIcon>
+          <ActionIcon
+            variant="default"
+            size={36}
+            radius="sm"
+            onClick={handleCopy}
+            aria-label={copy.common.copyLink}
+            style={{ flexShrink: 0 }}
+            styles={{
+              root: { borderColor: 'var(--mantine-color-mantineDefault-3)' },
+            }}
+          >
+            <IconCopy size={18} color="var(--mantine-color-mantineDefault-6)" />
+          </ActionIcon>
+        </Tooltip>
       </Group>
 
       <Text size="xs" c="mantineDefault.5">

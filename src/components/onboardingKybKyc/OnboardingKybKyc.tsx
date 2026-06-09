@@ -4,9 +4,10 @@ import { useCallback, useMemo, useState } from 'react';
 import { FormShell } from './layout/FormShell';
 import { IntroScreen } from './screens/IntroScreen';
 import { PersonaTypeScreen } from './screens/PersonaTypeScreen';
-import { ReviewScreen } from './screens/ReviewScreen';
+import { ReviewList } from './fields/ReviewList';
 import { SuccessScreen } from './screens/SuccessScreen';
 import { getSteps } from './steps/stepsConfig';
+import { getStepMissing } from './stepStatus';
 import { copy } from './copy';
 import { initialOnboardingFormData } from './types';
 import type {
@@ -67,13 +68,13 @@ export default function OnboardingKybKyc() {
   const handleNext = useCallback(() => {
     const isLast = activeIndex === steps.length - 1;
     if (isLast) {
-      setPhase('review');
+      setPhase('success');
       return;
     }
     const next = activeIndex + 1;
     setActiveIndex(next);
     setMaxReachedIndex((m) => Math.max(m, next));
-  }, [activeIndex, steps.length, personaType]);
+  }, [activeIndex, steps.length]);
 
   const handleRestart = useCallback(() => {
     setData(initialOnboardingFormData);
@@ -100,25 +101,6 @@ export default function OnboardingKybKyc() {
     );
   }
 
-  if (phase === 'review' && personaType) {
-    return (
-      <ReviewScreen
-        personaType={personaType}
-        steps={steps.map((s) => ({ id: s.id, label: s.label }))}
-        data={data}
-        onEdit={(index) => {
-          setActiveIndex(index);
-          setPhase('form');
-        }}
-        onBack={() => {
-          setActiveIndex(steps.length - 1);
-          setPhase('form');
-        }}
-        onSubmit={() => setPhase('success')}
-      />
-    );
-  }
-
   if (phase === 'success') {
     return <SuccessScreen onRestart={handleRestart} />;
   }
@@ -126,7 +108,13 @@ export default function OnboardingKybKyc() {
   // phase === 'form'
   if (!personaType) return null;
 
-  const nextLabel = copy.common.next;
+  const current = steps[activeIndex];
+  const isReview = current?.id === 'review';
+  const formSteps = steps.slice(0, -1);
+  const totalMissing = formSteps.reduce(
+    (acc, s) => acc + getStepMissing(s.id, data),
+    0
+  );
 
   return (
     <FormShell
@@ -137,9 +125,18 @@ export default function OnboardingKybKyc() {
       onStepClick={goToStep}
       onBack={handleBack}
       onNext={handleNext}
-      nextLabel={nextLabel}
+      nextLabel={isReview ? copy.common.submit : copy.common.next}
+      nextDisabled={isReview && totalMissing > 0}
     >
-      {steps[activeIndex]?.render(stepProps)}
+      {isReview ? (
+        <ReviewList
+          steps={formSteps.map((s) => ({ id: s.id, label: s.label }))}
+          data={data}
+          onEdit={goToStep}
+        />
+      ) : (
+        current?.render(stepProps)
+      )}
     </FormShell>
   );
 }

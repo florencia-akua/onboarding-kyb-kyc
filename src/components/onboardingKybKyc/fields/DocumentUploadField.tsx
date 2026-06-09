@@ -93,6 +93,8 @@ export function DocumentUploadField({
         >
           <Button
             variant="default"
+            size="md"
+            radius="sm"
             leftSection={<IconUpload size={16} />}
             onClick={() => inputRef.current?.click()}
           >

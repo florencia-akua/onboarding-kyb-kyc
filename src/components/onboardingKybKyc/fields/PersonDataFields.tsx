@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
 import {
   Group,
   Paper,
@@ -41,6 +42,20 @@ interface PersonDataFieldsProps {
  */
 export function PersonDataFields({ value, onChange }: PersonDataFieldsProps) {
   const f = copy.addPersonForm;
+  const pepRef = useRef<HTMLDivElement>(null);
+
+  // Al activar PEP, revela un poco de la declaración.
+  useEffect(() => {
+    if (value.isPep) {
+      const id = window.setTimeout(() => {
+        pepRef.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+        });
+      }, 80);
+      return () => window.clearTimeout(id);
+    }
+  }, [value.isPep]);
 
   return (
     <Stack gap={32}>
@@ -120,10 +135,14 @@ export function PersonDataFields({ value, onChange }: PersonDataFieldsProps) {
         </Paper>
 
         {value.isPep && (
-          <PepDeclarationFields
-            value={value.pep}
-            onChange={(patch) => onChange({ pep: { ...value.pep, ...patch } })}
-          />
+          <div ref={pepRef} style={{ scrollMarginBottom: 24 }}>
+            <PepDeclarationFields
+              value={value.pep}
+              onChange={(patch) =>
+                onChange({ pep: { ...value.pep, ...patch } })
+              }
+            />
+          </div>
         )}
       </Stack>
     </Stack>

@@ -26,7 +26,7 @@ export function SuccessScreen({ onRestart }: SuccessScreenProps) {
         </Title>
         <Text c="mantineDefault.7">{copy.success.description}</Text>
         <Box mt="sm">
-          <Button color="akuaPurple.6" radius="md" onClick={onRestart}>
+          <Button color="akuaPurple.6" size="md" radius="sm" onClick={onRestart}>
             {copy.success.cta}
           </Button>
         </Box>

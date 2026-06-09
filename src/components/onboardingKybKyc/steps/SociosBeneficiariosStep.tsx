@@ -1,6 +1,6 @@
 'use client';
 
-import { Stack } from '@mantine/core';
+import { Divider, Stack } from '@mantine/core';
 import { StepTitle } from '../fields/SectionTitle';
 import { copy } from '../copy';
 import type { StepProps } from '../stepProps';
@@ -11,8 +11,11 @@ export function SociosBeneficiariosStep(props: StepProps) {
   return (
     <Stack gap={32}>
       <StepTitle>{copy.steps.sociosBeneficiarios}</StepTitle>
-      <EstructuraSocietariaStep {...props} asSection />
-      <BeneficiarioFinalStep {...props} asSection />
+      <Stack gap={24}>
+        <EstructuraSocietariaStep {...props} asSection />
+        <Divider />
+        <BeneficiarioFinalStep {...props} asSection />
+      </Stack>
     </Stack>
   );
 }

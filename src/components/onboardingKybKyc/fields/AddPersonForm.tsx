@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import {
   ActionIcon,
   Button,
@@ -54,8 +54,8 @@ const emptyDraft: PersonDraft = {
 };
 
 interface AddPersonFormProps {
-  /** Etiqueta del bloque (ej. "Nuevo accionista", "Beneficiario final"). */
-  label: string;
+  /** Título del bloque (ej. "Representante legal principal"). */
+  label: ReactNode;
   onCancel: () => void;
   /** Se llama al enviar el enlace ("Se lo pido a la persona"). */
   onSubmitInvite: (draft: PersonDraft) => void;
@@ -125,6 +125,21 @@ export function AddPersonForm({
     draft.lastName.trim() === '' ||
     draft.email.trim() === '';
 
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  // Al elegir una opción, revela un poco del contenido de esa sección.
+  useEffect(() => {
+    if (draft.mode) {
+      const id = window.setTimeout(() => {
+        contentRef.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+        });
+      }, 80);
+      return () => window.clearTimeout(id);
+    }
+  }, [draft.mode]);
+
   const handleSendLink = () => {
     if (sending || sent) return;
     setSending(true);
@@ -140,7 +155,7 @@ export function AddPersonForm({
   return (
     <Stack gap={24}>
       <Group justify="space-between" wrap="nowrap">
-        <Text size="sm" c="gray.5">
+        <Text fw={600} fz="md" c="mantineDefault.9">
           {label}
         </Text>
         <ActionIcon
@@ -201,6 +216,7 @@ export function AddPersonForm({
         </SimpleGrid>
       </Stack>
 
+      <div ref={contentRef} style={{ scrollMarginBottom: 24 }}>
       {/* "Lo completo yo": carga manual de datos y documentos. */}
       {draft.mode === 'self' && (
         <PersonDataFields value={draft} onChange={set} />
@@ -226,6 +242,8 @@ export function AddPersonForm({
             ) : (
               <Button
                 color="akuaPurple.6"
+                size="md"
+                radius="sm"
                 style={{ flexShrink: 0 }}
                 loading={sending}
                 disabled={inviteDisabled}
@@ -237,6 +255,7 @@ export function AddPersonForm({
           </Group>
         </Paper>
       )}
+      </div>
     </Stack>
   );
 }
