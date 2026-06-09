@@ -83,10 +83,11 @@ export function PersonaTypeScreen({
     <PlainShell
       footer={{
         onBack,
-        onNext: selected ? onNext : undefined,
+        onNext,
+        nextDisabled: !selected,
       }}
     >
-      <Stack align="center" gap="xl" w="100%" maw={600}>
+      <Stack align="center" gap="xl" w="100%" maw={760}>
         <Text fz="md" c="mantineDefault.7">
           {copy.select.title}
         </Text>

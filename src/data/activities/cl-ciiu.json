@@ -1,0 +1,25 @@
+{
+  "_todo": "DATOS DE EJEMPLO — reemplazar por la lista oficial COMPLETA CIIU Rev.4 CL (SII, Chile) y verificar la correspondencia a ISIC (ver README.md). No usar en producción tal cual.",
+  "entries": [
+    {
+      "localCode": "471100",
+      "localLabel": "Venta al por menor en comercios no especializados con predominio de alimentos, bebidas o tabaco",
+      "isicCode": "4711"
+    },
+    {
+      "localCode": "479100",
+      "localLabel": "Venta al por menor por correo y por Internet",
+      "isicCode": "4791"
+    },
+    {
+      "localCode": "561000",
+      "localLabel": "Actividades de restaurantes y de servicio móvil de comidas",
+      "isicCode": "5610"
+    },
+    {
+      "localCode": "620100",
+      "localLabel": "Actividades de programación informática",
+      "isicCode": "6201"
+    }
+  ]
+}

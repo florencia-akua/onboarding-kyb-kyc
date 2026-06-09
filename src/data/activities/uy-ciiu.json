@@ -1,0 +1,25 @@
+{
+  "_todo": "DATOS DE EJEMPLO — reemplazar por la lista oficial COMPLETA CIIU Rev.4 (INE / DGI, Uruguay) y verificar la correspondencia a ISIC (ver README.md). No usar en producción tal cual.",
+  "entries": [
+    {
+      "localCode": "4711",
+      "localLabel": "Venta al por menor en comercios no especializados con predominio de alimentos, bebidas o tabaco",
+      "isicCode": "4711"
+    },
+    {
+      "localCode": "4791",
+      "localLabel": "Venta al por menor por correo y por Internet",
+      "isicCode": "4791"
+    },
+    {
+      "localCode": "5610",
+      "localLabel": "Actividades de restaurantes y de servicio móvil de comidas",
+      "isicCode": "5610"
+    },
+    {
+      "localCode": "6201",
+      "localLabel": "Actividades de programación informática",
+      "isicCode": "6201"
+    }
+  ]
+}

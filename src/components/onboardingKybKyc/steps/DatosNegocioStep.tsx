@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useMemo, useState } from 'react';
 import {
   Box,
   Checkbox,
@@ -13,26 +14,126 @@ import {
 } from '@mantine/core';
 import { StepTitle } from '../fields/SectionTitle';
 import { copy } from '../copy';
-import { ECONOMIC_ACTIVITY_OPTIONS } from '../options';
+import { COUNTRIES, isoToFlag } from '../countries';
+import {
+  getTaxonomy,
+  loadActivities,
+  type ActivityEntry,
+} from '@/data/activities/taxonomies';
 import type { StepProps } from '../stepProps';
+
+const COUNTRY_OPTIONS = COUNTRIES.map((c) => ({
+  value: c.iso,
+  label: `${isoToFlag(c.iso)}  ${c.name}`,
+}));
 
 export function DatosNegocioStep({ data, update }: StepProps) {
   const showWebsite =
     data.salesChannels.includes('ecommerce') ||
     data.salesChannels.includes('both');
 
+  const country = data.businessCountry;
+  const [activities, setActivities] = useState<ActivityEntry[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  // Carga perezosa del dataset del país seleccionado.
+  useEffect(() => {
+    if (!country) {
+      setActivities([]);
+      return;
+    }
+    let cancelled = false;
+    setLoading(true);
+    loadActivities(country)
+      .then((list) => {
+        if (!cancelled) setActivities(list);
+      })
+      .catch(() => {
+        if (!cancelled) setActivities([]);
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [country]);
+
+  const taxonomy = country ? getTaxonomy(country) : null;
+
+  const activityOptions = useMemo(
+    () =>
+      activities.map((a) => ({
+        value: a.localCode,
+        label: `${a.localCode} — ${a.localLabel}`,
+      })),
+    [activities]
+  );
+
+  const handleSelectActivity = (code: string | null) => {
+    if (!code || !taxonomy) {
+      update({ economicActivity: null });
+      return;
+    }
+    const entry = activities.find((a) => a.localCode === code);
+    if (!entry) {
+      update({ economicActivity: null });
+      return;
+    }
+    update({
+      economicActivity: {
+        country,
+        system: taxonomy.system,
+        localCode: entry.localCode,
+        localLabel: entry.localLabel,
+        isicCode: entry.isicCode,
+        isicRevision: taxonomy.isicRevision,
+      },
+    });
+  };
+
+  const activityPlaceholder = !country
+    ? copy.business.economicActivityCountryFirst
+    : loading
+      ? copy.business.economicActivityLoading
+      : copy.business.economicActivityPlaceholder;
+
   return (
     <Stack gap={32}>
       <StepTitle>{copy.business.title}</StepTitle>
 
       <Select
-        label={copy.business.economicActivity}
-        placeholder={copy.fields.selectFromList}
-        data={ECONOMIC_ACTIVITY_OPTIONS}
-        value={data.economicActivity || null}
-        onChange={(v) => update({ economicActivity: v ?? '' })}
+        label={copy.business.country}
+        placeholder={copy.business.countryPlaceholder}
+        data={COUNTRY_OPTIONS}
+        value={country || null}
+        onChange={(v) =>
+          update({ businessCountry: v ?? '', economicActivity: null })
+        }
         comboboxProps={{ withinPortal: true }}
         searchable
+        withAsterisk
+        limit={50}
+        nothingFoundMessage="Sin resultados"
+      />
+
+      <Select
+        label={copy.business.economicActivity}
+        placeholder={activityPlaceholder}
+        description={
+          taxonomy
+            ? `${taxonomy.system} ${taxonomy.revision} · ${taxonomy.authority}`
+            : undefined
+        }
+        data={activityOptions}
+        value={data.economicActivity?.localCode ?? null}
+        onChange={handleSelectActivity}
+        comboboxProps={{ withinPortal: true }}
+        searchable
+        withAsterisk
+        disabled={!country || loading}
+        limit={100}
+        nothingFoundMessage="Sin resultados"
       />
 
       <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={32}>

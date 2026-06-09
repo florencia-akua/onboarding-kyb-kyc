@@ -15,6 +15,7 @@ interface PlainShellProps {
     onNext?: () => void;
     nextLabel?: string;
     showBack?: boolean;
+    nextDisabled?: boolean;
   };
   /** Center the content vertically and horizontally. */
   centered?: boolean;
@@ -56,6 +57,7 @@ export function PlainShell({
           onNext={footer.onNext}
           nextLabel={footer.nextLabel}
           showBack={footer.showBack}
+          nextDisabled={footer.nextDisabled}
         />
       )}
     </Box>

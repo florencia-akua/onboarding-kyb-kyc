@@ -9,6 +9,7 @@ interface FooterBarProps {
   nextLabel?: string;
   showBack?: boolean;
   backDisabled?: boolean;
+  nextDisabled?: boolean;
 }
 
 export function FooterBar({
@@ -17,6 +18,7 @@ export function FooterBar({
   nextLabel = copy.common.next,
   showBack = true,
   backDisabled = false,
+  nextDisabled = false,
 }: FooterBarProps) {
   return (
     <Group
@@ -49,6 +51,7 @@ export function FooterBar({
         <Button
           color="akuaPurple.6"
           onClick={onNext}
+          disabled={nextDisabled}
           styles={{ root: { minHeight: 44 } }}
         >
           {nextLabel}

@@ -52,6 +52,28 @@ export interface UploadedDoc {
   size: number;
 }
 
+export type CompletionMode = 'self' | 'invite';
+export type PersonStatus = 'in_progress' | 'complete';
+
+/** Persona agregada en Socios y Beneficiarios (accionista o beneficiario). */
+export interface Person {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  mode: CompletionMode;
+  status: PersonStatus;
+  /** Enlace de alta (modo "Se lo pido a la persona"). */
+  link?: string;
+  // Datos cuando se completan en el momento (modo "Lo completo yo").
+  documentNumber?: string;
+  participation?: string;
+  birthCountry?: string;
+  nationality?: string;
+  docFront?: UploadedDoc | null;
+  docBack?: UploadedDoc | null;
+}
+
 export interface Shareholder {
   fullName: string;
   documentNumber: string;
@@ -91,6 +113,19 @@ export const emptyBeneficiary: Beneficiary = {
   phone: '',
   email: '',
 };
+
+/** Actividad económica seleccionada: código local + capa canónica ISIC. */
+export interface BusinessActivity {
+  /** ISO del país de operación. */
+  country: string;
+  /** Sistema local (CIIU, CLAE, CNAE, ISIC…). */
+  system: string;
+  localCode: string;
+  localLabel: string;
+  /** Clase ISIC correspondiente (capa canónica para riesgo/analítica). */
+  isicCode: string;
+  isicRevision: string;
+}
 
 export interface OnboardingFormData {
   personaType: PersonaType | null;
@@ -135,6 +170,10 @@ export interface OnboardingFormData {
   legalRepPhone: string;
   legalRepEmail: string;
   hasAlternateLegalRep: YesNo | null;
+  /** Representante legal principal (flujo de personas). */
+  legalRepPeople: Person[];
+  /** Representante legal suplente (flujo de personas). */
+  alternateRepPeople: Person[];
 
   // --- Representante legal suplente (solo si aplica) ---
   alternateRepFullName: string;
@@ -149,17 +188,20 @@ export interface OnboardingFormData {
   alternateRepEmail: string;
 
   // --- Estructura societaria ---
-  shareholders: Shareholder[];
+  shareholders: Person[];
 
   // --- Beneficiario final ---
-  beneficiaries: Beneficiary[];
+  beneficiaries: Person[];
 
   // --- Perfil de riesgo ---
   companyHasPep: YesNo | null;
   companyPep: PepDeclaration;
 
   // --- Datos del negocio (compartido) ---
-  economicActivity: string;
+  /** País de operación; define la taxonomía de actividad económica. */
+  businessCountry: string;
+  /** Actividad económica: código local + mapeo canónico a ISIC. */
+  economicActivity: BusinessActivity | null;
   monthlyVolume: string;
   averageTicket: string;
   salesChannels: string[];
@@ -222,6 +264,8 @@ export const initialOnboardingFormData: OnboardingFormData = {
   legalRepPhone: '',
   legalRepEmail: '',
   hasAlternateLegalRep: null,
+  legalRepPeople: [],
+  alternateRepPeople: [],
 
   alternateRepFullName: '',
   alternateRepDocumentNumber: '',
@@ -241,7 +285,8 @@ export const initialOnboardingFormData: OnboardingFormData = {
   companyHasPep: null,
   companyPep: { ...emptyPepDeclaration },
 
-  economicActivity: '',
+  businessCountry: '',
+  economicActivity: null,
   monthlyVolume: '',
   averageTicket: '',
   salesChannels: [],

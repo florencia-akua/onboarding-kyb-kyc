@@ -1,0 +1,25 @@
+{
+  "_todo": "DATOS DE EJEMPLO — reemplazar por el nomenclador oficial COMPLETO CLAE (ARCA, ex-AFIP) y verificar la correspondencia a ISIC (ver README.md). Códigos por confirmar. No usar en producción tal cual.",
+  "entries": [
+    {
+      "localCode": "471190",
+      "localLabel": "Venta al por menor en comercios no especializados con predominio de productos alimenticios y bebidas",
+      "isicCode": "4711"
+    },
+    {
+      "localCode": "479900",
+      "localLabel": "Venta al por menor no realizada en establecimientos (incluye Internet)",
+      "isicCode": "4791"
+    },
+    {
+      "localCode": "561011",
+      "localLabel": "Servicios de restaurantes y cantinas sin espectáculo",
+      "isicCode": "5610"
+    },
+    {
+      "localCode": "620100",
+      "localLabel": "Servicios de consultores en informática y suministros de programas de informática",
+      "isicCode": "6201"
+    }
+  ]
+}

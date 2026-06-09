@@ -1,0 +1,25 @@
+{
+  "_todo": "DATOS DE EJEMPLO — reemplazar por la tabla oficial COMPLETA CNAE (IBGE/Concla, Brasil) y verificar la correspondencia a ISIC (ver README.md). Códigos por confirmar. No usar en producción tal cual.",
+  "entries": [
+    {
+      "localCode": "4711-3/02",
+      "localLabel": "Comércio varejista de mercadorias em geral, com predominância de produtos alimentícios - supermercados",
+      "isicCode": "4711"
+    },
+    {
+      "localCode": "4791-1/00",
+      "localLabel": "Comércio varejista por catálogo, internet ou correio",
+      "isicCode": "4791"
+    },
+    {
+      "localCode": "5611-2/01",
+      "localLabel": "Restaurantes e similares",
+      "isicCode": "5610"
+    },
+    {
+      "localCode": "6201-5/01",
+      "localLabel": "Desenvolvimento de programas de computador sob encomenda",
+      "isicCode": "6201"
+    }
+  ]
+}

@@ -16,6 +16,40 @@ export const copy = {
     multipleSelection: '(selección múltiple)',
     yes: 'Sí',
     no: 'No',
+    addPerson: 'Agregar persona',
+    cancel: 'Cancelar',
+    continue: 'Continuar',
+    inProgress: 'En progreso',
+    copyLink: 'Copiar enlace',
+  },
+
+  addPersonForm: {
+    firstName: 'Nombre/s',
+    lastName: 'Apellido/s',
+    namePlaceholder: 'Ingrese nombre completo',
+    email: 'Email',
+    emailPlaceholder: 'Ingrese email',
+    completionQuestion: '¿Cómo quieres completar sus datos?',
+    selfTitle: 'Lo completo yo',
+    selfDesc: 'Tengo a mano sus datos y su documento.',
+    inviteTitle: 'Se lo pido a la persona',
+    inviteDesc: 'Le enviaremos un enlace para que lo complete.',
+    participation: 'Porcentaje de participación (%)',
+    participationPlaceholder: 'Ingrese porcentaje de participación (%)',
+    birthCountry: 'País de nacimiento',
+    birthCountryPlaceholder: 'Ingrese país de nacimiento',
+    nationality: 'Nacionalidad',
+    nationalityPlaceholder: 'Ingrese nacionalidad',
+    documentNumberPlaceholder: 'Ingrese número de documento',
+    docFront: 'Documento de identidad (frente)',
+    docBack: 'Documento de identidad (dorso)',
+    pepQuestion: '¿Es Persona Políticamente Expuesta (PEP)?',
+    inviteText:
+      'Le enviaremos un enlace seguro para que complete sus datos. Su avance queda visible en el formulario.',
+    sendLink: 'Enviar enlace',
+    linkSent: 'Enlace enviado',
+    inviteHelper:
+      'Puedes continuar aunque alguien siga "En progreso": completará sus datos en paralelo.',
   },
 
   personaBadge: {
@@ -138,7 +172,12 @@ export const copy = {
 
   business: {
     title: 'Datos del negocio',
+    country: 'País de operación',
+    countryPlaceholder: 'Seleccione el país',
     economicActivity: 'Actividad económica principal',
+    economicActivityPlaceholder: 'Busque por código o descripción',
+    economicActivityCountryFirst: 'Seleccione primero el país de operación',
+    economicActivityLoading: 'Cargando actividades…',
     monthlyVolume: '¿Cuánto procesas en el mes? (monto estimado en COP)',
     averageTicket: '¿Cuál es tu ticket promedio por transacción? (en COP)',
     channelsQuestion: '¿Por qué medios vendes?',
@@ -190,10 +229,14 @@ export const copy = {
     principalTitle: 'Representante legal principal',
     alternateQuestion: '¿Existe representante legal suplente?',
     alternateTitle: 'Representante legal suplente',
+    alternateHint: '(si aplica)',
+    newPersonLabel: 'Nuevo representante legal',
   },
 
   ownership: {
     title: 'Estructura societaria',
+    cardLabel: 'Accionistas',
+    newPersonLabel: 'Nuevo accionista',
     subtitle: 'Accionistas con participación mayor al 5%',
     participation: 'Porcentaje de participación (%)',
     addShareholder: 'Agregar',
@@ -202,6 +245,8 @@ export const copy = {
 
   beneficiary: {
     title: 'Beneficiario final (Controlador)',
+    cardLabel: 'Beneficiario final',
+    newPersonLabel: 'Beneficiario final',
     calloutTitle: 'Beneficiario final',
     calloutText: 'Persona natural que controla/beneficia de la empresa',
     controlPercentage: 'Porcentaje de control (%)',
@@ -227,6 +272,12 @@ export const copy = {
   review: {
     title: 'Revisión',
     edit: 'Editar',
+  },
+
+  invitee: {
+    greeting: 'Juan Martínez,',
+    intro:
+      'Usted figura como beneficiario final de [Empresa] en akua. Le pedimos completar los siguientes datos para finalizar su verificación de forma segura.',
   },
 
   success: {
