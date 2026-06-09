@@ -62,11 +62,21 @@ export function ReviewScreen({
   onBack,
   onSubmit,
 }: ReviewScreenProps) {
+  const totalMissing = steps.reduce(
+    (acc, step) => acc + getStepMissing(step.id, data),
+    0
+  );
+
   return (
     <PlainShell
       personaType={personaType}
       centered={false}
-      footer={{ onBack, onNext: onSubmit, nextLabel: copy.common.submit }}
+      footer={{
+        onBack,
+        onNext: onSubmit,
+        nextLabel: copy.common.submit,
+        nextDisabled: totalMissing > 0,
+      }}
     >
       <Stack gap="md" w="100%" maw={620} mx="auto">
         <Title order={3} c="mantineDefault.9" fz={22}>
