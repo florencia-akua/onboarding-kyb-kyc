@@ -1,22 +1,63 @@
 'use client';
 
-import { ActionIcon, Paper, Stack, Group, Text, Title } from '@mantine/core';
+import { ActionIcon, Badge, Paper, Stack, Group, Text, Title } from '@mantine/core';
 import { IconPencil } from '@tabler/icons-react';
 import { PlainShell } from '../layout/PlainShell';
 import { copy } from '../copy';
-import type { PersonaType } from '../types';
+import { getStepMissing } from '../stepStatus';
+import type { OnboardingFormData, PersonaType } from '../types';
+
+interface ReviewStep {
+  id: string;
+  label: string;
+}
 
 interface ReviewScreenProps {
   personaType: PersonaType;
-  stepLabels: string[];
+  steps: ReviewStep[];
+  data: OnboardingFormData;
   onEdit: (index: number) => void;
   onBack: () => void;
   onSubmit: () => void;
 }
 
+function StatusPill({ missing }: { missing: number }) {
+  if (missing === 0) {
+    return (
+      <Badge
+        variant="outline"
+        radius="xl"
+        styles={{
+          root: {
+            textTransform: 'none',
+            fontWeight: 500,
+            borderColor: 'var(--mantine-color-akuaGreen-8)',
+            color: 'var(--mantine-color-akuaGreen-8)',
+          },
+        }}
+      >
+        {copy.review.completed}
+      </Badge>
+    );
+  }
+
+  return (
+    <Badge
+      variant="light"
+      color="red"
+      radius="xl"
+      styles={{ root: { textTransform: 'none', fontWeight: 500 } }}
+    >
+      {missing}{' '}
+      {missing === 1 ? copy.review.missingOne : copy.review.missingMany}
+    </Badge>
+  );
+}
+
 export function ReviewScreen({
   personaType,
-  stepLabels,
+  steps,
+  data,
   onEdit,
   onBack,
   onSubmit,
@@ -32,26 +73,23 @@ export function ReviewScreen({
           {copy.review.title}
         </Title>
 
-        {stepLabels.map((label, index) => (
-          <Paper
-            key={label}
-            withBorder
-            radius="md"
-            p="md"
-            bg="white"
-          >
+        {steps.map((step, index) => (
+          <Paper key={step.id} withBorder radius="md" p="md" bg="white">
             <Group justify="space-between" wrap="nowrap">
               <Text size="sm" c="mantineDefault.9">
-                {label}
+                {step.label}
               </Text>
-              <ActionIcon
-                variant="subtle"
-                color="akuaPurple.6"
-                aria-label={`${copy.review.edit} ${label}`}
-                onClick={() => onEdit(index)}
-              >
-                <IconPencil size={16} />
-              </ActionIcon>
+              <Group gap="sm" wrap="nowrap">
+                <StatusPill missing={getStepMissing(step.id, data)} />
+                <ActionIcon
+                  variant="subtle"
+                  color="gray"
+                  aria-label={`${copy.review.edit} ${step.label}`}
+                  onClick={() => onEdit(index)}
+                >
+                  <IconPencil size={16} />
+                </ActionIcon>
+              </Group>
             </Group>
           </Paper>
         ))}

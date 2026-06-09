@@ -70,7 +70,7 @@ export const copy = {
     title: 'Selecciona el tipo de negocio',
     fisica: {
       title: 'Persona Natural',
-      description: 'Individuo que actúa en nombre propio',
+      description: 'Individuo que vende en nombre propio',
     },
     juridica: {
       title: 'Persona Jurídica',
@@ -195,7 +195,7 @@ export const copy = {
     commercialName: 'Nombre comercial (si es diferente al nombre del titular)',
     commercialNamePlaceholder: 'Nombre del comercio',
     commercialAddressPlaceholder: 'Av. Lope de Vega 123',
-    commercialPhone: 'Teléfono de contacto comercial',
+    commercialPhone: 'Teléfono',
     commercialDepartment: 'Departamento comercial',
     commercialCity: 'Ciudad comercial',
   },
@@ -272,6 +272,9 @@ export const copy = {
   review: {
     title: 'Revisión',
     edit: 'Editar',
+    completed: 'Completed',
+    missingOne: 'Faltante',
+    missingMany: 'Faltantes',
   },
 
   invitee: {
@@ -315,17 +318,6 @@ export const JURIDICA_DOCUMENTS: DocumentField[] = [
   {
     key: 'chamberOfCommerce',
     label: 'Cámara de Comercio (no mayor a 3 meses)',
-  },
-  {
-    key: 'legalRepId',
-    label:
-      'Documento de identidad / Cédula de ciudadanía / extranjería / pasaporte del representante legal (frente y dorso)',
-  },
-  {
-    key: 'alternateRepId',
-    label:
-      'Documento de identidad del suplente (cédula de ciudadanía / extranjería / pasaporte)',
-    note: '*Sólo si aplica',
   },
   {
     key: 'bankCertificate',

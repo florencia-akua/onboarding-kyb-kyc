@@ -67,7 +67,7 @@ export default function OnboardingKybKyc() {
   const handleNext = useCallback(() => {
     const isLast = activeIndex === steps.length - 1;
     if (isLast) {
-      setPhase(personaType === 'juridica' ? 'review' : 'success');
+      setPhase('review');
       return;
     }
     const next = activeIndex + 1;
@@ -104,7 +104,8 @@ export default function OnboardingKybKyc() {
     return (
       <ReviewScreen
         personaType={personaType}
-        stepLabels={steps.map((s) => s.label)}
+        steps={steps.map((s) => ({ id: s.id, label: s.label }))}
+        data={data}
         onEdit={(index) => {
           setActiveIndex(index);
           setPhase('form');
@@ -125,9 +126,7 @@ export default function OnboardingKybKyc() {
   // phase === 'form'
   if (!personaType) return null;
 
-  const isLast = activeIndex === steps.length - 1;
-  const nextLabel =
-    isLast && personaType === 'fisica' ? copy.common.finish : copy.common.next;
+  const nextLabel = copy.common.next;
 
   return (
     <FormShell
