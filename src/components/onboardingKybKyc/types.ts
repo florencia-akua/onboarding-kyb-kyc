@@ -147,6 +147,7 @@ export interface OnboardingFormData {
   holderPep: PepDeclaration;
 
   // --- Persona jurídica: identificación y contacto ---
+  companyCountry: string;
   companyLegalName: string;
   companyNit: string;
   companyType: string;
@@ -242,6 +243,7 @@ export const initialOnboardingFormData: OnboardingFormData = {
   holderIsPep: false,
   holderPep: { ...emptyPepDeclaration },
 
+  companyCountry: '',
   companyLegalName: '',
   companyNit: '',
   companyType: '',

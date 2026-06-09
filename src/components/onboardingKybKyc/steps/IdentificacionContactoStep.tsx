@@ -3,18 +3,60 @@
 import { SimpleGrid, Stack, Select, TextInput, Title } from '@mantine/core';
 import { PhoneField } from '../fields/PhoneField';
 import { copy } from '../copy';
+import { COUNTRIES } from '../countries';
 import { COMPANY_TYPE_OPTIONS } from '../options';
 import type { StepProps } from '../stepProps';
 
+/** Etiqueta e hint del identificador tributario según el país de la empresa. */
+interface TaxIdConfig {
+  label: string;
+  placeholder: string;
+}
+
+const TAX_ID_BY_ISO: Record<string, TaxIdConfig> = {
+  CO: { label: 'NIT',  placeholder: '900.123.456-7' },
+  AR: { label: 'CUIT', placeholder: '30-12345678-9' },
+  BR: { label: 'CNPJ', placeholder: '12.345.678/0001-95' },
+  CL: { label: 'RUT',  placeholder: '12.345.678-9' },
+  EC: { label: 'RUC',  placeholder: '1790012345001' },
+  UY: { label: 'RUT',  placeholder: '123456789012' },
+};
+
+const DEFAULT_TAX_ID: TaxIdConfig = {
+  label: 'Identificación tributaria',
+  placeholder: 'Ingrese número de identificación',
+};
+
+const COUNTRY_SELECT_DATA = COUNTRIES.map((c) => ({
+  value: c.iso,
+  label: c.name,
+}));
+
 export function IdentificacionContactoStep({ data, update }: StepProps) {
+  const taxId = TAX_ID_BY_ISO[data.companyCountry] ?? DEFAULT_TAX_ID;
+
   return (
     <Stack gap={32}>
+      {/* ─── Identificación de la empresa ─── */}
       <Stack gap={24}>
         <Title order={3} fz={22} c="mantineDefault.9">
           {copy.identification.companyTitle}
         </Title>
 
         <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={32}>
+          <Select
+            label="País"
+            placeholder="Seleccione país"
+            data={COUNTRY_SELECT_DATA}
+            value={data.companyCountry || null}
+            onChange={(v) => update({ companyCountry: v ?? '' })}
+            comboboxProps={{
+              withinPortal: true,
+              position: 'bottom',
+              middlewares: { flip: false, shift: true },
+            }}
+            searchable
+          />
           <TextInput
             label={copy.identification.legalName}
             placeholder={copy.identification.legalNamePlaceholder}
@@ -24,8 +66,8 @@ export function IdentificacionContactoStep({ data, update }: StepProps) {
             }
           />
           <TextInput
-            label={copy.identification.nit}
-            placeholder={copy.identification.nitPlaceholder}
+            label={taxId.label}
+            placeholder={taxId.placeholder}
             value={data.companyNit}
             onChange={(e) => update({ companyNit: e.currentTarget.value })}
           />
@@ -35,19 +77,16 @@ export function IdentificacionContactoStep({ data, update }: StepProps) {
             data={COMPANY_TYPE_OPTIONS}
             value={data.companyType || null}
             onChange={(v) => update({ companyType: v ?? '' })}
-            comboboxProps={{ withinPortal: true, position: 'bottom', middlewares: { flip: false, shift: true } }}
-          />
-          <TextInput
-            label={copy.fields.fullName}
-            placeholder={copy.holder.fullNamePlaceholder}
-            value={data.companyContactFullName}
-            onChange={(e) =>
-              update({ companyContactFullName: e.currentTarget.value })
-            }
+            comboboxProps={{
+              withinPortal: true,
+              position: 'bottom',
+              middlewares: { flip: false, shift: true },
+            }}
           />
         </SimpleGrid>
       </Stack>
 
+      {/* ─── Datos de contacto ─── */}
       <Stack gap={24}>
         <Title order={4} fz={18} fw={600} c="mantineDefault.9">
           {copy.identification.contactTitle}
