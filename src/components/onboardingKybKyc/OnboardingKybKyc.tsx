@@ -25,6 +25,8 @@ export default function OnboardingKybKyc() {
   const [data, setData] = useState<OnboardingFormData>(
     initialOnboardingFormData
   );
+  /** Activado al editar desde Revisión: muestra errores en campos vacíos. */
+  const [showValidation, setShowValidation] = useState(false);
 
   const update = useCallback((patch: Partial<OnboardingFormData>) => {
     setData((prev) => ({ ...prev, ...patch }));
@@ -43,6 +45,12 @@ export default function OnboardingKybKyc() {
   );
 
   const goToStep = useCallback((index: number) => {
+    setActiveIndex(index);
+  }, []);
+
+  /** Navegar a un paso desde la pantalla de revisión: activa la validación. */
+  const handleEditFromReview = useCallback((index: number) => {
+    setShowValidation(true);
     setActiveIndex(index);
   }, []);
 
@@ -84,7 +92,7 @@ export default function OnboardingKybKyc() {
     setPhase('intro');
   }, []);
 
-  const stepProps = { data, update, updateDocument };
+  const stepProps = { data, update, updateDocument, showValidation };
 
   if (phase === 'intro') {
     return <IntroScreen onStart={() => setPhase('select')} />;
@@ -132,7 +140,7 @@ export default function OnboardingKybKyc() {
         <ReviewList
           steps={formSteps.map((s) => ({ id: s.id, label: s.label }))}
           data={data}
-          onEdit={goToStep}
+          onEdit={handleEditFromReview}
         />
       ) : (
         current?.render(stepProps)

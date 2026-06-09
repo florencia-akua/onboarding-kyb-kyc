@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, type ReactNode } from 'react';
-import { Box, Button, Group, Paper, Stack, Text } from '@mantine/core';
+import { Box, Button, Group, Paper, Stack, Text, ThemeIcon } from '@mantine/core';
+import { IconAlertCircle } from '@tabler/icons-react';
 import { IconPlus } from '@tabler/icons-react';
 import { AddPersonForm, type PersonDraft } from './AddPersonForm';
 import { InvitedPersonRow } from './InvitedPersonRow';
@@ -28,6 +29,10 @@ interface PersonSectionProps {
   newPersonLabel: string;
   people: Person[];
   onChange: (people: Person[]) => void;
+  /** Si true, al menos una persona es requerida. */
+  required?: boolean;
+  /** Cuando true, muestra error si required y la lista está vacía. */
+  showValidation?: boolean;
 }
 
 /**
@@ -43,7 +48,10 @@ export function PersonSection({
   newPersonLabel,
   people,
   onChange,
+  required = false,
+  showValidation = false,
 }: PersonSectionProps) {
+  const showError = required && showValidation && people.length === 0;
   const [adding, setAdding] = useState(false);
 
   const addInvite = (d: PersonDraft) => {
@@ -117,6 +125,15 @@ export function PersonSection({
             onSubmitInvite={addInvite}
           />
         </Paper>
+      )}
+
+      {showError && (
+        <Group gap={6} align="center">
+          <IconAlertCircle size={14} color="var(--mantine-color-red-6)" style={{ flexShrink: 0 }} />
+          <Text size="xs" c="red.6">
+            Debés agregar al menos una persona para continuar
+          </Text>
+        </Group>
       )}
     </Stack>
   );

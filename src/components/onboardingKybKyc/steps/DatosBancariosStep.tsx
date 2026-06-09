@@ -7,7 +7,9 @@ import { BANK_OPTIONS } from '../options';
 import type { StepProps } from '../stepProps';
 import type { AccountType, YesNo } from '../types';
 
-export function DatosBancariosStep({ data, update }: StepProps) {
+export function DatosBancariosStep({ data, update, showValidation }: StepProps) {
+  const req = (val: string | null | undefined) =>
+    showValidation && !val?.trim() ? 'Requerido' : undefined;
   return (
     <Stack gap={32}>
       <StepTitle>{copy.banking.title}</StepTitle>
@@ -21,12 +23,14 @@ export function DatosBancariosStep({ data, update }: StepProps) {
           onChange={(v) => update({ payoutBank: v ?? '' })}
           comboboxProps={{ withinPortal: true, position: 'bottom', middlewares: { flip: false, shift: true } }}
           searchable
+          error={req(data.payoutBank)}
         />
         <TextInput
           label={copy.banking.accountNumber}
           placeholder={copy.banking.accountNumber}
           value={data.accountNumber}
           onChange={(e) => update({ accountNumber: e.currentTarget.value })}
+          error={req(data.accountNumber)}
         />
       </SimpleGrid>
 
@@ -37,6 +41,7 @@ export function DatosBancariosStep({ data, update }: StepProps) {
         <Radio.Group
           value={data.accountType}
           onChange={(v) => update({ accountType: v as AccountType })}
+          error={showValidation && !data.accountType ? 'Requerido' : undefined}
         >
           <Stack gap="xs">
             <Radio

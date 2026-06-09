@@ -10,6 +10,7 @@ import type { StepProps } from '../stepProps';
 export function EstructuraSocietariaStep({
   data,
   update,
+  showValidation,
   asSection,
 }: StepProps & { asSection?: boolean }) {
   return (
@@ -23,6 +24,8 @@ export function EstructuraSocietariaStep({
         newPersonLabel={copy.ownership.newPersonLabel}
         people={data.shareholders}
         onChange={(people) => update({ shareholders: people })}
+        required
+        showValidation={showValidation}
       />
     </Stack>
   );

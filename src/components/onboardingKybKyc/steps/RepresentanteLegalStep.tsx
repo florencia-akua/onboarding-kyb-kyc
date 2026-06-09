@@ -16,7 +16,7 @@ function status(required: boolean, people: Person[]): string {
   return `${base} · ${assigned}`;
 }
 
-export function RepresentanteLegalStep({ data, update }: StepProps) {
+export function RepresentanteLegalStep({ data, update, showValidation }: StepProps) {
   return (
     <Stack gap={32}>
       <StepTitle>{copy.legalRep.title}</StepTitle>
@@ -30,6 +30,8 @@ export function RepresentanteLegalStep({ data, update }: StepProps) {
           newPersonLabel={copy.legalRep.newPersonLabel}
           people={data.legalRepPeople}
           onChange={(people) => update({ legalRepPeople: people })}
+          required
+          showValidation={showValidation}
         />
 
         <Divider />

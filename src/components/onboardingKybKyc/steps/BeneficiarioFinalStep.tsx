@@ -10,6 +10,7 @@ import type { StepProps } from '../stepProps';
 export function BeneficiarioFinalStep({
   data,
   update,
+  showValidation,
   asSection,
 }: StepProps & { asSection?: boolean }) {
   return (
@@ -23,6 +24,8 @@ export function BeneficiarioFinalStep({
         newPersonLabel={copy.beneficiary.newPersonLabel}
         people={data.beneficiaries}
         onChange={(people) => update({ beneficiaries: people })}
+        required
+        showValidation={showValidation}
       />
     </Stack>
   );

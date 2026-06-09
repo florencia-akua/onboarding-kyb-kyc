@@ -38,10 +38,10 @@ export function getStepMissing(
 
     case 'identification':
       return countMissing([
+        d.companyCountry,
         d.companyLegalName,
         d.companyNit,
         d.companyType,
-        d.companyContactFullName,
         d.companyAddress,
         d.companyDepartment,
         d.companyCity,

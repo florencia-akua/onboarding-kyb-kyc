@@ -32,8 +32,11 @@ const COUNTRY_SELECT_DATA = COUNTRIES.map((c) => ({
   label: c.name,
 }));
 
-export function IdentificacionContactoStep({ data, update }: StepProps) {
+export function IdentificacionContactoStep({ data, update, showValidation }: StepProps) {
   const taxId = TAX_ID_BY_ISO[data.companyCountry] ?? DEFAULT_TAX_ID;
+
+  const req = (val: string | null | undefined) =>
+    showValidation && !val?.trim() ? 'Requerido' : undefined;
 
   return (
     <Stack gap={32}>
@@ -56,6 +59,7 @@ export function IdentificacionContactoStep({ data, update }: StepProps) {
               middlewares: { flip: false, shift: true },
             }}
             searchable
+            error={req(data.companyCountry)}
           />
           <TextInput
             label={copy.identification.legalName}
@@ -64,12 +68,14 @@ export function IdentificacionContactoStep({ data, update }: StepProps) {
             onChange={(e) =>
               update({ companyLegalName: e.currentTarget.value })
             }
+            error={req(data.companyLegalName)}
           />
           <TextInput
             label={taxId.label}
             placeholder={taxId.placeholder}
             value={data.companyNit}
             onChange={(e) => update({ companyNit: e.currentTarget.value })}
+            error={req(data.companyNit)}
           />
           <Select
             label={copy.identification.companyType}
@@ -82,6 +88,7 @@ export function IdentificacionContactoStep({ data, update }: StepProps) {
               position: 'bottom',
               middlewares: { flip: false, shift: true },
             }}
+            error={req(data.companyType)}
           />
         </SimpleGrid>
       </Stack>
@@ -98,6 +105,7 @@ export function IdentificacionContactoStep({ data, update }: StepProps) {
             placeholder="Ingrese dirección comercial"
             value={data.companyAddress}
             onChange={(e) => update({ companyAddress: e.currentTarget.value })}
+            error={req(data.companyAddress)}
           />
           <TextInput
             label={copy.fields.department}
@@ -106,12 +114,14 @@ export function IdentificacionContactoStep({ data, update }: StepProps) {
             onChange={(e) =>
               update({ companyDepartment: e.currentTarget.value })
             }
+            error={req(data.companyDepartment)}
           />
           <TextInput
             label={copy.fields.city}
             placeholder="Ingrese ciudad"
             value={data.companyCity}
             onChange={(e) => update({ companyCity: e.currentTarget.value })}
+            error={req(data.companyCity)}
           />
           <PhoneField
             value={data.companyPhone}
@@ -122,6 +132,7 @@ export function IdentificacionContactoStep({ data, update }: StepProps) {
             placeholder="Ingrese correo electrónico corporativo"
             value={data.companyEmail}
             onChange={(e) => update({ companyEmail: e.currentTarget.value })}
+            error={req(data.companyEmail)}
           />
           <TextInput
             label={copy.fields.website}

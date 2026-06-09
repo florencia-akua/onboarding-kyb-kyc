@@ -21,6 +21,7 @@ interface DateFieldProps {
   clearable?: boolean;
   /** Latest selectable date. */
   maxDate?: Date;
+  error?: string;
 }
 
 function parse(value: string): Date | null {
@@ -36,11 +37,13 @@ export function DateField({
   onChange,
   clearable = true,
   maxDate,
+  error,
 }: DateFieldProps) {
   return (
     <DatePickerInput
       label={label}
       placeholder={placeholder}
+      error={error}
       value={parse(value)}
       onChange={(d) => onChange(d ? dayjs(d).format(FORMAT) : '')}
       valueFormat={FORMAT}

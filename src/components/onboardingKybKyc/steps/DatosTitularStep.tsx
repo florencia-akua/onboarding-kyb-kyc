@@ -16,8 +16,12 @@ import {
 } from '../options';
 import type { StepProps } from '../stepProps';
 
-export function DatosTitularStep({ data, update }: StepProps) {
+export function DatosTitularStep({ data, update, showValidation }: StepProps) {
   const pepRef = useRef<HTMLDivElement>(null);
+
+  /** Devuelve "Requerido" si showValidation y el valor está vacío. */
+  const req = (val: string | null | undefined) =>
+    showValidation && !val?.trim() ? 'Requerido' : undefined;
 
   useEffect(() => {
     if (data.holderIsPep) {
@@ -38,6 +42,7 @@ export function DatosTitularStep({ data, update }: StepProps) {
           placeholder={copy.holder.fullNamePlaceholder}
           value={data.holderFullName}
           onChange={(e) => update({ holderFullName: e.currentTarget.value })}
+          error={req(data.holderFullName)}
         />
         <Select
           label={copy.fields.documentType}
@@ -46,6 +51,7 @@ export function DatosTitularStep({ data, update }: StepProps) {
           value={data.holderDocumentType || null}
           onChange={(v) => update({ holderDocumentType: v ?? '' })}
           comboboxProps={{ withinPortal: true, position: 'bottom', middlewares: { flip: false, shift: true } }}
+          error={req(data.holderDocumentType)}
         />
         <TextInput
           label={copy.fields.documentNumber}
@@ -54,18 +60,21 @@ export function DatosTitularStep({ data, update }: StepProps) {
           onChange={(e) =>
             update({ holderDocumentNumber: e.currentTarget.value })
           }
+          error={req(data.holderDocumentNumber)}
         />
         <DateField
           label={copy.fields.issueDate}
           value={data.holderDocumentIssueDate}
           onChange={(v) => update({ holderDocumentIssueDate: v })}
           maxDate={new Date()}
+          error={req(data.holderDocumentIssueDate)}
         />
         <DateField
           label={copy.fields.birthDate}
           value={data.holderBirthDate}
           onChange={(v) => update({ holderBirthDate: v })}
           maxDate={new Date()}
+          error={req(data.holderBirthDate)}
         />
         <Select
           label={copy.fields.nationality}
@@ -75,6 +84,7 @@ export function DatosTitularStep({ data, update }: StepProps) {
           onChange={(v) => update({ holderNationality: v ?? '' })}
           comboboxProps={{ withinPortal: true, position: 'bottom', middlewares: { flip: false, shift: true } }}
           searchable
+          error={req(data.holderNationality)}
         />
         <Select
           label={copy.fields.birthCity}
@@ -84,6 +94,7 @@ export function DatosTitularStep({ data, update }: StepProps) {
           onChange={(v) => update({ holderBirthCity: v ?? '' })}
           comboboxProps={{ withinPortal: true, position: 'bottom', middlewares: { flip: false, shift: true } }}
           searchable
+          error={req(data.holderBirthCity)}
         />
       </SimpleGrid>
 
@@ -95,6 +106,7 @@ export function DatosTitularStep({ data, update }: StepProps) {
           placeholder="Carrera 15 # 80 - 45"
           value={data.holderAddress}
           onChange={(e) => update({ holderAddress: e.currentTarget.value })}
+          error={req(data.holderAddress)}
         />
         <Select
           label={copy.fields.city}
@@ -104,6 +116,7 @@ export function DatosTitularStep({ data, update }: StepProps) {
           onChange={(v) => update({ holderCity: v ?? '' })}
           comboboxProps={{ withinPortal: true, position: 'bottom', middlewares: { flip: false, shift: true } }}
           searchable
+          error={req(data.holderCity)}
         />
         <Select
           label={copy.fields.department}
@@ -113,6 +126,7 @@ export function DatosTitularStep({ data, update }: StepProps) {
           onChange={(v) => update({ holderDepartment: v ?? '' })}
           comboboxProps={{ withinPortal: true, position: 'bottom', middlewares: { flip: false, shift: true } }}
           searchable
+          error={req(data.holderDepartment)}
         />
         <PhoneField
           value={data.holderPhone}
@@ -125,6 +139,7 @@ export function DatosTitularStep({ data, update }: StepProps) {
         placeholder={copy.holder.emailPlaceholder}
         value={data.holderEmail}
         onChange={(e) => update({ holderEmail: e.currentTarget.value })}
+        error={req(data.holderEmail)}
       />
 
       <SectionTitle>{copy.holder.pepTitle}</SectionTitle>

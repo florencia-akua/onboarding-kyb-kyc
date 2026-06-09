@@ -27,7 +27,9 @@ const COUNTRY_OPTIONS = COUNTRIES.map((c) => ({
   label: `${isoToFlag(c.iso)}  ${c.name}`,
 }));
 
-export function DatosNegocioStep({ data, update }: StepProps) {
+export function DatosNegocioStep({ data, update, showValidation }: StepProps) {
+  const req = (val: string | null | undefined) =>
+    showValidation && !val?.trim() ? 'Requerido' : undefined;
   const showWebsite =
     data.salesChannels.includes('ecommerce') ||
     data.salesChannels.includes('both');
@@ -115,6 +117,7 @@ export function DatosNegocioStep({ data, update }: StepProps) {
         withAsterisk
         limit={50}
         nothingFoundMessage="Sin resultados"
+        error={req(data.businessCountry)}
       />
 
       <Select
@@ -134,6 +137,7 @@ export function DatosNegocioStep({ data, update }: StepProps) {
         disabled={!country || loading}
         limit={100}
         nothingFoundMessage="Sin resultados"
+        error={showValidation && !data.economicActivity ? 'Requerido' : undefined}
       />
 
       <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={32}>
@@ -145,6 +149,7 @@ export function DatosNegocioStep({ data, update }: StepProps) {
           hideControls
           value={data.monthlyVolume === '' ? '' : Number(data.monthlyVolume)}
           onChange={(v) => update({ monthlyVolume: String(v ?? '') })}
+          error={req(data.monthlyVolume)}
         />
         <NumberInput
           label={copy.business.averageTicket}
@@ -154,6 +159,7 @@ export function DatosNegocioStep({ data, update }: StepProps) {
           hideControls
           value={data.averageTicket === '' ? '' : Number(data.averageTicket)}
           onChange={(v) => update({ averageTicket: String(v ?? '') })}
+          error={req(data.averageTicket)}
         />
       </SimpleGrid>
 
@@ -169,6 +175,7 @@ export function DatosNegocioStep({ data, update }: StepProps) {
         <Checkbox.Group
           value={data.salesChannels}
           onChange={(v) => update({ salesChannels: v })}
+          error={showValidation && data.salesChannels.length === 0 ? 'Seleccioná al menos un canal' : undefined}
         >
           <Stack gap="xs">
             <Checkbox
