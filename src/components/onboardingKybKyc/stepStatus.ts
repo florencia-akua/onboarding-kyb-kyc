@@ -47,6 +47,7 @@ export function getStepMissing(
         d.companyCity,
         d.companyPhone,
         d.companyEmail,
+        d.companyWebsite,
       ]);
 
     case 'legalRep':

@@ -140,6 +140,7 @@ export function IdentificacionContactoStep({ data, update, showValidation }: Ste
             placeholder="Ingrese sitio web"
             value={data.companyWebsite}
             onChange={(e) => update({ companyWebsite: e.currentTarget.value })}
+            error={req(data.companyWebsite)}
           />
         </SimpleGrid>
       </Stack>
