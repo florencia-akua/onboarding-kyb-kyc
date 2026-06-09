@@ -65,7 +65,7 @@ export function PhoneField({
           allowDeselect={false}
           nothingFoundMessage="Sin resultados"
           w={130}
-          comboboxProps={{ withinPortal: true, width: 280, position: 'bottom-start' }}
+          comboboxProps={{ withinPortal: true, width: 280, position: 'bottom-start', middlewares: { flip: false, shift: true } }}
           // @ts-expect-error filter recibe ComboboxItem[]; el typing de Mantine incluye grupos.
           filter={filter}
           renderOption={({ option }) => (

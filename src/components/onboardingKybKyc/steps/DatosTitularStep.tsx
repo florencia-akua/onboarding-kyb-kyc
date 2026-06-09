@@ -45,7 +45,7 @@ export function DatosTitularStep({ data, update }: StepProps) {
           data={DOCUMENT_TYPE_OPTIONS}
           value={data.holderDocumentType || null}
           onChange={(v) => update({ holderDocumentType: v ?? '' })}
-          comboboxProps={{ withinPortal: true }}
+          comboboxProps={{ withinPortal: true, position: 'bottom', middlewares: { flip: false, shift: true } }}
         />
         <TextInput
           label={copy.fields.documentNumber}
@@ -73,7 +73,7 @@ export function DatosTitularStep({ data, update }: StepProps) {
           data={NATIONALITY_OPTIONS}
           value={data.holderNationality || null}
           onChange={(v) => update({ holderNationality: v ?? '' })}
-          comboboxProps={{ withinPortal: true }}
+          comboboxProps={{ withinPortal: true, position: 'bottom', middlewares: { flip: false, shift: true } }}
           searchable
         />
         <Select
@@ -82,7 +82,7 @@ export function DatosTitularStep({ data, update }: StepProps) {
           data={CITY_OPTIONS}
           value={data.holderBirthCity || null}
           onChange={(v) => update({ holderBirthCity: v ?? '' })}
-          comboboxProps={{ withinPortal: true }}
+          comboboxProps={{ withinPortal: true, position: 'bottom', middlewares: { flip: false, shift: true } }}
           searchable
         />
       </SimpleGrid>
@@ -102,7 +102,7 @@ export function DatosTitularStep({ data, update }: StepProps) {
           data={CITY_OPTIONS}
           value={data.holderCity || null}
           onChange={(v) => update({ holderCity: v ?? '' })}
-          comboboxProps={{ withinPortal: true }}
+          comboboxProps={{ withinPortal: true, position: 'bottom', middlewares: { flip: false, shift: true } }}
           searchable
         />
         <Select
@@ -111,7 +111,7 @@ export function DatosTitularStep({ data, update }: StepProps) {
           data={DEPARTMENT_OPTIONS}
           value={data.holderDepartment || null}
           onChange={(v) => update({ holderDepartment: v ?? '' })}
-          comboboxProps={{ withinPortal: true }}
+          comboboxProps={{ withinPortal: true, position: 'bottom', middlewares: { flip: false, shift: true } }}
           searchable
         />
         <PhoneField

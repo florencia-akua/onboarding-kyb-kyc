@@ -19,7 +19,7 @@ export function DatosBancariosStep({ data, update }: StepProps) {
           data={BANK_OPTIONS}
           value={data.payoutBank || null}
           onChange={(v) => update({ payoutBank: v ?? '' })}
-          comboboxProps={{ withinPortal: true }}
+          comboboxProps={{ withinPortal: true, position: 'bottom', middlewares: { flip: false, shift: true } }}
           searchable
         />
         <TextInput

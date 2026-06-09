@@ -78,7 +78,7 @@ export function PersonDataFields({ value, onChange }: PersonDataFieldsProps) {
           data={COUNTRY_OPTIONS}
           value={value.birthCountry || null}
           onChange={(v) => onChange({ birthCountry: v ?? '' })}
-          comboboxProps={{ withinPortal: true }}
+          comboboxProps={{ withinPortal: true, position: 'bottom', middlewares: { flip: false, shift: true } }}
           searchable
         />
         <Select
@@ -87,7 +87,7 @@ export function PersonDataFields({ value, onChange }: PersonDataFieldsProps) {
           data={NATIONALITY_OPTIONS}
           value={value.nationality || null}
           onChange={(v) => onChange({ nationality: v ?? '' })}
-          comboboxProps={{ withinPortal: true }}
+          comboboxProps={{ withinPortal: true, position: 'bottom', middlewares: { flip: false, shift: true } }}
           searchable
         />
       </SimpleGrid>

@@ -35,7 +35,7 @@ export function IdentificacionContactoStep({ data, update }: StepProps) {
             data={COMPANY_TYPE_OPTIONS}
             value={data.companyType || null}
             onChange={(v) => update({ companyType: v ?? '' })}
-            comboboxProps={{ withinPortal: true }}
+            comboboxProps={{ withinPortal: true, position: 'bottom', middlewares: { flip: false, shift: true } }}
           />
           <TextInput
             label={copy.fields.fullName}

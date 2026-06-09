@@ -48,7 +48,7 @@ export function InformacionComercialStep({ data, update }: StepProps) {
           data={CITY_OPTIONS}
           value={data.commercialCity || null}
           onChange={(v) => update({ commercialCity: v ?? '' })}
-          comboboxProps={{ withinPortal: true }}
+          comboboxProps={{ withinPortal: true, position: 'bottom', middlewares: { flip: false, shift: true } }}
           searchable
         />
       </SimpleGrid>

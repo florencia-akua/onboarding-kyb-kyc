@@ -110,7 +110,7 @@ export function DatosNegocioStep({ data, update }: StepProps) {
         onChange={(v) =>
           update({ businessCountry: v ?? '', economicActivity: null })
         }
-        comboboxProps={{ withinPortal: true }}
+        comboboxProps={{ withinPortal: true, position: 'bottom', middlewares: { flip: false, shift: true } }}
         searchable
         withAsterisk
         limit={50}
@@ -128,7 +128,7 @@ export function DatosNegocioStep({ data, update }: StepProps) {
         data={activityOptions}
         value={data.economicActivity?.localCode ?? null}
         onChange={handleSelectActivity}
-        comboboxProps={{ withinPortal: true }}
+        comboboxProps={{ withinPortal: true, position: 'bottom', middlewares: { flip: false, shift: true } }}
         searchable
         withAsterisk
         disabled={!country || loading}
