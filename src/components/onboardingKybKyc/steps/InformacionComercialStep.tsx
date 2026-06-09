@@ -37,6 +37,7 @@ export function InformacionComercialStep({ data, update, showValidation }: StepP
           value={data.commercialPhone}
           onChange={(v) => update({ commercialPhone: v })}
           placeholder="300 000 0000"
+          error={req(data.commercialPhone)}
         />
         <TextInput
           label={copy.commercial.commercialDepartment}

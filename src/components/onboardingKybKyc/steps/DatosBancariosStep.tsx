@@ -65,6 +65,7 @@ export function DatosBancariosStep({ data, update, showValidation }: StepProps) 
         <Radio.Group
           value={data.receivesTips}
           onChange={(v) => update({ receivesTips: v as YesNo })}
+          error={showValidation && !data.receivesTips ? 'Requerido' : undefined}
         >
           <Stack gap="xs">
             <Radio value="si" label={copy.common.yes} color="akuaPurple.6" />

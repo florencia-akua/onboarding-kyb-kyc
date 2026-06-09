@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 import {
   Box,
   Group,
+  Input,
   Select,
   Text,
   TextInput,
@@ -17,6 +18,7 @@ interface PhoneFieldProps {
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
+  error?: string;
 }
 
 const SELECT_DATA: ComboboxItem[] = COUNTRIES.map((c) => ({
@@ -36,6 +38,7 @@ export function PhoneField({
   value,
   onChange,
   placeholder = 'XXXXXXX',
+  error,
 }: PhoneFieldProps) {
   const [country, setCountry] = useState(DEFAULT_COUNTRY_ISO);
 
@@ -87,8 +90,10 @@ export function PhoneField({
           value={value}
           onChange={(e) => onChange(e.currentTarget.value)}
           style={{ flex: 1 }}
+          error={!!error}
         />
       </Group>
+      {error && <Input.Error mt={4}>{error}</Input.Error>}
     </Box>
   );
 }

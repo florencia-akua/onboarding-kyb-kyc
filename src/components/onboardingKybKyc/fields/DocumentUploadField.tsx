@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
-import { ActionIcon, Box, Button, Group, Paper, Text } from '@mantine/core';
+import { ActionIcon, Box, Button, Group, Input, Paper, Text } from '@mantine/core';
 import { IconFile, IconTrash, IconUpload } from '@tabler/icons-react';
 import { copy } from '../copy';
 import type { DocumentField } from '../copy';
@@ -11,6 +11,8 @@ interface DocumentUploadFieldProps {
   field: DocumentField;
   value: UploadedDoc | null;
   onChange: (key: string, doc: UploadedDoc | null) => void;
+  /** Cuando true y no hay archivo, muestra borde rojo y mensaje de error. */
+  showError?: boolean;
 }
 
 function formatSize(bytes: number): string {
@@ -22,7 +24,9 @@ export function DocumentUploadField({
   field,
   value,
   onChange,
+  showError = false,
 }: DocumentUploadFieldProps) {
+  const hasError = showError && !value;
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,6 +53,8 @@ export function DocumentUploadField({
         hidden
         onChange={handleFile}
       />
+
+      {hasError && <Input.Error mt={4}>Requerido</Input.Error>}
 
       {value ? (
         <Paper withBorder radius="md" p="sm" mt="sm" bg="gray.0">
@@ -89,6 +95,7 @@ export function DocumentUploadField({
             borderStyle: 'dashed',
             display: 'flex',
             justifyContent: 'center',
+            borderColor: hasError ? 'var(--mantine-color-red-6)' : undefined,
           }}
         >
           <Button

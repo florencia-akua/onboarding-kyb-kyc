@@ -131,6 +131,7 @@ export function DatosTitularStep({ data, update, showValidation }: StepProps) {
         <PhoneField
           value={data.holderPhone}
           onChange={(v) => update({ holderPhone: v })}
+          error={req(data.holderPhone)}
         />
       </SimpleGrid>
 

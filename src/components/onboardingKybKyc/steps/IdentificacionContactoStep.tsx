@@ -126,6 +126,7 @@ export function IdentificacionContactoStep({ data, update, showValidation }: Ste
           <PhoneField
             value={data.companyPhone}
             onChange={(v) => update({ companyPhone: v })}
+            error={req(data.companyPhone)}
           />
           <TextInput
             label={copy.identification.corporateEmail}

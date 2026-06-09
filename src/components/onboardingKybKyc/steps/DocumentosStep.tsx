@@ -13,6 +13,7 @@ interface DocumentosStepProps extends StepProps {
 export function DocumentosStep({
   data,
   updateDocument,
+  showValidation,
   fields,
 }: DocumentosStepProps) {
   return (
@@ -24,6 +25,7 @@ export function DocumentosStep({
           field={field}
           value={data.documents[field.key] ?? null}
           onChange={updateDocument}
+          showError={showValidation && !field.optional && !data.documents[field.key]}
         />
       ))}
     </Stack>
