@@ -2,8 +2,7 @@
 
 import { useState, type ReactNode } from 'react';
 import { Box, Button, Group, Paper, Stack, Text, ThemeIcon } from '@mantine/core';
-import { IconAlertCircle } from '@tabler/icons-react';
-import { IconPlus } from '@tabler/icons-react';
+import { IconAlertCircle, IconPlus } from '@tabler/icons-react';
 import { AddPersonForm, type PersonDraft } from './AddPersonForm';
 import { InvitedPersonRow } from './InvitedPersonRow';
 import { copy } from '../copy';
@@ -17,29 +16,17 @@ const makeLink = () => {
 };
 
 interface PersonSectionProps {
-  /** Prefijo para los ids generados (ej. "sh", "bf", "lr"). */
   idPrefix: string;
-  /** Ícono de la sección. */
   icon: ReactNode;
-  /** Título de la sección (ej. "Accionistas"). */
   cardLabel: ReactNode;
-  /** Subtítulo descriptivo (opcional). */
   subtitle?: string;
-  /** Etiqueta del bloque al agregar (ej. "Nuevo accionista"). */
   newPersonLabel: string;
   people: Person[];
   onChange: (people: Person[]) => void;
-  /** Si true, al menos una persona es requerida. */
   required?: boolean;
-  /** Cuando true, muestra error si required y la lista está vacía. */
   showValidation?: boolean;
 }
 
-/**
- * Sección reutilizable de personas (accionistas, beneficiarios, representantes):
- * encabezado con ícono + título + subtítulo + botón "Agregar", lista de personas
- * invitadas y alta de persona (enlace o carga manual con declaración PEP).
- */
 export function PersonSection({
   idPrefix,
   icon,
@@ -69,37 +56,39 @@ export function PersonSection({
   };
 
   return (
-    <Stack gap="md" mb={adding ? 8 : 0}>
-      {!adding && (
-        <Group justify="space-between" wrap="nowrap" align="flex-start" gap="md">
-          <Group gap="sm" wrap="nowrap" align="flex-start">
-            <Box
-              w={36}
-              h={36}
-              style={{
-                flexShrink: 0,
-                borderRadius: 'var(--mantine-radius-md)',
-                backgroundColor: 'var(--mantine-color-gray-1)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: 'var(--mantine-color-mantineDefault-7)',
-              }}
-            >
-              {icon}
-            </Box>
-            <div>
-              <Text fw={600} fz="md" c="mantineDefault.9">
-                {cardLabel}
+    <Stack gap="md">
+      {/* ── Encabezado: ícono + título + subtítulo ── */}
+      <Group justify="space-between" wrap="nowrap" align="flex-start" gap="md">
+        <Group gap="sm" wrap="nowrap" align="flex-start">
+          <Box
+            w={36}
+            h={36}
+            style={{
+              flexShrink: 0,
+              borderRadius: 'var(--mantine-radius-md)',
+              backgroundColor: 'var(--mantine-color-gray-1)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: 'var(--mantine-color-mantineDefault-7)',
+            }}
+          >
+            {icon}
+          </Box>
+          <div>
+            <Text fw={600} fz="md" c="mantineDefault.9">
+              {cardLabel}
+            </Text>
+            {subtitle && (
+              <Text size="sm" c="mantineDefault.5" mt={2}>
+                {subtitle}
               </Text>
-              {subtitle && (
-                <Text size="sm" c="mantineDefault.5" mt={2}>
-                  {subtitle}
-                </Text>
-              )}
-            </div>
-          </Group>
+            )}
+          </div>
+        </Group>
 
+        {/* "Agregar" en el header solo cuando no hay personas todavía */}
+        {people.length === 0 && !adding && (
           <Button
             variant="default"
             size="xs"
@@ -110,15 +99,12 @@ export function PersonSection({
           >
             {copy.common.add}
           </Button>
-        </Group>
-      )}
+        )}
+      </Group>
 
-      {people.map((person) => (
-        <InvitedPersonRow key={person.id} person={person} />
-      ))}
-
-      {adding && (
-        <Paper withBorder={false} radius="lg" p="md" bg="gray.0">
+      {/* ── Formulario de alta cuando aún no hay personas ── */}
+      {adding && people.length === 0 && (
+        <Paper radius="md" p="md" bg="gray.0" style={{ border: 'none' }}>
           <AddPersonForm
             label={cardLabel}
             onCancel={() => setAdding(false)}
@@ -127,9 +113,42 @@ export function PersonSection({
         </Paper>
       )}
 
+      {/* ── Contenedor gris cuando hay personas ── */}
+      {people.length > 0 && (
+        <Paper radius="md" p="md" bg="gray.0" style={{ border: 'none' }}>
+          <Stack gap="md">
+            {people.map((person) => (
+              <InvitedPersonRow key={person.id} person={person} />
+            ))}
+
+            {adding ? (
+              <AddPersonForm
+                label={cardLabel}
+                onCancel={() => setAdding(false)}
+                onSubmitInvite={addInvite}
+              />
+            ) : (
+              <Button
+                variant="default"
+                size="sm"
+                radius="sm"
+                onClick={() => setAdding(true)}
+                style={{ alignSelf: 'flex-start' }}
+              >
+                {copy.common.addPerson}
+              </Button>
+            )}
+          </Stack>
+        </Paper>
+      )}
+
       {showError && (
         <Group gap={6} align="center">
-          <IconAlertCircle size={14} color="var(--mantine-color-red-6)" style={{ flexShrink: 0 }} />
+          <IconAlertCircle
+            size={14}
+            color="var(--mantine-color-red-6)"
+            style={{ flexShrink: 0 }}
+          />
           <Text size="xs" c="red.6">
             Debés agregar al menos una persona para continuar
           </Text>
