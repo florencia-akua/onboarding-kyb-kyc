@@ -65,10 +65,12 @@ export function IntroScreen({ onStart }: IntroScreenProps) {
 
       {/* Desktop (>= md): dos columnas, contenido a la izquierda. */}
       <Box visibleFrom="md" style={{ display: 'flex', flex: 1, minHeight: 0 }}>
+        {/* Columna texto: 45% */}
         <Box
           px={64}
           style={{
-            flex: 1,
+            flexBasis: '45%',
+            flexShrink: 0,
             display: 'flex',
             alignItems: 'center',
             backgroundColor: 'var(--mantine-color-white)',
@@ -93,9 +95,11 @@ export function IntroScreen({ onStart }: IntroScreenProps) {
           </Stack>
         </Box>
 
+        {/* Columna imagen: 55%, llega hasta el borde derecho sin margen */}
         <Box
           style={{
-            flex: 1,
+            flexBasis: '55%',
+            flexGrow: 1,
             position: 'relative',
             overflow: 'hidden',
             backgroundColor: '#f5f6fc',
@@ -109,7 +113,7 @@ export function IntroScreen({ onStart }: IntroScreenProps) {
             style={{
               position: 'absolute',
               top: '50%',
-              right: -40,
+              right: 0,
               transform: 'translateY(-50%)',
               height: '104%',
               width: 'auto',
