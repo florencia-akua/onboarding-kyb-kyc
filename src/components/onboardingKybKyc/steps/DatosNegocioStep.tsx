@@ -145,14 +145,12 @@ export function DatosNegocioStep({ data, update, showValidation }: StepProps) {
       <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={32}>
         <NumberInput
           label={
-            <Group gap={4} wrap="nowrap" component="span">
-              <Text component="span" size="sm" fw={500}>
-                {copy.business.monthlyVolume}
-              </Text>
+            <Text component="span" size="sm" fw={500}>
+              {copy.business.monthlyVolume}
               <Tooltip label={copy.business.monthlyVolumeTooltip} withArrow>
-                <IconInfoCircle size={14} style={{ cursor: 'help', flexShrink: 0 }} />
+                <IconInfoCircle size={14} style={{ cursor: 'help', display: 'inline-block', verticalAlign: 'middle', marginLeft: 4 }} />
               </Tooltip>
-            </Group>
+            </Text>
           }
           placeholder="0"
           thousandSeparator="."
@@ -164,14 +162,12 @@ export function DatosNegocioStep({ data, update, showValidation }: StepProps) {
         />
         <NumberInput
           label={
-            <Group gap={4} wrap="nowrap" component="span">
-              <Text component="span" size="sm" fw={500}>
-                {copy.business.averageTicket}
-              </Text>
+            <Text component="span" size="sm" fw={500}>
+              {copy.business.averageTicket}
               <Tooltip label={copy.business.averageTicketTooltip} withArrow>
-                <IconInfoCircle size={14} style={{ cursor: 'help', flexShrink: 0 }} />
+                <IconInfoCircle size={14} style={{ cursor: 'help', display: 'inline-block', verticalAlign: 'middle', marginLeft: 4 }} />
               </Tooltip>
-            </Group>
+            </Text>
           }
           placeholder="0"
           thousandSeparator="."
