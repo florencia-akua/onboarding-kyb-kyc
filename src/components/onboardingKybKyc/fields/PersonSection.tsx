@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, type ReactNode } from 'react';
-import { Box, Button, Group, Paper, Stack, Text, ThemeIcon } from '@mantine/core';
+import { Box, Button, Group, Paper, Stack, Text } from '@mantine/core';
 import { IconAlertCircle, IconPlus } from '@tabler/icons-react';
 import { AddPersonForm, type PersonDraft } from './AddPersonForm';
 import { InvitedPersonRow } from './InvitedPersonRow';
@@ -87,8 +87,8 @@ export function PersonSection({
           </div>
         </Group>
 
-        {/* "Agregar" en el header solo cuando no hay personas todavía */}
-        {people.length === 0 && !adding && (
+        {/* "Agregar +" siempre visible en el header mientras no esté abierto el form */}
+        {!adding && (
           <Button
             variant="default"
             size="xs"
@@ -102,11 +102,11 @@ export function PersonSection({
         )}
       </Group>
 
-      {/* ── Formulario de alta cuando aún no hay personas ── */}
+      {/* ── Form sin personas previas ── */}
       {adding && people.length === 0 && (
         <Paper radius="md" p="md" bg="gray.0" style={{ border: 'none' }}>
           <AddPersonForm
-            label={cardLabel}
+            label={newPersonLabel}
             onCancel={() => setAdding(false)}
             onSubmitInvite={addInvite}
           />
@@ -120,23 +120,12 @@ export function PersonSection({
             {people.map((person) => (
               <InvitedPersonRow key={person.id} person={person} />
             ))}
-
-            {adding ? (
+            {adding && (
               <AddPersonForm
-                label={cardLabel}
+                label={newPersonLabel}
                 onCancel={() => setAdding(false)}
                 onSubmitInvite={addInvite}
               />
-            ) : (
-              <Button
-                variant="default"
-                size="sm"
-                radius="sm"
-                onClick={() => setAdding(true)}
-                style={{ alignSelf: 'flex-start' }}
-              >
-                {copy.common.addPerson}
-              </Button>
             )}
           </Stack>
         </Paper>
