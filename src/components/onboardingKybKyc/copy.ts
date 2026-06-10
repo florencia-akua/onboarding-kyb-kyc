@@ -183,7 +183,7 @@ export const copy = {
     economicActivityLoading: 'Cargando actividades…',
     monthlyVolume: '¿Cuánto procesas en el mes?',
     monthlyVolumeTooltip: 'Monto estimado en COP',
-    averageTicket: '¿Cuál es tu ticket promedio por transacción?',
+    averageTicket: 'Ticket promedio por transacción',
     averageTicketTooltip: 'En COP',
     channelsQuestion: '¿Por qué medios vendes?',
     channels: {
@@ -192,7 +192,8 @@ export const copy = {
       both: 'Ambos',
     },
     website: 'Sitio web',
-    websitePlaceholder: 'http://...',
+    websitePlaceholder: 'http://... o usuario',
+    websiteDescription: 'Si vende por redes sociales, puede ingresar el enlace a su perfil (Instagram, Facebook, etc.).',
   },
 
   commercial: {

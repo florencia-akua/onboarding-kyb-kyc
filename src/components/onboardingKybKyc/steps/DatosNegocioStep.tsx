@@ -205,6 +205,7 @@ export function DatosNegocioStep({ data, update, showValidation }: StepProps) {
                 <TextInput
                   label={copy.business.website}
                   placeholder={copy.business.websitePlaceholder}
+                  description={copy.business.websiteDescription}
                   value={data.businessWebsite}
                   onChange={(e) =>
                     update({ businessWebsite: e.currentTarget.value })
