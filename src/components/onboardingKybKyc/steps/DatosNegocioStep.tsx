@@ -11,7 +11,9 @@ import {
   Stack,
   Text,
   TextInput,
+  Tooltip,
 } from '@mantine/core';
+import { IconInfoCircle } from '@tabler/icons-react';
 import { StepTitle } from '../fields/SectionTitle';
 import { copy } from '../copy';
 import { COUNTRIES, isoToFlag } from '../countries';
@@ -142,7 +144,16 @@ export function DatosNegocioStep({ data, update, showValidation }: StepProps) {
 
       <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={32}>
         <NumberInput
-          label={copy.business.monthlyVolume}
+          label={
+            <Group gap={4} component="span">
+              <Text component="span" size="sm" fw={500}>
+                {copy.business.monthlyVolume}
+              </Text>
+              <Tooltip label={copy.business.monthlyVolumeTooltip} withArrow>
+                <IconInfoCircle size={14} style={{ cursor: 'help' }} />
+              </Tooltip>
+            </Group>
+          }
           placeholder="0"
           thousandSeparator="."
           decimalSeparator=","
@@ -152,7 +163,16 @@ export function DatosNegocioStep({ data, update, showValidation }: StepProps) {
           error={req(data.monthlyVolume)}
         />
         <NumberInput
-          label={copy.business.averageTicket}
+          label={
+            <Group gap={4} component="span">
+              <Text component="span" size="sm" fw={500}>
+                {copy.business.averageTicket}
+              </Text>
+              <Tooltip label={copy.business.averageTicketTooltip} withArrow>
+                <IconInfoCircle size={14} style={{ cursor: 'help' }} />
+              </Tooltip>
+            </Group>
+          }
           placeholder="0"
           thousandSeparator="."
           decimalSeparator=","

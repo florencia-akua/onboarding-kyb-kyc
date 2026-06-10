@@ -181,8 +181,10 @@ export const copy = {
     economicActivityPlaceholder: 'Busque por código o descripción',
     economicActivityCountryFirst: 'Seleccione primero el país de operación',
     economicActivityLoading: 'Cargando actividades…',
-    monthlyVolume: '¿Cuánto procesas en el mes? (monto estimado en COP)',
-    averageTicket: '¿Cuál es tu ticket promedio por transacción? (en COP)',
+    monthlyVolume: '¿Cuánto procesas en el mes?',
+    monthlyVolumeTooltip: 'Monto estimado en COP',
+    averageTicket: '¿Cuál es tu ticket promedio por transacción?',
+    averageTicketTooltip: 'En COP',
     channelsQuestion: '¿Por qué medios vendes?',
     channels: {
       ecommerce: 'Ecommerce (tienda en línea)',
