@@ -19,6 +19,8 @@ interface DateFieldProps {
   onChange: (value: string) => void;
   /** Allow clearing the date (e.g. periods still in course). */
   clearable?: boolean;
+  /** Earliest selectable date. */
+  minDate?: Date;
   /** Latest selectable date. */
   maxDate?: Date;
   error?: string;
@@ -36,6 +38,7 @@ export function DateField({
   value,
   onChange,
   clearable = true,
+  minDate,
   maxDate,
   error,
 }: DateFieldProps) {
@@ -49,6 +52,7 @@ export function DateField({
       valueFormat={FORMAT}
       locale="es"
       clearable={clearable}
+      minDate={minDate}
       maxDate={maxDate}
       leftSection={
         <IconCalendar size={16} color="var(--mantine-color-mantineDefault-5)" />

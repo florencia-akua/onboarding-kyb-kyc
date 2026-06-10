@@ -1,7 +1,11 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { Box, Paper, SimpleGrid, Stack, Select, Switch, TextInput, Group, Text } from '@mantine/core';
+
+dayjs.extend(customParseFormat);
 import { IconShieldHalf } from '@tabler/icons-react';
 import { StepTitle, SectionTitle } from '../fields/SectionTitle';
 import { PhoneField } from '../fields/PhoneField';
@@ -16,12 +20,26 @@ import {
 } from '../options';
 import type { StepProps } from '../stepProps';
 
+/** Fecha máxima para fecha de nacimiento: hoy menos 18 años. */
+const MAX_BIRTH_DATE = dayjs().subtract(18, 'year').toDate();
+const BIRTH_FORMAT = 'DD/MM/YYYY';
+
 export function DatosTitularStep({ data, update, showValidation }: StepProps) {
   const pepRef = useRef<HTMLDivElement>(null);
 
   /** Devuelve "Requerido" si showValidation y el valor está vacío. */
   const req = (val: string | null | undefined) =>
     showValidation && !val?.trim() ? 'Requerido' : undefined;
+
+  /** Valida fecha de nacimiento: requerida + mayor de 18 años. */
+  const birthDateError = (() => {
+    if (!showValidation) return undefined;
+    if (!data.holderBirthDate?.trim()) return 'Requerido';
+    const parsed = dayjs(data.holderBirthDate, BIRTH_FORMAT, true);
+    if (!parsed.isValid()) return 'Fecha inválida';
+    if (parsed.isAfter(dayjs().subtract(18, 'year'))) return 'Debe ser mayor de 18 años';
+    return undefined;
+  })();
 
   useEffect(() => {
     if (data.holderIsPep) {
@@ -73,8 +91,8 @@ export function DatosTitularStep({ data, update, showValidation }: StepProps) {
           label={copy.fields.birthDate}
           value={data.holderBirthDate}
           onChange={(v) => update({ holderBirthDate: v })}
-          maxDate={new Date()}
-          error={req(data.holderBirthDate)}
+          maxDate={MAX_BIRTH_DATE}
+          error={birthDateError}
         />
         <Select
           label={copy.fields.nationality}
