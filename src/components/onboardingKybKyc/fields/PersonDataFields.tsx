@@ -71,6 +71,7 @@ export function PersonDataFields({ value, onChange }: PersonDataFieldsProps) {
           placeholder={f.participationPlaceholder}
           value={value.participation}
           onChange={(e) => onChange({ participation: e.currentTarget.value })}
+          rightSection={<Text size="sm" c="mantineDefault.5">%</Text>}
         />
         <Select
           label={f.birthCountry}
