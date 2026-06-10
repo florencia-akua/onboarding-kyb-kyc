@@ -75,12 +75,14 @@ export function ReviewList({ steps, data, onEdit }: ReviewListProps) {
             <Group gap="sm" wrap="nowrap">
               <StatusPill missing={getStepMissing(step.id, data)} />
               <ActionIcon
-                variant="subtle"
-                color="gray"
+                variant="default"
+                radius="xs"
+                size={24}
                 aria-label={`${copy.review.edit} ${step.label}`}
                 onClick={() => onEdit(index)}
+                style={{ border: '1px solid #d1d5db' }}
               >
-                <IconPencil size={16} />
+                <IconPencil size={14} />
               </ActionIcon>
             </Group>
           </Group>
