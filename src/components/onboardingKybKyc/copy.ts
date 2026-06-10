@@ -37,7 +37,7 @@ export const copy = {
     inviteTitle: 'Se lo pido a la persona',
     inviteDesc: 'Le enviaremos un enlace para que lo complete.',
     participation: 'Porcentaje de participación (%)',
-    participationPlaceholder: 'Ingrese porcentaje de participación (%)',
+    participationPlaceholder: 'Ingrese porcentaje',
     birthCountry: 'País de nacimiento',
     birthCountryPlaceholder: 'Ingrese país de nacimiento',
     nationality: 'Nacionalidad',
