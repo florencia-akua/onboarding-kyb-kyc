@@ -27,6 +27,77 @@ const DEFAULT_TAX_ID: TaxIdConfig = {
   placeholder: 'Ingrese número de identificación',
 };
 
+/** Máximo de dígitos permitidos por país (para limitar el input). */
+const MAX_DIGITS: Record<string, number> = {
+  CO: 10, AR: 11, BR: 14, CL: 9, EC: 13, UY: 12,
+};
+
+/**
+ * Extrae solo los caracteres válidos del raw value:
+ * dígitos para todos, más 'K' para Chile (dígito verificador).
+ */
+function stripTaxId(raw: string, iso: string): string {
+  const max = MAX_DIGITS[iso] ?? 20;
+  if (iso === 'CL') {
+    return raw.replace(/[^0-9kK]/g, '').toUpperCase().slice(0, max);
+  }
+  return raw.replace(/\D/g, '').slice(0, max);
+}
+
+/**
+ * Aplica el formato visual del identificador tributario según el país.
+ * Recibe el valor actual del input (que puede ya tener separadores),
+ * strips primero y re-aplica el patrón.
+ *
+ * Formatos:
+ *   AR  CUIT  → XX-XXXXXXXX-X
+ *   CO  NIT   → XXX.XXX.XXX-X
+ *   BR  CNPJ  → XX.XXX.XXX/XXXX-XX
+ *   CL  RUT   → X.XXX.XXX-DV  o  XX.XXX.XXX-DV
+ *   EC  RUC   → sin separadores (13 dígitos)
+ *   UY  RUT   → sin separadores (12 dígitos)
+ */
+function formatTaxId(raw: string, iso: string): string {
+  const d = stripTaxId(raw, iso);
+  if (!d) return '';
+
+  switch (iso) {
+    case 'AR': {
+      // XX-XXXXXXXX-X
+      if (d.length <= 2) return d;
+      if (d.length <= 10) return `${d.slice(0, 2)}-${d.slice(2)}`;
+      return `${d.slice(0, 2)}-${d.slice(2, 10)}-${d.slice(10)}`;
+    }
+    case 'CO': {
+      // XXX.XXX.XXX-X
+      if (d.length <= 3) return d;
+      if (d.length <= 6) return `${d.slice(0, 3)}.${d.slice(3)}`;
+      if (d.length <= 9) return `${d.slice(0, 3)}.${d.slice(3, 6)}.${d.slice(6)}`;
+      return `${d.slice(0, 3)}.${d.slice(3, 6)}.${d.slice(6, 9)}-${d.slice(9)}`;
+    }
+    case 'BR': {
+      // XX.XXX.XXX/XXXX-XX
+      if (d.length <= 2) return d;
+      if (d.length <= 5) return `${d.slice(0, 2)}.${d.slice(2)}`;
+      if (d.length <= 8) return `${d.slice(0, 2)}.${d.slice(2, 5)}.${d.slice(5)}`;
+      if (d.length <= 12) return `${d.slice(0, 2)}.${d.slice(2, 5)}.${d.slice(5, 8)}/${d.slice(8)}`;
+      return `${d.slice(0, 2)}.${d.slice(2, 5)}.${d.slice(5, 8)}/${d.slice(8, 12)}-${d.slice(12)}`;
+    }
+    case 'CL': {
+      // X.XXX.XXX-DV  (último char = dígito verificador, puede ser K)
+      if (d.length <= 1) return d;
+      const body = d.slice(0, -1);
+      const dv   = d.slice(-1);
+      // Puntos cada 3 dígitos desde la derecha del cuerpo
+      const bodyFormatted = body.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+      return `${bodyFormatted}-${dv}`;
+    }
+    default:
+      // EC, UY y cualquier otro: solo dígitos, sin separadores
+      return d;
+  }
+}
+
 const COUNTRY_SELECT_DATA = COUNTRIES.map((c) => ({
   value: c.iso,
   label: c.name,
@@ -52,7 +123,10 @@ export function IdentificacionContactoStep({ data, update, showValidation }: Ste
             placeholder="Seleccione país"
             data={COUNTRY_SELECT_DATA}
             value={data.companyCountry || null}
-            onChange={(v) => update({ companyCountry: v ?? '' })}
+            onChange={(v) =>
+              // Al cambiar el país limpiamos el NIT para evitar formatos cruzados.
+              update({ companyCountry: v ?? '', companyNit: '' })
+            }
             comboboxProps={{
               withinPortal: true,
               position: 'bottom',
@@ -74,7 +148,11 @@ export function IdentificacionContactoStep({ data, update, showValidation }: Ste
             label={taxId.label}
             placeholder={taxId.placeholder}
             value={data.companyNit}
-            onChange={(e) => update({ companyNit: e.currentTarget.value })}
+            onChange={(e) =>
+              update({
+                companyNit: formatTaxId(e.currentTarget.value, data.companyCountry),
+              })
+            }
             error={req(data.companyNit)}
           />
           <Select
