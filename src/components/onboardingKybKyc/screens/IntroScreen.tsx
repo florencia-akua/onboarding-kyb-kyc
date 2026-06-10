@@ -129,18 +129,22 @@ export function IntroScreen({ onStart }: IntroScreenProps) {
         style={{ display: 'flex', flexDirection: 'column', flex: 1, minHeight: 0 }}
       >
         <Box style={{ flex: 1, overflowY: 'auto' }}>
-          {/* Preview del dashboard — ancho completo, sin corte, proporciones naturales. */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/intro-dashboard-mobile.png"
-            alt=""
-            aria-hidden
-            style={{
-              display: 'block',
-              width: '100%',
-              height: 'auto',
-            }}
-          />
+          {/* Preview del dashboard — ancho completo, altura máxima 42 vh para que el
+              texto debajo siempre sea visible en pantallas angostas. La imagen se
+              mantiene en sus proporciones naturales y el contenedor corta el exceso. */}
+          <Box style={{ maxHeight: '42vh', overflow: 'hidden' }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/intro-dashboard-mobile.png"
+              alt=""
+              aria-hidden
+              style={{
+                display: 'block',
+                width: '100%',
+                height: 'auto',
+              }}
+            />
+          </Box>
 
           {/* Contenido */}
           <Box px={24} py={32}>
