@@ -34,6 +34,8 @@ export function PlainShell({
         flexDirection: 'column',
         height: '100dvh',
         backgroundColor: 'var(--mantine-color-white)',
+        backgroundImage: 'radial-gradient(circle, #d1d5db 1px, transparent 1px)',
+        backgroundSize: '20px 20px',
       }}
     >
       <TopNav personaType={personaType} />
