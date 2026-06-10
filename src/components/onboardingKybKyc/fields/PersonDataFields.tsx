@@ -10,16 +10,17 @@ import {
   Switch,
   Text,
   TextInput,
+  Tooltip,
 } from '@mantine/core';
-import { IconShieldHalf } from '@tabler/icons-react';
+import { IconInfoCircle, IconShieldHalf } from '@tabler/icons-react';
 import { copy } from '../copy';
-import { COUNTRY_OPTIONS, NATIONALITY_OPTIONS } from '../options';
-import { DocumentNumberLabel } from './DocumentNumberLabel';
+import { COUNTRY_OPTIONS, DOCUMENT_TYPE_OPTIONS, NATIONALITY_OPTIONS } from '../options';
 import { DocumentUploadField } from './DocumentUploadField';
 import { PepDeclarationFields } from './PepDeclarationFields';
 import type { PepDeclaration, UploadedDoc } from '../types';
 
 export interface PersonDataValue {
+  documentType: string;
   documentNumber: string;
   participation: string;
   birthCountry: string;
@@ -60,8 +61,23 @@ export function PersonDataFields({ value, onChange }: PersonDataFieldsProps) {
   return (
     <Stack gap={32}>
       <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={32}>
+        <Select
+          label={
+            <Text component="span" size="sm" fw={500}>
+              {f.documentType}
+              <Tooltip label={f.documentTypeTooltip} withArrow>
+                <IconInfoCircle size={14} style={{ cursor: 'help', display: 'inline-block', verticalAlign: 'middle', marginLeft: 4 }} />
+              </Tooltip>
+            </Text>
+          }
+          placeholder={f.documentTypePlaceholder}
+          data={DOCUMENT_TYPE_OPTIONS}
+          value={value.documentType || null}
+          onChange={(v) => onChange({ documentType: v ?? '' })}
+          comboboxProps={{ withinPortal: true, position: 'bottom', middlewares: { flip: false, shift: true } }}
+        />
         <TextInput
-          label={<DocumentNumberLabel />}
+          label={f.documentNumber}
           placeholder={f.documentNumberPlaceholder}
           value={value.documentNumber}
           onChange={(e) => onChange({ documentNumber: e.currentTarget.value })}

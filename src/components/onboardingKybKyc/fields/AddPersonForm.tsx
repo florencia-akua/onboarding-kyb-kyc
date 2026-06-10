@@ -28,6 +28,7 @@ export interface PersonDraft {
   lastName: string;
   email: string;
   mode: CompletionMode | null;
+  documentType: string;
   documentNumber: string;
   participation: string;
   birthCountry: string;
@@ -43,6 +44,7 @@ const emptyDraft: PersonDraft = {
   lastName: '',
   email: '',
   mode: null,
+  documentType: '',
   documentNumber: '',
   participation: '',
   birthCountry: '',

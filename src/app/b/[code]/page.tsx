@@ -13,6 +13,7 @@ import { copy } from '@/components/onboardingKybKyc/copy';
 import { emptyPepDeclaration } from '@/components/onboardingKybKyc/types';
 
 const emptyValue: PersonDataValue = {
+  documentType: '',
   documentNumber: '',
   participation: '',
   birthCountry: '',
