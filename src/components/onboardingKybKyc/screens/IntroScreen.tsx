@@ -125,33 +125,18 @@ export function IntroScreen({ onStart }: IntroScreenProps) {
         style={{ display: 'flex', flexDirection: 'column', flex: 1, minHeight: 0 }}
       >
         <Box style={{ flex: 1, overflowY: 'auto' }}>
-          {/* Preview del dashboard (versión mobile). Imagen SVG pegada al margen derecho. */}
-          <Box
+          {/* Preview del dashboard — ancho completo, sin corte, proporciones naturales. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/intro-dashboard-mobile.png"
+            alt=""
+            aria-hidden
             style={{
-              backgroundColor: '#f5f6fc',
-              overflow: 'hidden',
-              position: 'relative',
-              height: '46vw',
-              minHeight: 160,
-              maxHeight: 240,
+              display: 'block',
+              width: '100%',
+              height: 'auto',
             }}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/intro-dashboard-mobile.svg"
-              alt=""
-              aria-hidden
-              style={{
-                position: 'absolute',
-                top: 0,
-                right: 0,
-                height: '100%',
-                width: 'auto',
-                maxWidth: 'none',
-                display: 'block',
-              }}
-            />
-          </Box>
+          />
 
           {/* Contenido */}
           <Box px={24} py={32}>
