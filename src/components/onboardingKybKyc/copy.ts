@@ -178,7 +178,7 @@ export const copy = {
       'Describe brevemente el origen de los fondos que procesarás a través de la plataforma:',
     fundsOriginPlaceholder: 'Describe el origen de los fondos…',
     approvalQuestion:
-      '¿Necesitas aprobación especial de cumplimiento para operar como PEP?',
+      '¿La empresa requiere aprobación especial de cumplimiento para operar con PEP involucrada?',
     approvalHint:
       '(Esta pregunta es para activar revisión manual del equipo de compliance)',
     approvalRequires: 'Sí, requiero aprobación',
