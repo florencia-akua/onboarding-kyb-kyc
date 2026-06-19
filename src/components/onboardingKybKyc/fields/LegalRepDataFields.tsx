@@ -4,7 +4,7 @@ import { Select, SimpleGrid, Stack, TextInput } from '@mantine/core';
 import { DateField } from './DateField';
 import { PhoneField } from './PhoneField';
 import { copy } from '../copy';
-import { CITY_OPTIONS, COUNTRY_OPTIONS, NATIONALITY_OPTIONS } from '../options';
+import { CITY_OPTIONS, COUNTRY_OPTIONS, DOCUMENT_TYPE_OPTIONS, NATIONALITY_OPTIONS } from '../options';
 import type { PersonDraft } from './AddPersonForm';
 
 interface LegalRepDataFieldsProps {
@@ -18,6 +18,16 @@ export function LegalRepDataFields({ value, onChange }: LegalRepDataFieldsProps)
   return (
     <Stack gap={24}>
       <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={24}>
+        {/* Tipo de documento */}
+        <Select
+          label={f.documentType}
+          placeholder="Seleccionar tipo de documento"
+          data={DOCUMENT_TYPE_OPTIONS}
+          value={value.documentType || null}
+          onChange={(v) => onChange({ documentType: v ?? '' })}
+          comboboxProps={{ withinPortal: true, position: 'bottom', middlewares: { flip: false, shift: true } }}
+        />
+
         {/* Número de documento */}
         <TextInput
           label={f.documentNumber}
