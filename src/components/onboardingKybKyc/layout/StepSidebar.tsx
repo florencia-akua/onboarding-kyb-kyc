@@ -33,7 +33,7 @@ export function StepSidebar({
       style={{
         flexShrink: 0,
         overflowY: 'auto',
-        backgroundColor: 'var(--mantine-color-gray-1)',
+        backgroundColor: '#FAFAFA',
         borderRight: '1px solid var(--mantine-color-gray-2)',
         display: 'flex',
         flexDirection: 'column',
@@ -66,7 +66,7 @@ export function StepSidebar({
                 style={{
                   borderRadius: 'var(--mantine-radius-md)',
                   backgroundColor: isActive
-                    ? 'var(--mantine-color-akuaPurple-9)'
+                    ? '#180047'
                     : 'transparent',
                   cursor: isReachable ? 'pointer' : 'default',
                   opacity: isReachable ? 1 : 0.45,
