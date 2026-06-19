@@ -15,7 +15,6 @@ interface StepSidebarProps {
   activeIndex: number;
   maxReachedIndex: number;
   onStepClick: (index: number) => void;
-  /** Breakpoint from which the sidebar is visible (hidden below it). */
   visibleFrom?: string;
 }
 
@@ -29,66 +28,85 @@ export function StepSidebar({
   return (
     <Box
       component="nav"
-      w={300}
-      p="md"
+      w={280}
       visibleFrom={visibleFrom}
       style={{
         flexShrink: 0,
         overflowY: 'auto',
+        backgroundColor: 'var(--mantine-color-gray-1)',
+        borderRight: '1px solid var(--mantine-color-gray-2)',
+        display: 'flex',
+        flexDirection: 'column',
       }}
     >
-      <Stack gap={2}>
-        {steps.map((step, index) => {
-          const isActive = index === activeIndex;
-          const isCompleted = index < maxReachedIndex;
-          const isReachable = index <= maxReachedIndex;
+      <Box p="md" style={{ flex: 1 }}>
+        <Text
+          size="xs"
+          fw={700}
+          c="mantineDefault.4"
+          mb="sm"
+          style={{ letterSpacing: '0.08em', textTransform: 'uppercase' }}
+        >
+          Pasos
+        </Text>
 
-          return (
-            <UnstyledButton
-              key={step.id}
-              onClick={() => isReachable && onStepClick(index)}
-              disabled={!isReachable}
-              py={9}
-              px={12}
-              style={{
-                borderRadius: 'var(--mantine-radius-md)',
-                backgroundColor: isActive
-                  ? 'var(--mantine-color-akuaPurple-6)'
-                  : 'transparent',
-                cursor: isReachable ? 'pointer' : 'default',
-                opacity: isReachable ? 1 : 0.5,
-              }}
-            >
-              <Group justify="space-between" wrap="nowrap" gap="sm">
-                <Group gap="sm" wrap="nowrap">
-                  <Box
-                    c={
-                      isActive
-                        ? 'white'
-                        : isReachable
-                          ? 'mantineDefault.8'
-                          : 'mantineDefault.4'
-                    }
-                    style={{ display: 'flex' }}
-                  >
-                    {step.icon}
-                  </Box>
-                  <Text
-                    size="sm"
-                    fw={isActive ? 600 : 500}
-                    c={isActive ? 'white' : 'mantineDefault.8'}
-                  >
-                    {step.label}
-                  </Text>
+        <Stack gap={2}>
+          {steps.map((step, index) => {
+            const isActive = index === activeIndex;
+            const isCompleted = index < maxReachedIndex;
+            const isReachable = index <= maxReachedIndex;
+
+            return (
+              <UnstyledButton
+                key={step.id}
+                onClick={() => isReachable && onStepClick(index)}
+                disabled={!isReachable}
+                py={8}
+                px={10}
+                style={{
+                  borderRadius: 'var(--mantine-radius-md)',
+                  backgroundColor: isActive
+                    ? 'var(--mantine-color-akuaPurple-9)'
+                    : 'transparent',
+                  cursor: isReachable ? 'pointer' : 'default',
+                  opacity: isReachable ? 1 : 0.45,
+                }}
+              >
+                <Group justify="space-between" wrap="nowrap" gap="sm">
+                  <Group gap="sm" wrap="nowrap" align="center">
+                    <Box
+                      c={isActive ? 'white' : isReachable ? 'mantineDefault.5' : 'mantineDefault.4'}
+                      style={{ display: 'flex', flexShrink: 0 }}
+                    >
+                      {step.icon}
+                    </Box>
+                    <Box>
+                      <Text
+                        size="xs"
+                        c={isActive ? 'rgba(255,255,255,0.65)' : 'mantineDefault.4'}
+                        lh={1.2}
+                      >
+                        Paso {index + 1}
+                      </Text>
+                      <Text
+                        size="sm"
+                        fw={600}
+                        c={isActive ? 'white' : isReachable ? 'mantineDefault.8' : 'mantineDefault.5'}
+                        lh={1.3}
+                      >
+                        {step.label}
+                      </Text>
+                    </Box>
+                  </Group>
+                  {isCompleted && !isActive && (
+                    <IconCheck size={15} color="var(--mantine-color-akuaGreen-7)" style={{ flexShrink: 0 }} />
+                  )}
                 </Group>
-                {isCompleted && !isActive && (
-                  <IconCheck size={16} color="var(--mantine-color-akuaGreen-8)" />
-                )}
-              </Group>
-            </UnstyledButton>
-          );
-        })}
-      </Stack>
+              </UnstyledButton>
+            );
+          })}
+        </Stack>
+      </Box>
     </Box>
   );
 }
