@@ -93,7 +93,7 @@ export const copy = {
     // Persona jurídica
     identification: 'Identificación y contacto',
     legalRep: 'Representante legal',
-    sociosBeneficiarios: 'Socios y Beneficiarios',
+    sociosBeneficiarios: 'Accionistas y Beneficiarios',
     ownership: 'Estructura societaria',
     beneficiary: 'Beneficiario final',
     riskProfile: 'Perfil de riesgo',
