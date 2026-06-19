@@ -64,27 +64,36 @@ export function StepSidebar({
                 py={10}
                 px={12}
                 style={{
-                  borderRadius: 'var(--mantine-radius-md)',
-                  backgroundColor: isActive
-                    ? '#180047'
-                    : 'transparent',
+                  borderRadius: 8,
+                  backgroundColor: isActive ? '#180047' : 'transparent',
                   cursor: isReachable ? 'pointer' : 'default',
                   opacity: isReachable ? 1 : 0.45,
                 }}
               >
                 <Group justify="space-between" wrap="nowrap" gap="sm">
-                  <Group gap="sm" wrap="nowrap" align="center">
+                  <Group gap={10} wrap="nowrap" align="center">
+                    {/* Ícono: con círculo de fondo cuando está activo */}
                     <Box
-                      c={isActive ? 'white' : isReachable ? 'mantineDefault.5' : 'mantineDefault.4'}
-                      style={{ display: 'flex', flexShrink: 0 }}
+                      style={{
+                        flexShrink: 0,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        width: 34,
+                        height: 34,
+                        borderRadius: '50%',
+                        backgroundColor: isActive ? 'rgba(255,255,255,0.12)' : 'transparent',
+                        color: isActive ? 'white' : isReachable ? 'var(--mantine-color-mantineDefault-5)' : 'var(--mantine-color-mantineDefault-4)',
+                      }}
                     >
                       {step.icon}
                     </Box>
                     <Box>
                       <Text
                         size="xs"
-                        c={isActive ? 'rgba(255,255,255,0.65)' : 'mantineDefault.4'}
-                        lh={1.2}
+                        fw={500}
+                        c={isActive ? 'rgba(255,255,255,0.6)' : 'mantineDefault.4'}
+                        lh={1.3}
                       >
                         Paso {index + 1}
                       </Text>
