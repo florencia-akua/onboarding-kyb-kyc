@@ -99,7 +99,7 @@ export const copy = {
     ownership: 'Estructura societaria',
     beneficiary: 'Beneficiario final',
     riskProfile: 'Perfil de riesgo',
-    bankingPayouts: 'Datos bancarios para payouts',
+    bankingPayouts: 'Datos bancarios',
     review: 'Revisión',
     reviewStep: 'Revisión y envío',
   },
