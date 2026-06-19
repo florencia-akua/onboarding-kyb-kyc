@@ -14,7 +14,7 @@ import {
 } from '@mantine/core';
 import { IconInfoCircle, IconShieldHalf } from '@tabler/icons-react';
 import { copy } from '../copy';
-import { CITY_OPTIONS, COUNTRY_OPTIONS, DOCUMENT_TYPE_OPTIONS, NATIONALITY_OPTIONS } from '../options';
+import { CITY_OPTIONS, COUNTRY_OPTIONS, DEPARTMENT_OPTIONS, DOCUMENT_TYPE_OPTIONS, NATIONALITY_OPTIONS } from '../options';
 import { DocumentUploadField } from './DocumentUploadField';
 import { PepDeclarationFields } from './PepDeclarationFields';
 import type { PepDeclaration, UploadedDoc } from '../types';
@@ -30,12 +30,19 @@ export interface PersonDataValue {
   docBack: UploadedDoc | null;
   isPep: boolean;
   pep: PepDeclaration;
+  addressCountry?: string;
+  addressState?: string;
+  addressCity?: string;
+  addressStreet?: string;
+  addressNumber?: string;
+  addressZip?: string;
 }
 
 interface PersonDataFieldsProps {
   value: PersonDataValue;
   onChange: (patch: Partial<PersonDataValue>) => void;
   participationLabel?: string;
+  showAddressSection?: boolean;
 }
 
 /**
@@ -43,7 +50,7 @@ interface PersonDataFieldsProps {
  * y declaración PEP). Compartido entre el alta "Lo completo yo" y la página
  * pública del invitado.
  */
-export function PersonDataFields({ value, onChange, participationLabel }: PersonDataFieldsProps) {
+export function PersonDataFields({ value, onChange, participationLabel, showAddressSection }: PersonDataFieldsProps) {
   const f = copy.addPersonForm;
   const pepRef = useRef<HTMLDivElement>(null);
 
@@ -119,6 +126,60 @@ export function PersonDataFields({ value, onChange, participationLabel }: Person
           searchable
         />
       </SimpleGrid>
+
+      {showAddressSection && (
+        <Stack gap={12}>
+          <Text fw={600} fz="sm" c="mantineDefault.9">{copy.fields.addressSectionTitle}</Text>
+          <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={24}>
+            <Select
+              label={copy.fields.addressCountry}
+              placeholder={copy.fields.selectCountry}
+              data={COUNTRY_OPTIONS}
+              value={value.addressCountry || null}
+              onChange={(v) => onChange({ addressCountry: v ?? '' })}
+              comboboxProps={{ withinPortal: true, position: 'bottom', middlewares: { flip: false, shift: true } }}
+              searchable
+            />
+            <Select
+              label={copy.fields.addressState}
+              placeholder={copy.fields.selectState}
+              data={DEPARTMENT_OPTIONS}
+              value={value.addressState || null}
+              onChange={(v) => onChange({ addressState: v ?? '' })}
+              comboboxProps={{ withinPortal: true, position: 'bottom', middlewares: { flip: false, shift: true } }}
+              searchable
+            />
+            <Select
+              label={copy.fields.addressCity}
+              placeholder={copy.fields.selectCity}
+              data={CITY_OPTIONS}
+              value={value.addressCity || null}
+              onChange={(v) => onChange({ addressCity: v ?? '' })}
+              comboboxProps={{ withinPortal: true, position: 'bottom', middlewares: { flip: false, shift: true } }}
+              searchable
+            />
+            <TextInput
+              label={copy.fields.addressStreet}
+              placeholder="Ej: Carrera 15"
+              value={value.addressStreet ?? ''}
+              onChange={(e) => onChange({ addressStreet: e.currentTarget.value })}
+            />
+            <TextInput
+              label={copy.fields.addressNumber}
+              placeholder="Ej: # 80 - 45"
+              value={value.addressNumber ?? ''}
+              onChange={(e) => onChange({ addressNumber: e.currentTarget.value })}
+            />
+            <TextInput
+              label={copy.fields.addressZip}
+              placeholder="Ej: 110111"
+              value={value.addressZip ?? ''}
+              onChange={(e) => onChange({ addressZip: e.currentTarget.value.replace(/\D/g, '') })}
+              inputMode="numeric"
+            />
+          </SimpleGrid>
+        </Stack>
+      )}
 
       <DocumentUploadField
         field={{ key: 'docFront', label: f.docFront }}

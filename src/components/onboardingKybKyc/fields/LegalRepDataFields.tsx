@@ -1,10 +1,10 @@
 'use client';
 
-import { Select, SimpleGrid, Stack, TextInput } from '@mantine/core';
+import { Select, SimpleGrid, Stack, Text, TextInput } from '@mantine/core';
 import { DateField } from './DateField';
 import { PhoneField } from './PhoneField';
 import { copy } from '../copy';
-import { CITY_OPTIONS, COUNTRY_OPTIONS, DOCUMENT_TYPE_OPTIONS, NATIONALITY_OPTIONS } from '../options';
+import { CITY_OPTIONS, COUNTRY_OPTIONS, DEPARTMENT_OPTIONS, DOCUMENT_TYPE_OPTIONS, NATIONALITY_OPTIONS } from '../options';
 import type { PersonDraft } from './AddPersonForm';
 
 interface LegalRepDataFieldsProps {
@@ -86,20 +86,65 @@ export function LegalRepDataFields({ value, onChange }: LegalRepDataFieldsProps)
           searchable
         />
 
-        {/* Dirección residencial */}
-        <TextInput
-          label={f.residentialAddress}
-          placeholder="Carrera 15 # 80 - 45"
-          value={value.address}
-          onChange={(e) => onChange({ address: e.currentTarget.value })}
-        />
-
         {/* Teléfono */}
         <PhoneField
           value={value.phone}
           onChange={(v) => onChange({ phone: v })}
         />
       </SimpleGrid>
+
+      {/* Dirección residencial */}
+      <Stack gap={12}>
+        <Text fw={600} fz="sm" c="mantineDefault.9">{f.addressSectionTitle}</Text>
+        <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={24}>
+          <Select
+            label={f.addressCountry}
+            placeholder={f.selectCountry}
+            data={COUNTRY_OPTIONS}
+            value={value.addressCountry || null}
+            onChange={(v) => onChange({ addressCountry: v ?? '' })}
+            comboboxProps={{ withinPortal: true, position: 'bottom', middlewares: { flip: false, shift: true } }}
+            searchable
+          />
+          <Select
+            label={f.addressState}
+            placeholder={f.selectState}
+            data={DEPARTMENT_OPTIONS}
+            value={value.addressState || null}
+            onChange={(v) => onChange({ addressState: v ?? '' })}
+            comboboxProps={{ withinPortal: true, position: 'bottom', middlewares: { flip: false, shift: true } }}
+            searchable
+          />
+          <Select
+            label={f.addressCity}
+            placeholder={f.selectCity}
+            data={CITY_OPTIONS}
+            value={value.addressCity || null}
+            onChange={(v) => onChange({ addressCity: v ?? '' })}
+            comboboxProps={{ withinPortal: true, position: 'bottom', middlewares: { flip: false, shift: true } }}
+            searchable
+          />
+          <TextInput
+            label={f.addressStreet}
+            placeholder="Ej: Carrera 15"
+            value={value.addressStreet}
+            onChange={(e) => onChange({ addressStreet: e.currentTarget.value })}
+          />
+          <TextInput
+            label={f.addressNumber}
+            placeholder="Ej: # 80 - 45"
+            value={value.addressNumber}
+            onChange={(e) => onChange({ addressNumber: e.currentTarget.value })}
+          />
+          <TextInput
+            label={f.addressZip}
+            placeholder="Ej: 110111"
+            value={value.addressZip}
+            onChange={(e) => onChange({ addressZip: e.currentTarget.value.replace(/\D/g, '') })}
+            inputMode="numeric"
+          />
+        </SimpleGrid>
+      </Stack>
     </Stack>
   );
 }
