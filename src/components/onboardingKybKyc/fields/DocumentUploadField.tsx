@@ -42,10 +42,6 @@ export function DocumentUploadField({
       <Text size="sm" fw={500} c="mantineDefault.9">
         {field.label}
       </Text>
-      <Text size="xs" c="mantineDefault.5" mt={2}>
-        {field.note ?? copy.common.fileHint}
-      </Text>
-
       <input
         ref={inputRef}
         type="file"
