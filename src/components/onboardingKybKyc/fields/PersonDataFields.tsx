@@ -35,6 +35,7 @@ export interface PersonDataValue {
 interface PersonDataFieldsProps {
   value: PersonDataValue;
   onChange: (patch: Partial<PersonDataValue>) => void;
+  participationLabel?: string;
 }
 
 /**
@@ -42,7 +43,7 @@ interface PersonDataFieldsProps {
  * y declaración PEP). Compartido entre el alta "Lo completo yo" y la página
  * pública del invitado.
  */
-export function PersonDataFields({ value, onChange }: PersonDataFieldsProps) {
+export function PersonDataFields({ value, onChange, participationLabel }: PersonDataFieldsProps) {
   const f = copy.addPersonForm;
   const pepRef = useRef<HTMLDivElement>(null);
 
@@ -84,7 +85,7 @@ export function PersonDataFields({ value, onChange }: PersonDataFieldsProps) {
           onChange={(e) => onChange({ documentNumber: e.currentTarget.value })}
         />
         <TextInput
-          label={f.participation}
+          label={participationLabel ?? f.participation}
           placeholder={f.participationPlaceholder}
           value={value.participation}
           onChange={(e) => onChange({ participation: e.currentTarget.value })}

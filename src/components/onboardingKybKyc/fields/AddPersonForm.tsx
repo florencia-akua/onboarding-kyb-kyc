@@ -57,7 +57,7 @@ interface AddPersonFormProps {
   label: ReactNode;
   onCancel: () => void;
   onSubmit: (draft: PersonDraft) => void;
-  variant?: 'legalRep' | 'shareholder';
+  variant?: 'legalRep' | 'shareholder' | 'beneficiary';
 }
 
 export function AddPersonForm({ label, onCancel, onSubmit, variant }: AddPersonFormProps) {
@@ -107,7 +107,11 @@ export function AddPersonForm({ label, onCancel, onSubmit, variant }: AddPersonF
       {variant === 'legalRep' ? (
         <LegalRepDataFields value={draft} onChange={set} />
       ) : (
-        <PersonDataFields value={draft} onChange={set} />
+        <PersonDataFields
+          value={draft}
+          onChange={set}
+          participationLabel={variant === 'beneficiary' ? copy.beneficiary.controlPercentage : undefined}
+        />
       )}
 
       <Group justify="flex-end">

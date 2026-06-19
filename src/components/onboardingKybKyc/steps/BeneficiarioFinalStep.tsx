@@ -26,6 +26,7 @@ export function BeneficiarioFinalStep({
         onChange={(people) => update({ beneficiaries: people })}
         required
         showValidation={showValidation}
+        variant="beneficiary"
       />
     </Stack>
   );
