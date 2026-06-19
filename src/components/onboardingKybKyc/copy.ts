@@ -26,9 +26,8 @@ export const copy = {
   },
 
   addPersonForm: {
-    firstName: 'Nombre/s',
-    lastName: 'Apellido/s',
-    namePlaceholder: 'Ingrese nombre completo',
+    fullName: 'Nombre completo',
+    fullNamePlaceholder: 'Juan Pérez',
     email: 'Email',
     emailPlaceholder: 'Ingrese email',
     completionQuestion: '¿Cómo quieres completar sus datos?',

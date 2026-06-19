@@ -44,8 +44,7 @@ export function PersonSection({
   const addInvite = (d: PersonDraft) => {
     const person: Person = {
       id: `${idPrefix}-${Date.now()}-${idSeq++}`,
-      firstName: d.firstName,
-      lastName: d.lastName,
+      fullName: d.fullName,
       email: d.email,
       mode: 'invite',
       status: 'in_progress',

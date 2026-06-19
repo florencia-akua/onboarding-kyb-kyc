@@ -32,7 +32,7 @@ export function InvitedPersonRow({ person }: InvitedPersonRowProps) {
       <Group justify="space-between" wrap="nowrap">
         <Group gap="xs" wrap="nowrap">
           <Text fw={600} size="sm" c="mantineDefault.9">
-            {person.firstName} {person.lastName}
+            {person.fullName}
           </Text>
           <Text size="sm" c="mantineDefault.5">
             ·

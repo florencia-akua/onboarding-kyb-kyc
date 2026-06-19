@@ -24,8 +24,7 @@ import { emptyPepDeclaration, type PepDeclaration, type UploadedDoc } from '../t
 export type CompletionMode = 'self' | 'invite';
 
 export interface PersonDraft {
-  firstName: string;
-  lastName: string;
+  fullName: string;
   email: string;
   mode: CompletionMode | null;
   documentType: string;
@@ -40,8 +39,7 @@ export interface PersonDraft {
 }
 
 const emptyDraft: PersonDraft = {
-  firstName: '',
-  lastName: '',
+  fullName: '',
   email: '',
   mode: null,
   documentType: '',
@@ -123,8 +121,7 @@ export function AddPersonForm({
     setDraft((d) => ({ ...d, ...patch }));
 
   const inviteDisabled =
-    draft.firstName.trim() === '' ||
-    draft.lastName.trim() === '' ||
+    draft.fullName.trim() === '' ||
     draft.email.trim() === '';
 
   const contentRef = useRef<HTMLDivElement>(null);
@@ -174,20 +171,12 @@ export function AddPersonForm({
         </ActionIcon>
       </Group>
 
-      <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={32}>
-        <TextInput
-          label={f.firstName}
-          placeholder={f.namePlaceholder}
-          value={draft.firstName}
-          onChange={(e) => set({ firstName: e.currentTarget.value })}
-        />
-        <TextInput
-          label={f.lastName}
-          placeholder={f.namePlaceholder}
-          value={draft.lastName}
-          onChange={(e) => set({ lastName: e.currentTarget.value })}
-        />
-      </SimpleGrid>
+      <TextInput
+        label={f.fullName}
+        placeholder={f.fullNamePlaceholder}
+        value={draft.fullName}
+        onChange={(e) => set({ fullName: e.currentTarget.value })}
+      />
 
       <TextInput
         label={f.email}

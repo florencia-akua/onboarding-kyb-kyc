@@ -58,8 +58,7 @@ export type PersonStatus = 'in_progress' | 'complete';
 /** Persona agregada en Socios y Beneficiarios (accionista o beneficiario). */
 export interface Person {
   id: string;
-  firstName: string;
-  lastName: string;
+  fullName: string;
   email: string;
   mode: CompletionMode;
   status: PersonStatus;
