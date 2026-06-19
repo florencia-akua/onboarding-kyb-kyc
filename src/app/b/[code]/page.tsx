@@ -17,6 +17,7 @@ const emptyValue: PersonDataValue = {
   documentNumber: '',
   participation: '',
   birthCountry: '',
+  birthCity: '',
   nationality: '',
   docFront: null,
   docBack: null,
