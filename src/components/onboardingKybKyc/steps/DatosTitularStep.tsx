@@ -8,6 +8,7 @@ import { Box, Paper, SimpleGrid, Stack, Select, Switch, TextInput, Group, Text }
 dayjs.extend(customParseFormat);
 import { IconShieldHalf } from '@tabler/icons-react';
 import { StepTitle, SectionTitle } from '../fields/SectionTitle';
+import { DocumentUploadField } from '../fields/DocumentUploadField';
 import { PhoneField } from '../fields/PhoneField';
 import { DateField } from '../fields/DateField';
 import { PepDeclarationFields } from '../fields/PepDeclarationFields';
@@ -115,6 +116,17 @@ export function DatosTitularStep({ data, update, showValidation }: StepProps) {
           error={req(data.holderBirthCity)}
         />
       </SimpleGrid>
+
+      <DocumentUploadField
+        field={{ key: 'holderDocFront', label: copy.addPersonForm.docFront }}
+        value={data.holderDocFront}
+        onChange={(_k, doc) => update({ holderDocFront: doc })}
+      />
+      <DocumentUploadField
+        field={{ key: 'holderDocBack', label: copy.addPersonForm.docBack }}
+        value={data.holderDocBack}
+        onChange={(_k, doc) => update({ holderDocBack: doc })}
+      />
 
       <SectionTitle>{copy.holder.contactTitle}</SectionTitle>
 

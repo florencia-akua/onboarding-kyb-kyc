@@ -143,6 +143,8 @@ export interface OnboardingFormData {
   holderDepartment: string;
   holderPhone: string;
   holderEmail: string;
+  holderDocFront: UploadedDoc | null;
+  holderDocBack: UploadedDoc | null;
   holderIsPep: boolean;
   holderPep: PepDeclaration;
 
@@ -240,6 +242,8 @@ export const initialOnboardingFormData: OnboardingFormData = {
   holderDepartment: '',
   holderPhone: '',
   holderEmail: '',
+  holderDocFront: null,
+  holderDocBack: null,
   holderIsPep: false,
   holderPep: { ...emptyPepDeclaration },
 
