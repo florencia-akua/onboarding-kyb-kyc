@@ -182,7 +182,7 @@ export const copy = {
     approvalHint:
       '(Esta pregunta es para activar revisión manual del equipo de compliance)',
     approvalRequires: 'Sí, requiero aprobación',
-    approvalHas: 'No, ya tengo aprobación previa (adjuntar documento)',
+    approvalHas: 'No, ya tengo aprobación previa',
     approvalDocLabel: 'Documento de aprobación previa',
   },
 
