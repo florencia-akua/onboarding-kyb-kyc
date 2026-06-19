@@ -1,7 +1,6 @@
 'use client';
 
 import { Box, Group, Stack, Text, UnstyledButton } from '@mantine/core';
-import { IconCheck } from '@tabler/icons-react';
 import type { ReactNode } from 'react';
 
 export interface StepDef {
@@ -107,9 +106,6 @@ export function StepSidebar({
                       </Text>
                     </Box>
                   </Group>
-                  {isCompleted && !isActive && (
-                    <IconCheck size={15} color="var(--mantine-color-akuaGreen-7)" style={{ flexShrink: 0 }} />
-                  )}
                 </Group>
               </UnstyledButton>
             );
