@@ -20,7 +20,7 @@ interface PersonSectionProps {
   onChange: (people: Person[]) => void;
   required?: boolean;
   showValidation?: boolean;
-  variant?: 'legalRep';
+  variant?: 'legalRep' | 'shareholder';
 }
 
 export function PersonSection({

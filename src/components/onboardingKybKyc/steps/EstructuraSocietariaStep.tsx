@@ -26,6 +26,7 @@ export function EstructuraSocietariaStep({
         onChange={(people) => update({ shareholders: people })}
         required
         showValidation={showValidation}
+        variant="shareholder"
       />
     </Stack>
   );

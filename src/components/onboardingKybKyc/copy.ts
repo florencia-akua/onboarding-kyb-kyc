@@ -39,6 +39,8 @@ export const copy = {
     participationPlaceholder: 'Ingrese porcentaje',
     birthCountry: 'País de nacimiento',
     birthCountryPlaceholder: 'Ingrese país de nacimiento',
+    birthCity: 'Ciudad de nacimiento',
+    birthCityPlaceholder: 'Seleccione ciudad',
     nationality: 'Nacionalidad',
     nationalityPlaceholder: 'Ingrese nacionalidad',
     documentType: 'Tipo de documento',

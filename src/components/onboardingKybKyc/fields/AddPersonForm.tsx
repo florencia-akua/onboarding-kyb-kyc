@@ -57,7 +57,7 @@ interface AddPersonFormProps {
   label: ReactNode;
   onCancel: () => void;
   onSubmit: (draft: PersonDraft) => void;
-  variant?: 'legalRep';
+  variant?: 'legalRep' | 'shareholder';
 }
 
 export function AddPersonForm({ label, onCancel, onSubmit, variant }: AddPersonFormProps) {
@@ -95,12 +95,14 @@ export function AddPersonForm({ label, onCancel, onSubmit, variant }: AddPersonF
         onChange={(e) => set({ fullName: e.currentTarget.value })}
       />
 
-      <TextInput
-        label={f.email}
-        placeholder={f.emailPlaceholder}
-        value={draft.email}
-        onChange={(e) => set({ email: e.currentTarget.value })}
-      />
+      {variant !== 'shareholder' && (
+        <TextInput
+          label={f.email}
+          placeholder={f.emailPlaceholder}
+          value={draft.email}
+          onChange={(e) => set({ email: e.currentTarget.value })}
+        />
+      )}
 
       {variant === 'legalRep' ? (
         <LegalRepDataFields value={draft} onChange={set} />

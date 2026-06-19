@@ -14,7 +14,7 @@ import {
 } from '@mantine/core';
 import { IconInfoCircle, IconShieldHalf } from '@tabler/icons-react';
 import { copy } from '../copy';
-import { COUNTRY_OPTIONS, DOCUMENT_TYPE_OPTIONS, NATIONALITY_OPTIONS } from '../options';
+import { CITY_OPTIONS, COUNTRY_OPTIONS, DOCUMENT_TYPE_OPTIONS, NATIONALITY_OPTIONS } from '../options';
 import { DocumentUploadField } from './DocumentUploadField';
 import { PepDeclarationFields } from './PepDeclarationFields';
 import type { PepDeclaration, UploadedDoc } from '../types';
@@ -24,6 +24,7 @@ export interface PersonDataValue {
   documentNumber: string;
   participation: string;
   birthCountry: string;
+  birthCity: string;
   nationality: string;
   docFront: UploadedDoc | null;
   docBack: UploadedDoc | null;
@@ -95,6 +96,15 @@ export function PersonDataFields({ value, onChange }: PersonDataFieldsProps) {
           data={COUNTRY_OPTIONS}
           value={value.birthCountry || null}
           onChange={(v) => onChange({ birthCountry: v ?? '' })}
+          comboboxProps={{ withinPortal: true, position: 'bottom', middlewares: { flip: false, shift: true } }}
+          searchable
+        />
+        <Select
+          label={f.birthCity}
+          placeholder={f.birthCityPlaceholder}
+          data={CITY_OPTIONS}
+          value={value.birthCity || null}
+          onChange={(v) => onChange({ birthCity: v ?? '' })}
           comboboxProps={{ withinPortal: true, position: 'bottom', middlewares: { flip: false, shift: true } }}
           searchable
         />
