@@ -5,6 +5,7 @@ import {
   ActionIcon,
   Button,
   Group,
+  SimpleGrid,
   Stack,
   Text,
   TextInput,
@@ -13,6 +14,7 @@ import { IconTrash } from '@tabler/icons-react';
 import { copy } from '../copy';
 import { PersonDataFields } from './PersonDataFields';
 import { LegalRepDataFields } from './LegalRepDataFields';
+import { PhoneField } from './PhoneField';
 import { emptyPepDeclaration, type PepDeclaration, type UploadedDoc } from '../types';
 
 export interface PersonDraft {
@@ -96,12 +98,27 @@ export function AddPersonForm({ label, onCancel, onSubmit, variant }: AddPersonF
       />
 
       {variant !== 'shareholder' && (
-        <TextInput
-          label={f.email}
-          placeholder={f.emailPlaceholder}
-          value={draft.email}
-          onChange={(e) => set({ email: e.currentTarget.value })}
-        />
+        variant === 'beneficiary' ? (
+          <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={24}>
+            <TextInput
+              label={f.email}
+              placeholder={f.emailPlaceholder}
+              value={draft.email}
+              onChange={(e) => set({ email: e.currentTarget.value })}
+            />
+            <PhoneField
+              value={draft.phone}
+              onChange={(v) => set({ phone: v })}
+            />
+          </SimpleGrid>
+        ) : (
+          <TextInput
+            label={f.email}
+            placeholder={f.emailPlaceholder}
+            value={draft.email}
+            onChange={(e) => set({ email: e.currentTarget.value })}
+          />
+        )
       )}
 
       {variant === 'legalRep' ? (
