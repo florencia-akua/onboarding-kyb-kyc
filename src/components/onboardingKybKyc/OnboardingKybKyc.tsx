@@ -110,7 +110,7 @@ export default function OnboardingKybKyc() {
   }
 
   if (phase === 'success') {
-    return <SuccessScreen onRestart={handleRestart} />;
+    return <SuccessScreen />;
   }
 
   // phase === 'form'

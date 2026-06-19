@@ -34,7 +34,7 @@ export default function InviteePage() {
   const [sent, setSent] = useState(false);
 
   if (sent) {
-    return <SuccessScreen onRestart={() => setSent(false)} />;
+    return <SuccessScreen />;
   }
 
   return (

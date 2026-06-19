@@ -87,19 +87,18 @@ export function PersonSection({
           </div>
         </Group>
 
-        {/* "Agregar +" siempre visible en el header mientras no esté abierto el form */}
-        {!adding && (
-          <Button
-            variant="default"
-            size="xs"
-            radius="sm"
-            rightSection={<IconPlus size={14} />}
-            onClick={() => setAdding(true)}
-            style={{ flexShrink: 0 }}
-          >
-            {copy.common.add}
-          </Button>
-        )}
+        {/* "Agregar +" siempre visible en el header; deshabilitado mientras el form está abierto */}
+        <Button
+          variant="default"
+          size="xs"
+          radius="sm"
+          rightSection={<IconPlus size={14} />}
+          onClick={() => setAdding(true)}
+          disabled={adding}
+          style={{ flexShrink: 0 }}
+        >
+          {copy.common.add}
+        </Button>
       </Group>
 
       {/* ── Form sin personas previas ── */}

@@ -299,8 +299,8 @@ export const copy = {
   success: {
     title: '¡Registro enviado!',
     description:
-      'Hemos recibido tu información. Nuestro equipo de cumplimiento revisará tu registro y te contactaremos a la brevedad.',
-    cta: 'Volver al inicio',
+      'Hemos recibido la información. Nuestro equipo revisará el registro y nos contactaremos a la brevedad.',
+    close: 'Ya puedes cerrar esta ventana.',
   },
 };
 
