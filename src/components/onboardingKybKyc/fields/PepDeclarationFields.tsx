@@ -178,9 +178,6 @@ export function PepDeclarationFields({
 
       <Stack gap="xs">
         <Question>{c.approvalQuestion}</Question>
-        <Text size="sm" c="mantineDefault.6">
-          {c.approvalHint}
-        </Text>
         <Radio.Group
           value={value.approval}
           onChange={(v) => onChange({ approval: v as PepApproval })}
