@@ -61,8 +61,8 @@ export function StepSidebar({
                 key={step.id}
                 onClick={() => isReachable && onStepClick(index)}
                 disabled={!isReachable}
-                py={8}
-                px={10}
+                py={10}
+                px={12}
                 style={{
                   borderRadius: 'var(--mantine-radius-md)',
                   backgroundColor: isActive
