@@ -316,10 +316,6 @@ export const FISICA_DOCUMENTS: DocumentField[] = [
   { key: 'storePhoto', label: 'Foto del comercio (fachada o punto de venta)' },
   { key: 'rut', label: 'RUT (Registro Único Tributario) actualizado' },
   {
-    key: 'holderId',
-    label: 'Cédula del titular (frente y detrás) / pasaporte',
-  },
-  {
     key: 'bankCertificate',
     label: 'Certificado bancario (opcional, para validar cuenta)',
     optional: true,
