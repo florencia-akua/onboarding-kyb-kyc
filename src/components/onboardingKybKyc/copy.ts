@@ -188,6 +188,9 @@ export const copy = {
 
   business: {
     title: 'Datos del negocio',
+    commercialName: 'Nombre comercial',
+    commercialNameTooltip: 'si es diferente a razón social',
+    commercialNamePlaceholder: 'Nombre del comercio',
     country: 'País de operación',
     countryPlaceholder: 'Seleccione el país',
     economicActivity: 'Actividad económica principal',
