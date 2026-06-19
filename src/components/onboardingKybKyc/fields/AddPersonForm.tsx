@@ -12,6 +12,7 @@ import {
 import { IconTrash } from '@tabler/icons-react';
 import { copy } from '../copy';
 import { PersonDataFields } from './PersonDataFields';
+import { LegalRepDataFields } from './LegalRepDataFields';
 import { emptyPepDeclaration, type PepDeclaration, type UploadedDoc } from '../types';
 
 export interface PersonDraft {
@@ -19,9 +20,14 @@ export interface PersonDraft {
   email: string;
   documentType: string;
   documentNumber: string;
-  participation: string;
+  birthDate: string;
+  issueDate: string;
   birthCountry: string;
+  birthCity: string;
   nationality: string;
+  address: string;
+  phone: string;
+  participation: string;
   docFront: UploadedDoc | null;
   docBack: UploadedDoc | null;
   isPep: boolean;
@@ -33,9 +39,14 @@ const emptyDraft: PersonDraft = {
   email: '',
   documentType: '',
   documentNumber: '',
-  participation: '',
+  birthDate: '',
+  issueDate: '',
   birthCountry: '',
+  birthCity: '',
   nationality: '',
+  address: '',
+  phone: '',
+  participation: '',
   docFront: null,
   docBack: null,
   isPep: false,
@@ -46,9 +57,10 @@ interface AddPersonFormProps {
   label: ReactNode;
   onCancel: () => void;
   onSubmit: (draft: PersonDraft) => void;
+  variant?: 'legalRep';
 }
 
-export function AddPersonForm({ label, onCancel, onSubmit }: AddPersonFormProps) {
+export function AddPersonForm({ label, onCancel, onSubmit, variant }: AddPersonFormProps) {
   const [draft, setDraft] = useState<PersonDraft>(emptyDraft);
   const f = copy.addPersonForm;
   const set = (patch: Partial<PersonDraft>) =>
@@ -90,7 +102,11 @@ export function AddPersonForm({ label, onCancel, onSubmit }: AddPersonFormProps)
         onChange={(e) => set({ email: e.currentTarget.value })}
       />
 
-      <PersonDataFields value={draft} onChange={set} />
+      {variant === 'legalRep' ? (
+        <LegalRepDataFields value={draft} onChange={set} />
+      ) : (
+        <PersonDataFields value={draft} onChange={set} />
+      )}
 
       <Group justify="flex-end">
         <Button

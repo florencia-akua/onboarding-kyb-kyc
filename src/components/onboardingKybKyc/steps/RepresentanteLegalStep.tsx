@@ -32,6 +32,7 @@ export function RepresentanteLegalStep({ data, update, showValidation }: StepPro
           onChange={(people) => update({ legalRepPeople: people })}
           required
           showValidation={showValidation}
+          variant="legalRep"
         />
 
         <Divider />
@@ -44,6 +45,7 @@ export function RepresentanteLegalStep({ data, update, showValidation }: StepPro
           newPersonLabel={copy.legalRep.newPersonLabel}
           people={data.alternateRepPeople}
           onChange={(people) => update({ alternateRepPeople: people })}
+          variant="legalRep"
         />
       </Stack>
     </Stack>

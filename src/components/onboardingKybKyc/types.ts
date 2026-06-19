@@ -58,9 +58,14 @@ export interface Person {
   email: string;
   documentType?: string;
   documentNumber?: string;
-  participation?: string;
+  birthDate?: string;
+  issueDate?: string;
   birthCountry?: string;
+  birthCity?: string;
   nationality?: string;
+  address?: string;
+  phone?: string;
+  participation?: string;
   docFront?: UploadedDoc | null;
   docBack?: UploadedDoc | null;
 }

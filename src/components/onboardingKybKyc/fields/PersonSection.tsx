@@ -20,6 +20,7 @@ interface PersonSectionProps {
   onChange: (people: Person[]) => void;
   required?: boolean;
   showValidation?: boolean;
+  variant?: 'legalRep';
 }
 
 export function PersonSection({
@@ -32,6 +33,7 @@ export function PersonSection({
   onChange,
   required = false,
   showValidation = false,
+  variant,
 }: PersonSectionProps) {
   const showError = required && showValidation && people.length === 0;
   const [adding, setAdding] = useState(false);
@@ -43,9 +45,14 @@ export function PersonSection({
       email: d.email,
       documentType: d.documentType,
       documentNumber: d.documentNumber,
-      participation: d.participation,
+      birthDate: d.birthDate,
+      issueDate: d.issueDate,
       birthCountry: d.birthCountry,
+      birthCity: d.birthCity,
       nationality: d.nationality,
+      address: d.address,
+      phone: d.phone,
+      participation: d.participation,
       docFront: d.docFront,
       docBack: d.docBack,
     };
@@ -112,6 +119,7 @@ export function PersonSection({
                 label={newPersonLabel}
                 onCancel={() => setAdding(false)}
                 onSubmit={handleSubmit}
+                variant={variant}
               />
             )}
           </Stack>
