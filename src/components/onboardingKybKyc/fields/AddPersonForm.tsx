@@ -1,32 +1,22 @@
 'use client';
 
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import {
   ActionIcon,
   Button,
   Group,
-  Paper,
-  SimpleGrid,
   Stack,
   Text,
   TextInput,
 } from '@mantine/core';
-import {
-  IconCheck,
-  IconTrash,
-  IconUser,
-  IconUserShare,
-} from '@tabler/icons-react';
+import { IconTrash } from '@tabler/icons-react';
 import { copy } from '../copy';
 import { PersonDataFields } from './PersonDataFields';
 import { emptyPepDeclaration, type PepDeclaration, type UploadedDoc } from '../types';
 
-export type CompletionMode = 'self' | 'invite';
-
 export interface PersonDraft {
   fullName: string;
   email: string;
-  mode: CompletionMode | null;
   documentType: string;
   documentNumber: string;
   participation: string;
@@ -41,7 +31,6 @@ export interface PersonDraft {
 const emptyDraft: PersonDraft = {
   fullName: '',
   email: '',
-  mode: null,
   documentType: '',
   documentNumber: '',
   participation: '',
@@ -54,102 +43,18 @@ const emptyDraft: PersonDraft = {
 };
 
 interface AddPersonFormProps {
-  /** Título del bloque (ej. "Representante legal principal"). */
   label: ReactNode;
   onCancel: () => void;
-  /** Se llama al enviar el enlace ("Se lo pido a la persona"). */
-  onSubmitInvite: (draft: PersonDraft) => void;
+  onSubmit: (draft: PersonDraft) => void;
 }
 
-function ChoiceCard({
-  icon,
-  title,
-  description,
-  selected,
-  onClick,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-  selected: boolean;
-  onClick: () => void;
-}) {
-  return (
-    <Paper
-      withBorder
-      radius="md"
-      p="md"
-      onClick={onClick}
-      style={{
-        cursor: 'pointer',
-        borderColor: selected
-          ? 'var(--mantine-color-akuaPurple-6)'
-          : undefined,
-        borderWidth: selected ? 2 : 1,
-        backgroundColor: selected
-          ? 'var(--mantine-color-akuaPurple-0)'
-          : 'var(--mantine-color-white)',
-      }}
-    >
-      <Group gap="sm" wrap="nowrap" align="flex-start">
-        <Text c="mantineDefault.7" style={{ display: 'flex' }}>
-          {icon}
-        </Text>
-        <div>
-          <Text fw={600} size="sm" c="mantineDefault.9">
-            {title}
-          </Text>
-          <Text size="sm" c="mantineDefault.6">
-            {description}
-          </Text>
-        </div>
-      </Group>
-    </Paper>
-  );
-}
-
-export function AddPersonForm({
-  label,
-  onCancel,
-  onSubmitInvite,
-}: AddPersonFormProps) {
+export function AddPersonForm({ label, onCancel, onSubmit }: AddPersonFormProps) {
   const [draft, setDraft] = useState<PersonDraft>(emptyDraft);
-  const [sending, setSending] = useState(false);
-  const [sent, setSent] = useState(false);
   const f = copy.addPersonForm;
   const set = (patch: Partial<PersonDraft>) =>
     setDraft((d) => ({ ...d, ...patch }));
 
-  const inviteDisabled =
-    draft.fullName.trim() === '' ||
-    draft.email.trim() === '';
-
-  const contentRef = useRef<HTMLDivElement>(null);
-
-  // Al elegir una opción, revela un poco del contenido de esa sección.
-  useEffect(() => {
-    if (draft.mode) {
-      const id = window.setTimeout(() => {
-        contentRef.current?.scrollIntoView({
-          behavior: 'smooth',
-          block: 'nearest',
-        });
-      }, 80);
-      return () => window.clearTimeout(id);
-    }
-  }, [draft.mode]);
-
-  const handleSendLink = () => {
-    if (sending || sent) return;
-    setSending(true);
-    // Simula el envío del enlace (unos segundos de loading).
-    window.setTimeout(() => {
-      setSending(false);
-      setSent(true);
-      // Deja "Enlace enviado" visible un momento antes de consolidar la fila.
-      window.setTimeout(() => onSubmitInvite(draft), 1800);
-    }, 2000);
-  };
+  const canSave = draft.fullName.trim() !== '';
 
   return (
     <Stack gap={24}>
@@ -185,68 +90,25 @@ export function AddPersonForm({
         onChange={(e) => set({ email: e.currentTarget.value })}
       />
 
-      <Stack gap="xs">
-        <Text fw={600} size="sm" c="mantineDefault.9">
-          {f.completionQuestion}
-        </Text>
-        <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
-          <ChoiceCard
-            icon={<IconUser size={18} />}
-            title={f.selfTitle}
-            description={f.selfDesc}
-            selected={draft.mode === 'self'}
-            onClick={() => set({ mode: 'self' })}
-          />
-          <ChoiceCard
-            icon={<IconUserShare size={18} />}
-            title={f.inviteTitle}
-            description={f.inviteDesc}
-            selected={draft.mode === 'invite'}
-            onClick={() => set({ mode: 'invite' })}
-          />
-        </SimpleGrid>
-      </Stack>
+      <PersonDataFields value={draft} onChange={set} />
 
-      <div ref={contentRef} style={{ scrollMarginBottom: 24 }}>
-      {/* "Lo completo yo": carga manual de datos y documentos. */}
-      {draft.mode === 'self' && (
-        <PersonDataFields value={draft} onChange={set} />
-      )}
-
-      {/* "Se lo pido a la persona": envío de enlace. */}
-      {draft.mode === 'invite' && (
-        <Paper withBorder radius="md" p="md" bg="white">
-          <Group justify="space-between" wrap="nowrap" gap="md">
-            <Text size="sm" c="mantineDefault.6" style={{ maxWidth: 420 }}>
-              {f.inviteText}
-            </Text>
-            {sent ? (
-              <Group gap="xs" wrap="nowrap" style={{ flexShrink: 0 }}>
-                <IconCheck
-                  size={16}
-                  color="var(--mantine-color-akuaGreen-8)"
-                />
-                <Text size="sm" fw={500} c="mantineDefault.7">
-                  {f.linkSent}
-                </Text>
-              </Group>
-            ) : (
-              <Button
-                color="akuaPurple.6"
-                size="md"
-                radius="sm"
-                style={{ flexShrink: 0 }}
-                loading={sending}
-                disabled={inviteDisabled}
-                onClick={handleSendLink}
-              >
-                {f.sendLink}
-              </Button>
-            )}
-          </Group>
-        </Paper>
-      )}
-      </div>
+      <Group justify="flex-end">
+        <Button
+          variant="default"
+          radius="sm"
+          onClick={onCancel}
+        >
+          {copy.common.cancel}
+        </Button>
+        <Button
+          color="akuaPurple.6"
+          radius="sm"
+          disabled={!canSave}
+          onClick={() => onSubmit(draft)}
+        >
+          {copy.common.add}
+        </Button>
+      </Group>
     </Stack>
   );
 }

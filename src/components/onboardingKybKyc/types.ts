@@ -52,19 +52,11 @@ export interface UploadedDoc {
   size: number;
 }
 
-export type CompletionMode = 'self' | 'invite';
-export type PersonStatus = 'in_progress' | 'complete';
-
-/** Persona agregada en Socios y Beneficiarios (accionista o beneficiario). */
 export interface Person {
   id: string;
   fullName: string;
   email: string;
-  mode: CompletionMode;
-  status: PersonStatus;
-  /** Enlace de alta (modo "Se lo pido a la persona"). */
-  link?: string;
-  // Datos cuando se completan en el momento (modo "Lo completo yo").
+  documentType?: string;
   documentNumber?: string;
   participation?: string;
   birthCountry?: string;

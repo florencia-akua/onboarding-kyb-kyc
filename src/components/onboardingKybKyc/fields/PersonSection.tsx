@@ -4,16 +4,11 @@ import { useState, type ReactNode } from 'react';
 import { Box, Button, Group, Paper, Stack, Text } from '@mantine/core';
 import { IconAlertCircle, IconPlus } from '@tabler/icons-react';
 import { AddPersonForm, type PersonDraft } from './AddPersonForm';
-import { InvitedPersonRow } from './InvitedPersonRow';
+import { PersonRow } from './PersonRow';
 import { copy } from '../copy';
 import type { Person } from '../types';
 
 let idSeq = 0;
-const makeLink = () => {
-  const code = Math.random().toString(36).slice(2, 10);
-  const origin = typeof window !== 'undefined' ? window.location.origin : '';
-  return `${origin}/b/${code}`;
-};
 
 interface PersonSectionProps {
   idPrefix: string;
@@ -41,22 +36,29 @@ export function PersonSection({
   const showError = required && showValidation && people.length === 0;
   const [adding, setAdding] = useState(false);
 
-  const addInvite = (d: PersonDraft) => {
+  const handleSubmit = (d: PersonDraft) => {
     const person: Person = {
       id: `${idPrefix}-${Date.now()}-${idSeq++}`,
       fullName: d.fullName,
       email: d.email,
-      mode: 'invite',
-      status: 'in_progress',
-      link: makeLink(),
+      documentType: d.documentType,
+      documentNumber: d.documentNumber,
+      participation: d.participation,
+      birthCountry: d.birthCountry,
+      nationality: d.nationality,
+      docFront: d.docFront,
+      docBack: d.docBack,
     };
     onChange([...people, person]);
     setAdding(false);
   };
 
+  const handleRemove = (id: string) => {
+    onChange(people.filter((p) => p.id !== id));
+  };
+
   return (
     <Stack gap="md">
-      {/* ── Encabezado: ícono + título + subtítulo ── */}
       <Group justify="space-between" wrap="nowrap" align="flex-start" gap="md">
         <Group gap="sm" wrap="nowrap" align="flex-start">
           <Box
@@ -86,7 +88,6 @@ export function PersonSection({
           </div>
         </Group>
 
-        {/* "Agregar +" siempre visible en el header; deshabilitado mientras el form está abierto */}
         <Button
           variant="default"
           size="xs"
@@ -100,29 +101,17 @@ export function PersonSection({
         </Button>
       </Group>
 
-      {/* ── Form sin personas previas ── */}
-      {adding && people.length === 0 && (
-        <Paper radius="md" p="md" bg="gray.0" style={{ border: 'none' }}>
-          <AddPersonForm
-            label={newPersonLabel}
-            onCancel={() => setAdding(false)}
-            onSubmitInvite={addInvite}
-          />
-        </Paper>
-      )}
-
-      {/* ── Contenedor gris cuando hay personas ── */}
-      {people.length > 0 && (
+      {(people.length > 0 || adding) && (
         <Paper radius="md" p="md" bg="gray.0" style={{ border: 'none' }}>
           <Stack gap="md">
             {people.map((person) => (
-              <InvitedPersonRow key={person.id} person={person} />
+              <PersonRow key={person.id} person={person} onRemove={handleRemove} />
             ))}
             {adding && (
               <AddPersonForm
                 label={newPersonLabel}
                 onCancel={() => setAdding(false)}
-                onSubmitInvite={addInvite}
+                onSubmit={handleSubmit}
               />
             )}
           </Stack>
