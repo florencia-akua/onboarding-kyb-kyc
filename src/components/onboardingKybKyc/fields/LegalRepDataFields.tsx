@@ -1,8 +1,11 @@
 'use client';
 
-import { Select, SimpleGrid, Stack, Text, TextInput } from '@mantine/core';
+import { useEffect, useRef } from 'react';
+import { Group, Paper, Select, SimpleGrid, Stack, Switch, Text, TextInput } from '@mantine/core';
+import { IconShieldHalf } from '@tabler/icons-react';
 import { DateField } from './DateField';
 import { PhoneField } from './PhoneField';
+import { PepDeclarationFields } from './PepDeclarationFields';
 import { copy } from '../copy';
 import { CITY_OPTIONS, COUNTRY_OPTIONS, DEPARTMENT_OPTIONS, DOCUMENT_TYPE_OPTIONS, NATIONALITY_OPTIONS } from '../options';
 import type { PersonDraft } from './AddPersonForm';
@@ -14,6 +17,16 @@ interface LegalRepDataFieldsProps {
 
 export function LegalRepDataFields({ value, onChange }: LegalRepDataFieldsProps) {
   const f = copy.fields;
+  const pepRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (value.isPep) {
+      const id = window.setTimeout(() => {
+        pepRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 80);
+      return () => window.clearTimeout(id);
+    }
+  }, [value.isPep]);
 
   return (
     <Stack gap={24}>
@@ -144,6 +157,40 @@ export function LegalRepDataFields({ value, onChange }: LegalRepDataFieldsProps)
             inputMode="numeric"
           />
         </SimpleGrid>
+      </Stack>
+
+      {/* PEP */}
+      <Stack gap="xs">
+        <Group justify="space-between" wrap="nowrap" gap="xl" align="flex-start">
+          <Text size="sm" c="mantineDefault.8">
+            {copy.addPersonForm.pepQuestion}
+          </Text>
+          <Switch
+            checked={value.isPep}
+            onChange={(e) => onChange({ isPep: e.currentTarget.checked })}
+            color="akuaPurple.6"
+            style={{ flexShrink: 0 }}
+          />
+        </Group>
+
+        <Paper withBorder radius="md" p="md" bg="gray.0">
+          <Group gap="sm" wrap="nowrap" align="flex-start">
+            <IconShieldHalf size={20} color="var(--mantine-color-mantineDefault-7)" style={{ flexShrink: 0 }} />
+            <div>
+              <Text fw={600} size="sm" c="mantineDefault.9">{copy.riskProfile.calloutTitle}</Text>
+              <Text size="sm" c="mantineDefault.6">{copy.riskProfile.calloutText}</Text>
+            </div>
+          </Group>
+        </Paper>
+
+        {value.isPep && (
+          <div ref={pepRef} style={{ scrollMarginBottom: 24 }}>
+            <PepDeclarationFields
+              value={value.pep}
+              onChange={(patch) => onChange({ pep: { ...value.pep, ...patch } })}
+            />
+          </div>
+        )}
       </Stack>
     </Stack>
   );
