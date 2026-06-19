@@ -5,6 +5,7 @@ import {
   ActionIcon,
   Button,
   Group,
+  Select,
   SimpleGrid,
   Stack,
   Text,
@@ -12,6 +13,7 @@ import {
 } from '@mantine/core';
 import { IconTrash } from '@tabler/icons-react';
 import { copy } from '../copy';
+import { CITY_OPTIONS, COUNTRY_OPTIONS, DEPARTMENT_OPTIONS } from '../options';
 import { PersonDataFields } from './PersonDataFields';
 import { LegalRepDataFields } from './LegalRepDataFields';
 import { PhoneField } from './PhoneField';
@@ -29,6 +31,12 @@ export interface PersonDraft {
   nationality: string;
   address: string;
   phone: string;
+  addressCountry: string;
+  addressState: string;
+  addressCity: string;
+  addressStreet: string;
+  addressNumber: string;
+  addressZip: string;
   participation: string;
   docFront: UploadedDoc | null;
   docBack: UploadedDoc | null;
@@ -48,6 +56,12 @@ const emptyDraft: PersonDraft = {
   nationality: '',
   address: '',
   phone: '',
+  addressCountry: '',
+  addressState: '',
+  addressCity: '',
+  addressStreet: '',
+  addressNumber: '',
+  addressZip: '',
   participation: '',
   docFront: null,
   docBack: null,
@@ -129,6 +143,60 @@ export function AddPersonForm({ label, onCancel, onSubmit, variant }: AddPersonF
           onChange={set}
           participationLabel={variant === 'beneficiary' ? copy.beneficiary.controlPercentage : undefined}
         />
+      )}
+
+      {variant === 'beneficiary' && (
+        <Stack gap={16}>
+          <Text fw={600} fz="sm" c="mantineDefault.9">{copy.fields.addressSectionTitle}</Text>
+          <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={24}>
+            <Select
+              label={copy.fields.addressCountry}
+              placeholder={copy.fields.selectCountry}
+              data={COUNTRY_OPTIONS}
+              value={draft.addressCountry || null}
+              onChange={(v) => set({ addressCountry: v ?? '' })}
+              comboboxProps={{ withinPortal: true, position: 'bottom', middlewares: { flip: false, shift: true } }}
+              searchable
+            />
+            <Select
+              label={copy.fields.addressState}
+              placeholder={copy.fields.selectState}
+              data={DEPARTMENT_OPTIONS}
+              value={draft.addressState || null}
+              onChange={(v) => set({ addressState: v ?? '' })}
+              comboboxProps={{ withinPortal: true, position: 'bottom', middlewares: { flip: false, shift: true } }}
+              searchable
+            />
+            <Select
+              label={copy.fields.addressCity}
+              placeholder={copy.fields.selectCity}
+              data={CITY_OPTIONS}
+              value={draft.addressCity || null}
+              onChange={(v) => set({ addressCity: v ?? '' })}
+              comboboxProps={{ withinPortal: true, position: 'bottom', middlewares: { flip: false, shift: true } }}
+              searchable
+            />
+            <TextInput
+              label={copy.fields.addressStreet}
+              placeholder="Ej: Carrera 15"
+              value={draft.addressStreet}
+              onChange={(e) => set({ addressStreet: e.currentTarget.value })}
+            />
+            <TextInput
+              label={copy.fields.addressNumber}
+              placeholder="Ej: # 80 - 45"
+              value={draft.addressNumber}
+              onChange={(e) => set({ addressNumber: e.currentTarget.value })}
+            />
+            <TextInput
+              label={copy.fields.addressZip}
+              placeholder="Ej: 110111"
+              value={draft.addressZip}
+              onChange={(e) => set({ addressZip: e.currentTarget.value.replace(/\D/g, '') })}
+              inputMode="numeric"
+            />
+          </SimpleGrid>
+        </Stack>
       )}
 
       <Group justify="flex-end">

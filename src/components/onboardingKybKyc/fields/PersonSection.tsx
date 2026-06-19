@@ -55,6 +55,12 @@ export function PersonSection({
       participation: d.participation,
       docFront: d.docFront,
       docBack: d.docBack,
+      addressCountry: d.addressCountry,
+      addressState: d.addressState,
+      addressCity: d.addressCity,
+      addressStreet: d.addressStreet,
+      addressNumber: d.addressNumber,
+      addressZip: d.addressZip,
     };
     onChange([...people, person]);
     setAdding(false);

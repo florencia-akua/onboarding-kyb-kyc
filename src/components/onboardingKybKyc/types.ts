@@ -66,6 +66,12 @@ export interface Person {
   address?: string;
   phone?: string;
   participation?: string;
+  addressCountry?: string;
+  addressState?: string;
+  addressCity?: string;
+  addressStreet?: string;
+  addressNumber?: string;
+  addressZip?: string;
   docFront?: UploadedDoc | null;
   docBack?: UploadedDoc | null;
 }

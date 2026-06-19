@@ -125,6 +125,14 @@ export const copy = {
     selectCountry: 'Seleccione país',
     selectCity: 'Seleccione ciudad',
     selectNationality: 'Seleccione nacionalidad',
+    addressSectionTitle: 'Dirección residencial',
+    addressCountry: 'País',
+    addressState: 'Estado / Departamento',
+    addressCity: 'Ciudad',
+    addressStreet: 'Calle',
+    addressNumber: 'Número',
+    addressZip: 'Código postal',
+    selectState: 'Seleccione estado',
   },
 
   holder: {
