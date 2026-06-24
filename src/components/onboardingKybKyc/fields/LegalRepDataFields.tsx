@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import { Group, Paper, Select, SimpleGrid, Stack, Switch, Text, TextInput } from '@mantine/core';
 import { IconShieldHalf } from '@tabler/icons-react';
 import { DateField } from './DateField';
+import { DocumentUploadField } from './DocumentUploadField';
 import { PhoneField } from './PhoneField';
 import { PepDeclarationFields } from './PepDeclarationFields';
 import { copy } from '../copy';
@@ -158,6 +159,17 @@ export function LegalRepDataFields({ value, onChange }: LegalRepDataFieldsProps)
           />
         </SimpleGrid>
       </Stack>
+
+      <DocumentUploadField
+        field={{ key: 'docFront', label: copy.addPersonForm.docFront }}
+        value={value.docFront}
+        onChange={(_k, doc) => onChange({ docFront: doc })}
+      />
+      <DocumentUploadField
+        field={{ key: 'docBack', label: copy.addPersonForm.docBack }}
+        value={value.docBack}
+        onChange={(_k, doc) => onChange({ docBack: doc })}
+      />
 
       {/* PEP */}
       <Stack gap="xs">
