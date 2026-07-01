@@ -106,20 +106,6 @@ export function DatosNegocioStep({ data, update, showValidation }: StepProps) {
     <Stack gap={32}>
       <StepTitle>{copy.business.title}</StepTitle>
 
-      <TextInput
-        label={
-          <Text component="span" size="sm" fw={500}>
-            {copy.business.commercialName}
-            <Tooltip label={copy.business.commercialNameTooltip} withArrow>
-              <IconInfoCircle size={14} style={{ cursor: 'help', display: 'inline-block', verticalAlign: 'middle', marginLeft: 4 }} />
-            </Tooltip>
-          </Text>
-        }
-        placeholder={copy.business.commercialNamePlaceholder}
-        value={data.commercialName}
-        onChange={(e) => update({ commercialName: e.currentTarget.value })}
-      />
-
       <Select
         label={copy.business.country}
         placeholder={copy.business.countryPlaceholder}
