@@ -48,8 +48,8 @@ export const copy = {
     documentTypeTooltip: 'Cédula de ciudadanía, cédula de extranjería o pasaporte',
     documentNumber: 'Número',
     documentNumberPlaceholder: 'Ingresar número',
-    docFront: 'Documento de identidad (frente)',
-    docBack: 'Documento de identidad (dorso)',
+    docFront: 'Documento (frente)',
+    docBack: 'Documento (dorso)',
     pepQuestion: '¿Es Persona Políticamente Expuesta (PEP)?',
     inviteText:
       'Le enviaremos un enlace seguro para que complete sus datos. Su avance queda visible en el formulario.',
