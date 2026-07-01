@@ -23,6 +23,25 @@ export function InformacionComercialStep({ data, update, showValidation }: StepP
       />
 
       <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={32}>
+        <Select
+          label={copy.commercial.commercialCity}
+          placeholder={copy.fields.selectCity}
+          data={CITY_OPTIONS}
+          value={data.commercialCity || null}
+          onChange={(v) => update({ commercialCity: v ?? '' })}
+          comboboxProps={{ withinPortal: true, position: 'bottom', middlewares: { flip: false, shift: true } }}
+          searchable
+          error={req(data.commercialCity)}
+        />
+        <TextInput
+          label={copy.commercial.commercialDepartment}
+          placeholder={copy.fields.department}
+          value={data.commercialDepartment}
+          onChange={(e) =>
+            update({ commercialDepartment: e.currentTarget.value })
+          }
+          error={req(data.commercialDepartment)}
+        />
         <TextInput
           label={copy.fields.address}
           placeholder={copy.commercial.commercialAddressPlaceholder}
@@ -38,25 +57,6 @@ export function InformacionComercialStep({ data, update, showValidation }: StepP
           onChange={(v) => update({ commercialPhone: v })}
           placeholder="300 000 0000"
           error={req(data.commercialPhone)}
-        />
-        <TextInput
-          label={copy.commercial.commercialDepartment}
-          placeholder={copy.fields.department}
-          value={data.commercialDepartment}
-          onChange={(e) =>
-            update({ commercialDepartment: e.currentTarget.value })
-          }
-          error={req(data.commercialDepartment)}
-        />
-        <Select
-          label={copy.commercial.commercialCity}
-          placeholder={copy.fields.selectCity}
-          data={CITY_OPTIONS}
-          value={data.commercialCity || null}
-          onChange={(v) => update({ commercialCity: v ?? '' })}
-          comboboxProps={{ withinPortal: true, position: 'bottom', middlewares: { flip: false, shift: true } }}
-          searchable
-          error={req(data.commercialCity)}
         />
       </SimpleGrid>
     </Stack>
