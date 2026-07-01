@@ -45,7 +45,6 @@ export function LegalRepDataFields({ value, onChange }: LegalRepDataFieldsProps)
         {/* Número de documento */}
         <TextInput
           label={f.documentNumber}
-          description={f.documentNumberHint}
           placeholder="Ej: 12345678"
           value={value.documentNumber}
           onChange={(e) => onChange({ documentNumber: e.currentTarget.value.replace(/\D/g, '') })}
