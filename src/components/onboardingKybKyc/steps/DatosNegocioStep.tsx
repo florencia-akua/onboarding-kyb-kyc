@@ -32,9 +32,7 @@ const COUNTRY_OPTIONS = COUNTRIES.map((c) => ({
 export function DatosNegocioStep({ data, update, showValidation }: StepProps) {
   const req = (val: string | null | undefined) =>
     showValidation && !val?.trim() ? 'Requerido' : undefined;
-  const showWebsite =
-    data.salesChannels.includes('ecommerce') ||
-    data.salesChannels.includes('both');
+  const showWebsite = data.salesChannels.includes('both');
 
   const country = data.businessCountry;
   const [activities, setActivities] = useState<ActivityEntry[]>([]);
@@ -200,6 +198,18 @@ export function DatosNegocioStep({ data, update, showValidation }: StepProps) {
               color="akuaPurple.6"
               radius="xs"
             />
+            <Checkbox
+              value="inPerson"
+              label={copy.business.channels.inPerson}
+              color="akuaPurple.6"
+              radius="xs"
+            />
+            <Checkbox
+              value="both"
+              label={copy.business.channels.both}
+              color="akuaPurple.6"
+              radius="xs"
+            />
             {showWebsite && (
               <Box ml={32}>
                 <TextInput
@@ -213,18 +223,6 @@ export function DatosNegocioStep({ data, update, showValidation }: StepProps) {
                 />
               </Box>
             )}
-            <Checkbox
-              value="inPerson"
-              label={copy.business.channels.inPerson}
-              color="akuaPurple.6"
-              radius="xs"
-            />
-            <Checkbox
-              value="both"
-              label={copy.business.channels.both}
-              color="akuaPurple.6"
-              radius="xs"
-            />
           </Stack>
         </Checkbox.Group>
       </div>
