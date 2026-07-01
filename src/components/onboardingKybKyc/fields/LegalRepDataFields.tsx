@@ -51,19 +51,19 @@ export function LegalRepDataFields({ value, onChange }: LegalRepDataFieldsProps)
           inputMode="numeric"
         />
 
-        {/* Fecha de nacimiento */}
-        <DateField
-          label={f.birthDate}
-          value={value.birthDate}
-          onChange={(v) => onChange({ birthDate: v })}
-        />
-
         {/* Fecha de expedición del documento */}
         <DateField
           label={f.issueDate}
           value={value.issueDate}
           onChange={(v) => onChange({ issueDate: v })}
           maxDate={new Date()}
+        />
+
+        {/* Fecha de nacimiento */}
+        <DateField
+          label={f.birthDate}
+          value={value.birthDate}
+          onChange={(v) => onChange({ birthDate: v })}
         />
 
         {/* País de nacimiento */}
