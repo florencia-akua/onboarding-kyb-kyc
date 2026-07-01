@@ -1,16 +1,21 @@
 'use client';
 
 import { ActionIcon, Group, Text } from '@mantine/core';
-import { IconTrash } from '@tabler/icons-react';
+import { IconPencil, IconTrash } from '@tabler/icons-react';
 import { copy } from '../copy';
 import type { Person } from '../types';
+
+const actionIconStyles = {
+  root: { borderColor: 'var(--mantine-color-mantineDefault-3)' },
+};
 
 interface PersonRowProps {
   person: Person;
   onRemove: (id: string) => void;
+  onEdit: (id: string) => void;
 }
 
-export function PersonRow({ person, onRemove }: PersonRowProps) {
+export function PersonRow({ person, onRemove, onEdit }: PersonRowProps) {
   return (
     <Group justify="space-between" wrap="nowrap">
       <div>
@@ -23,15 +28,28 @@ export function PersonRow({ person, onRemove }: PersonRowProps) {
           </Text>
         )}
       </div>
-      <ActionIcon
-        variant="subtle"
-        color="red"
-        size="sm"
-        onClick={() => onRemove(person.id)}
-        aria-label={copy.common.delete}
-      >
-        <IconTrash size={14} />
-      </ActionIcon>
+      <Group gap={8} wrap="nowrap">
+        <ActionIcon
+          variant="default"
+          radius="xs"
+          size={24}
+          onClick={() => onEdit(person.id)}
+          aria-label="Editar"
+          styles={actionIconStyles}
+        >
+          <IconPencil size={14} color="var(--mantine-color-mantineDefault-6)" />
+        </ActionIcon>
+        <ActionIcon
+          variant="default"
+          radius="xs"
+          size={24}
+          onClick={() => onRemove(person.id)}
+          aria-label={copy.common.delete}
+          styles={actionIconStyles}
+        >
+          <IconTrash size={14} color="var(--mantine-color-mantineDefault-6)" />
+        </ActionIcon>
+      </Group>
     </Group>
   );
 }

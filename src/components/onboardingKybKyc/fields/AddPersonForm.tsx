@@ -72,10 +72,11 @@ interface AddPersonFormProps {
   onCancel: () => void;
   onSubmit: (draft: PersonDraft) => void;
   variant?: 'legalRep' | 'shareholder' | 'beneficiary';
+  initialDraft?: Partial<PersonDraft>;
 }
 
-export function AddPersonForm({ label, onCancel, onSubmit, variant }: AddPersonFormProps) {
-  const [draft, setDraft] = useState<PersonDraft>(emptyDraft);
+export function AddPersonForm({ label, onCancel, onSubmit, variant, initialDraft }: AddPersonFormProps) {
+  const [draft, setDraft] = useState<PersonDraft>({ ...emptyDraft, ...initialDraft });
   const f = copy.addPersonForm;
   const set = (patch: Partial<PersonDraft>) =>
     setDraft((d) => ({ ...d, ...patch }));

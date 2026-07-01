@@ -37,33 +37,64 @@ export function PersonSection({
 }: PersonSectionProps) {
   const showError = required && showValidation && people.length === 0;
   const [adding, setAdding] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
+
+  const draftFromPerson = (p: Person): Partial<PersonDraft> => ({
+    fullName: p.fullName,
+    email: p.email ?? '',
+    documentType: p.documentType ?? '',
+    documentNumber: p.documentNumber ?? '',
+    birthDate: p.birthDate ?? '',
+    issueDate: p.issueDate ?? '',
+    birthCountry: p.birthCountry ?? '',
+    birthCity: p.birthCity ?? '',
+    nationality: p.nationality ?? '',
+    address: p.address ?? '',
+    phone: p.phone ?? '',
+    participation: p.participation ?? '',
+    docFront: p.docFront ?? null,
+    docBack: p.docBack ?? null,
+    addressCountry: p.addressCountry ?? '',
+    addressState: p.addressState ?? '',
+    addressCity: p.addressCity ?? '',
+    addressStreet: p.addressStreet ?? '',
+    addressNumber: p.addressNumber ?? '',
+    addressZip: p.addressZip ?? '',
+  });
+
+  const personFromDraft = (d: PersonDraft, id: string): Person => ({
+    id,
+    fullName: d.fullName,
+    email: d.email,
+    documentType: d.documentType,
+    documentNumber: d.documentNumber,
+    birthDate: d.birthDate,
+    issueDate: d.issueDate,
+    birthCountry: d.birthCountry,
+    birthCity: d.birthCity,
+    nationality: d.nationality,
+    address: d.address,
+    phone: d.phone,
+    participation: d.participation,
+    docFront: d.docFront,
+    docBack: d.docBack,
+    addressCountry: d.addressCountry,
+    addressState: d.addressState,
+    addressCity: d.addressCity,
+    addressStreet: d.addressStreet,
+    addressNumber: d.addressNumber,
+    addressZip: d.addressZip,
+  });
 
   const handleSubmit = (d: PersonDraft) => {
-    const person: Person = {
-      id: `${idPrefix}-${Date.now()}-${idSeq++}`,
-      fullName: d.fullName,
-      email: d.email,
-      documentType: d.documentType,
-      documentNumber: d.documentNumber,
-      birthDate: d.birthDate,
-      issueDate: d.issueDate,
-      birthCountry: d.birthCountry,
-      birthCity: d.birthCity,
-      nationality: d.nationality,
-      address: d.address,
-      phone: d.phone,
-      participation: d.participation,
-      docFront: d.docFront,
-      docBack: d.docBack,
-      addressCountry: d.addressCountry,
-      addressState: d.addressState,
-      addressCity: d.addressCity,
-      addressStreet: d.addressStreet,
-      addressNumber: d.addressNumber,
-      addressZip: d.addressZip,
-    };
-    onChange([...people, person]);
+    onChange([...people, personFromDraft(d, `${idPrefix}-${Date.now()}-${idSeq++}`)]);
     setAdding(false);
+  };
+
+  const handleEditSubmit = (d: PersonDraft) => {
+    if (!editingId) return;
+    onChange(people.map((p) => p.id === editingId ? personFromDraft(d, editingId) : p));
+    setEditingId(null);
   };
 
   const handleRemove = (id: string) => {
@@ -117,9 +148,25 @@ export function PersonSection({
       {(people.length > 0 || adding) && (
         <Paper radius="md" p="md" bg="gray.0" style={{ border: 'none' }}>
           <Stack gap="md">
-            {people.map((person) => (
-              <PersonRow key={person.id} person={person} onRemove={handleRemove} />
-            ))}
+            {people.map((person) =>
+              editingId === person.id ? (
+                <AddPersonForm
+                  key={person.id}
+                  label={newPersonLabel}
+                  onCancel={() => setEditingId(null)}
+                  onSubmit={handleEditSubmit}
+                  variant={variant}
+                  initialDraft={draftFromPerson(person)}
+                />
+              ) : (
+                <PersonRow
+                  key={person.id}
+                  person={person}
+                  onRemove={handleRemove}
+                  onEdit={(id) => { setEditingId(id); setAdding(false); }}
+                />
+              )
+            )}
             {adding && (
               <AddPersonForm
                 label={newPersonLabel}
