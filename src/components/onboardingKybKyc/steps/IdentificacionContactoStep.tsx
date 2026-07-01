@@ -218,7 +218,7 @@ export function IdentificacionContactoStep({ data, update, showValidation }: Ste
             label={
               <Text component="span" size="sm" fw={500}>
                 {copy.fields.website}
-                <Tooltip label="Sitio web o redes sociales son importantes para confirmar presencia online del cliente" withArrow multiline w={260}>
+                <Tooltip label="Sitio web o redes sociales" withArrow>
                   <IconInfoCircle size={14} style={{ cursor: 'help', display: 'inline-block', verticalAlign: 'middle', marginLeft: 4 }} />
                 </Tooltip>
               </Text>
