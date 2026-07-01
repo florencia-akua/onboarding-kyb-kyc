@@ -1,6 +1,7 @@
 'use client';
 
-import { SimpleGrid, Stack, Select, TextInput, Title } from '@mantine/core';
+import { SimpleGrid, Stack, Select, Text, TextInput, Title, Tooltip } from '@mantine/core';
+import { IconInfoCircle } from '@tabler/icons-react';
 import { PhoneField } from '../fields/PhoneField';
 import { copy } from '../copy';
 import { COUNTRIES } from '../countries';
@@ -214,7 +215,14 @@ export function IdentificacionContactoStep({ data, update, showValidation }: Ste
             error={req(data.companyEmail)}
           />
           <TextInput
-            label={copy.fields.website}
+            label={
+              <Text component="span" size="sm" fw={500}>
+                {copy.fields.website}
+                <Tooltip label="Sitio web o redes sociales son importantes para confirmar presencia online del cliente" withArrow multiline w={260}>
+                  <IconInfoCircle size={14} style={{ cursor: 'help', display: 'inline-block', verticalAlign: 'middle', marginLeft: 4 }} />
+                </Tooltip>
+              </Text>
+            }
             placeholder="Ingrese sitio web"
             value={data.companyWebsite}
             onChange={(e) => update({ companyWebsite: e.currentTarget.value })}
