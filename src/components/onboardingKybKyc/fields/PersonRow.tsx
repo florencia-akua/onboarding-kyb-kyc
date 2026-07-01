@@ -12,7 +12,7 @@ const actionIconStyles = {
 interface PersonRowProps {
   person: Person;
   onRemove: (id: string) => void;
-  onEdit: (id: string) => void;
+  onEdit?: (id: string) => void;
 }
 
 export function PersonRow({ person, onRemove, onEdit }: PersonRowProps) {
@@ -29,16 +29,18 @@ export function PersonRow({ person, onRemove, onEdit }: PersonRowProps) {
         )}
       </div>
       <Group gap={8} wrap="nowrap">
-        <ActionIcon
-          variant="default"
-          radius="xs"
-          size={24}
-          onClick={() => onEdit(person.id)}
-          aria-label="Editar"
-          styles={actionIconStyles}
-        >
-          <IconPencil size={14} color="var(--mantine-color-mantineDefault-6)" />
-        </ActionIcon>
+        {onEdit && (
+          <ActionIcon
+            variant="default"
+            radius="xs"
+            size={24}
+            onClick={() => onEdit(person.id)}
+            aria-label="Editar"
+            styles={actionIconStyles}
+          >
+            <IconPencil size={14} color="var(--mantine-color-mantineDefault-6)" />
+          </ActionIcon>
+        )}
         <ActionIcon
           variant="default"
           radius="xs"

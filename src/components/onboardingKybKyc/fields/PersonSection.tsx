@@ -163,7 +163,7 @@ export function PersonSection({
                   key={person.id}
                   person={person}
                   onRemove={handleRemove}
-                  onEdit={(id) => { setEditingId(id); setAdding(false); }}
+                  onEdit={variant === 'shareholder' ? (id) => { setEditingId(id); setAdding(false); } : undefined}
                 />
               )
             )}
